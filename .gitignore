@@ -1,0 +1,39 @@
+# Data
+*.tar.gz
+*.zip
+mvtec_ad/
+visa/
+
+# Results (generated on Kaggle)
+results/
+checkpoints/
+*.ckpt
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.egg-info/
+.eggs/
+dist/
+build/
+*.egg
+
+# Jupyter
+.ipynb_checkpoints/
+*.ipynb
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Virtual env
+venv/
+.env/

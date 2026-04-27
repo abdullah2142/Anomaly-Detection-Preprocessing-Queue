@@ -1,0 +1,39 @@
+{
+  "mvtec_root": "/kaggle/input/mvtec-ad",
+  "categories": [
+    "bottle", "cable", "capsule", "carpet", "grid",
+    "hazelnut", "leather", "metal_nut", "pill", "screw",
+    "tile", "toothbrush", "transistor", "wood", "zipper"
+  ],
+  "seeds": [42, 123, 456],
+  "corruptions": {
+    "low_light": {
+      "mild": {"gamma": 0.5},
+      "moderate": {"gamma": 0.35},
+      "severe": {"gamma": 0.2}
+    },
+    "gaussian_blur": {
+      "mild": {"sigma": 1.0, "kernel_size": 7},
+      "moderate": {"sigma": 2.0, "kernel_size": 11},
+      "severe": {"sigma": 4.0, "kernel_size": 23}
+    },
+    "motion_blur": {
+      "mild": {"kernel_size": 7},
+      "moderate": {"kernel_size": 15},
+      "severe": {"kernel_size": 25}
+    },
+    "sensor_noise": {
+      "mild": {"gauss_var": 0.02},
+      "moderate": {"gauss_var": 0.05},
+      "severe": {"gauss_var": 0.10}
+    },
+    "fog_haze": {
+      "mild": {"fog_coef_lower": 0.2, "fog_coef_upper": 0.35, "alpha_coef": 0.1},
+      "moderate": {"fog_coef_lower": 0.45, "fog_coef_upper": 0.65, "alpha_coef": 0.1},
+      "severe": {"fog_coef_lower": 0.75, "fog_coef_upper": 0.95, "alpha_coef": 0.1}
+    },
+    "combined": {
+      "single": {"gamma": 0.35, "gauss_var": 0.05}
+    }
+  }
+}
