@@ -1,0 +1,13 @@
+anomalib
+lightning
+albumentationsx
+bm3d
+opencv-python-headless
+scikit-image
+scipy
+pandas
+numpy
+matplotlib
+tqdm
+pyyaml
+scikit-learn

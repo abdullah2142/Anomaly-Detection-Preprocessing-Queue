@@ -1,39 +1,36 @@
-# Data
-*.tar.gz
-*.zip
-mvtec_ad/
-visa/
-
-# Results (generated on Kaggle)
-results/
-checkpoints/
-*.ckpt
-
 # Python
 __pycache__/
 *.pyc
 *.pyo
-*.egg-info/
-.eggs/
-dist/
-build/
-*.egg
+.venv/
 
-# Jupyter
+# Jupyter checkpoints
 .ipynb_checkpoints/
-*.ipynb
 
-# IDE
-.vscode/
-.idea/
-*.swp
-*.swo
-*~
+# Old/duplicate notebooks (superseded by new ones)
+01-baseline-patchcore.ipynb
+01-baseline-patchcore (1).ipynb
+01-baseline-patchcore (2).ipynb
+01-patchcore-baseline.ipynb
+02-padim-baseline.ipynb
+02-padim-baseline (1).ipynb
 
-# OS
+# Old source / planning files
+src/
+configs/
+notebooks/
+Untitled-1
+agent_workflow.md
+implementation_plan.md
+analyze_results.py
+anomaly_detection_briefing.md
+CONTEXT_FOR_NEXT_SESSION.md
+literature_review.md
+
+# Partial/raw individual run CSVs (unified ones are included)
+patchcore_final.csv
+results/
+
+# Misc
+*.egg-info/
 .DS_Store
-Thumbs.db
-
-# Virtual env
-venv/
-.env/

@@ -1,0 +1,991 @@
+model,category,seed,phase,ctype,severity,rescue,image_AUROC
+PaDiM,bottle,42,baseline,clean,none,none,1.0
+PaDiM,bottle,42,degradation,low_light,mild,none,0.5
+PaDiM,bottle,42,degradation,low_light,moderate,none,0.5
+PaDiM,bottle,42,degradation,low_light,severe,none,0.5
+PaDiM,bottle,42,rescue,low_light,severe,CLAHE,0.5
+PaDiM,bottle,42,rescue,low_light,severe,Retinex,0.5
+PaDiM,bottle,42,degradation,gaussian_blur,mild,none,0.997619092464447
+PaDiM,bottle,42,degradation,gaussian_blur,moderate,none,0.811904788017273
+PaDiM,bottle,42,degradation,gaussian_blur,severe,none,0.5809524059295654
+PaDiM,bottle,42,rescue,gaussian_blur,severe,Wiener,0.5
+PaDiM,bottle,42,degradation,motion_blur,mild,none,0.8999999761581421
+PaDiM,bottle,42,degradation,motion_blur,moderate,none,0.6952381134033203
+PaDiM,bottle,42,degradation,motion_blur,severe,none,0.5325397253036499
+PaDiM,bottle,42,rescue,motion_blur,severe,Wiener (Motion PSF),0.5
+PaDiM,bottle,42,degradation,sensor_noise,mild,none,0.5
+PaDiM,bottle,42,degradation,sensor_noise,moderate,none,0.5
+PaDiM,bottle,42,degradation,sensor_noise,severe,none,0.5
+PaDiM,bottle,42,rescue,sensor_noise,severe,NLM Denoise,0.5
+PaDiM,bottle,42,degradation,fog_haze,mild,none,0.4174603223800659
+PaDiM,bottle,42,degradation,fog_haze,moderate,none,0.5825396776199341
+PaDiM,bottle,42,degradation,fog_haze,severe,none,0.644444465637207
+PaDiM,bottle,42,rescue,fog_haze,severe,Dehaze (Dark Channel),0.5218254327774048
+PaDiM,bottle,123,baseline,clean,none,none,0.9984126687049866
+PaDiM,bottle,123,degradation,low_light,mild,none,0.5
+PaDiM,bottle,123,degradation,low_light,moderate,none,0.5
+PaDiM,bottle,123,degradation,low_light,severe,none,0.5
+PaDiM,bottle,123,rescue,low_light,severe,CLAHE,0.5
+PaDiM,bottle,123,rescue,low_light,severe,Retinex,0.5
+PaDiM,bottle,123,degradation,gaussian_blur,mild,none,0.9833333492279052
+PaDiM,bottle,123,degradation,gaussian_blur,moderate,none,0.8476189970970154
+PaDiM,bottle,123,degradation,gaussian_blur,severe,none,0.764285683631897
+PaDiM,bottle,123,rescue,gaussian_blur,severe,Wiener,0.5
+PaDiM,bottle,123,degradation,motion_blur,mild,none,0.9873015880584716
+PaDiM,bottle,123,degradation,motion_blur,moderate,none,0.8841269612312317
+PaDiM,bottle,123,degradation,motion_blur,severe,none,0.4444444477558136
+PaDiM,bottle,123,rescue,motion_blur,severe,Wiener (Motion PSF),0.5
+PaDiM,bottle,123,degradation,sensor_noise,mild,none,0.5
+PaDiM,bottle,123,degradation,sensor_noise,moderate,none,0.5
+PaDiM,bottle,123,degradation,sensor_noise,severe,none,0.5
+PaDiM,bottle,123,rescue,sensor_noise,severe,NLM Denoise,0.5
+PaDiM,bottle,123,degradation,fog_haze,mild,none,0.6888889074325562
+PaDiM,bottle,123,degradation,fog_haze,moderate,none,0.6880952715873718
+PaDiM,bottle,123,degradation,fog_haze,severe,none,0.5666667222976685
+PaDiM,bottle,123,rescue,fog_haze,severe,Dehaze (Dark Channel),0.6992063522338867
+PaDiM,bottle,456,baseline,clean,none,none,1.0
+PaDiM,bottle,456,degradation,low_light,mild,none,0.5087301731109619
+PaDiM,bottle,456,degradation,low_light,moderate,none,0.550000011920929
+PaDiM,bottle,456,degradation,low_light,severe,none,0.6198412775993347
+PaDiM,bottle,456,rescue,low_light,severe,CLAHE,0.6396825313568115
+PaDiM,bottle,456,rescue,low_light,severe,Retinex,0.7333333492279053
+PaDiM,bottle,456,degradation,gaussian_blur,mild,none,0.9404761791229248
+PaDiM,bottle,456,degradation,gaussian_blur,moderate,none,0.6269841194152832
+PaDiM,bottle,456,degradation,gaussian_blur,severe,none,0.617460310459137
+PaDiM,bottle,456,rescue,gaussian_blur,severe,Wiener,0.5
+PaDiM,bottle,456,degradation,motion_blur,mild,none,0.9841269850730896
+PaDiM,bottle,456,degradation,motion_blur,moderate,none,0.8539682626724243
+PaDiM,bottle,456,degradation,motion_blur,severe,none,0.6769841313362122
+PaDiM,bottle,456,rescue,motion_blur,severe,Wiener (Motion PSF),0.5
+PaDiM,bottle,456,degradation,sensor_noise,mild,none,0.5365079641342163
+PaDiM,bottle,456,degradation,sensor_noise,moderate,none,0.472222238779068
+PaDiM,bottle,456,degradation,sensor_noise,severe,none,0.5047619342803955
+PaDiM,bottle,456,rescue,sensor_noise,severe,NLM Denoise,0.5333333015441895
+PaDiM,bottle,456,degradation,fog_haze,mild,none,0.4742063879966736
+PaDiM,bottle,456,degradation,fog_haze,moderate,none,0.5634920597076416
+PaDiM,bottle,456,degradation,fog_haze,severe,none,0.5230158567428589
+PaDiM,bottle,456,rescue,fog_haze,severe,Dehaze (Dark Channel),0.5083333253860474
+PaDiM,cable,42,baseline,clean,none,none,0.8202773928642273
+PaDiM,cable,42,degradation,low_light,mild,none,0.8097826242446899
+PaDiM,cable,42,degradation,low_light,moderate,none,0.8071589469909668
+PaDiM,cable,42,degradation,low_light,severe,none,0.6218141317367554
+PaDiM,cable,42,rescue,low_light,severe,CLAHE,0.7336956262588501
+PaDiM,cable,42,rescue,low_light,severe,Retinex,0.6754122972488403
+PaDiM,cable,42,degradation,gaussian_blur,mild,none,0.7732384204864502
+PaDiM,cable,42,degradation,gaussian_blur,moderate,none,0.6870315074920654
+PaDiM,cable,42,degradation,gaussian_blur,severe,none,0.6086956262588501
+PaDiM,cable,42,rescue,gaussian_blur,severe,Wiener,0.4840704798698425
+PaDiM,cable,42,degradation,motion_blur,mild,none,0.7833583354949951
+PaDiM,cable,42,degradation,motion_blur,moderate,none,0.6535794734954834
+PaDiM,cable,42,degradation,motion_blur,severe,none,0.4880059957504272
+PaDiM,cable,42,rescue,motion_blur,severe,Wiener (Motion PSF),0.5483508110046387
+PaDiM,cable,42,degradation,sensor_noise,mild,none,0.6637930870056152
+PaDiM,cable,42,degradation,sensor_noise,moderate,none,0.4885681867599487
+PaDiM,cable,42,degradation,sensor_noise,severe,none,0.5024362802505493
+PaDiM,cable,42,rescue,sensor_noise,severe,NLM Denoise,0.5400112867355347
+PaDiM,cable,42,degradation,fog_haze,mild,none,0.7027735710144043
+PaDiM,cable,42,degradation,fog_haze,moderate,none,0.6583582758903503
+PaDiM,cable,42,degradation,fog_haze,severe,none,0.5710270404815674
+PaDiM,cable,42,rescue,fog_haze,severe,Dehaze (Dark Channel),0.6045727133750916
+PaDiM,cable,123,baseline,clean,none,none,0.8729385137557983
+PaDiM,cable,123,degradation,low_light,mild,none,0.704835057258606
+PaDiM,cable,123,degradation,low_light,moderate,none,0.6776611804962158
+PaDiM,cable,123,degradation,low_light,severe,none,0.5804909467697144
+PaDiM,cable,123,rescue,low_light,severe,CLAHE,0.6499249935150146
+PaDiM,cable,123,rescue,low_light,severe,Retinex,0.6719452738761902
+PaDiM,cable,123,degradation,gaussian_blur,mild,none,0.720952033996582
+PaDiM,cable,123,degradation,gaussian_blur,moderate,none,0.6183470487594604
+PaDiM,cable,123,degradation,gaussian_blur,severe,none,0.5556596517562866
+PaDiM,cable,123,rescue,gaussian_blur,severe,Wiener,0.5
+PaDiM,cable,123,degradation,motion_blur,mild,none,0.7378185987472534
+PaDiM,cable,123,degradation,motion_blur,moderate,none,0.6379310488700867
+PaDiM,cable,123,degradation,motion_blur,severe,none,0.5179910063743591
+PaDiM,cable,123,rescue,motion_blur,severe,Wiener (Motion PSF),0.4908170700073242
+PaDiM,cable,123,degradation,sensor_noise,mild,none,0.4934408068656921
+PaDiM,cable,123,degradation,sensor_noise,moderate,none,0.6324962377548218
+PaDiM,cable,123,degradation,sensor_noise,severe,none,0.5732758045196533
+PaDiM,cable,123,rescue,sensor_noise,severe,NLM Denoise,0.54076087474823
+PaDiM,cable,123,degradation,fog_haze,mild,none,0.6330584287643433
+PaDiM,cable,123,degradation,fog_haze,moderate,none,0.5863943099975586
+PaDiM,cable,123,degradation,fog_haze,severe,none,0.453710675239563
+PaDiM,cable,123,rescue,fog_haze,severe,Dehaze (Dark Channel),0.5506933927536011
+PaDiM,cable,456,baseline,clean,none,none,0.8678785562515259
+PaDiM,cable,456,degradation,low_light,mild,none,0.7730509638786316
+PaDiM,cable,456,degradation,low_light,moderate,none,0.6892803907394409
+PaDiM,cable,456,degradation,low_light,severe,none,0.5303598046302795
+PaDiM,cable,456,rescue,low_light,severe,CLAHE,0.5809594392776489
+PaDiM,cable,456,rescue,low_light,severe,Retinex,0.6094452738761902
+PaDiM,cable,456,degradation,gaussian_blur,mild,none,0.7837331295013428
+PaDiM,cable,456,degradation,gaussian_blur,moderate,none,0.5254872441291809
+PaDiM,cable,456,degradation,gaussian_blur,severe,none,0.4512743651866913
+PaDiM,cable,456,rescue,gaussian_blur,severe,Wiener,0.5
+PaDiM,cable,456,degradation,motion_blur,mild,none,0.580584704875946
+PaDiM,cable,456,degradation,motion_blur,moderate,none,0.5762743949890137
+PaDiM,cable,456,degradation,motion_blur,severe,none,0.5030921697616577
+PaDiM,cable,456,rescue,motion_blur,severe,Wiener (Motion PSF),0.5232383608818054
+PaDiM,cable,456,degradation,sensor_noise,mild,none,0.7061468958854675
+PaDiM,cable,456,degradation,sensor_noise,moderate,none,0.5251124501228333
+PaDiM,cable,456,degradation,sensor_noise,severe,none,0.5489130020141602
+PaDiM,cable,456,rescue,sensor_noise,severe,NLM Denoise,0.5327960848808289
+PaDiM,cable,456,degradation,fog_haze,mild,none,0.7648050785064697
+PaDiM,cable,456,degradation,fog_haze,moderate,none,0.6146926879882812
+PaDiM,cable,456,degradation,fog_haze,severe,none,0.5460082292556763
+PaDiM,cable,456,rescue,fog_haze,severe,Dehaze (Dark Channel),0.587893545627594
+PaDiM,capsule,42,baseline,clean,none,none,0.8540087938308716
+PaDiM,capsule,42,degradation,low_light,mild,none,0.5725966691970825
+PaDiM,capsule,42,degradation,low_light,moderate,none,0.5424810647964478
+PaDiM,capsule,42,degradation,low_light,severe,none,0.5
+PaDiM,capsule,42,rescue,low_light,severe,CLAHE,0.5
+PaDiM,capsule,42,rescue,low_light,severe,Retinex,0.5
+PaDiM,capsule,42,degradation,gaussian_blur,mild,none,0.601914644241333
+PaDiM,capsule,42,degradation,gaussian_blur,moderate,none,0.4742720127105713
+PaDiM,capsule,42,degradation,gaussian_blur,severe,none,0.5
+PaDiM,capsule,42,rescue,gaussian_blur,severe,Wiener,0.5
+PaDiM,capsule,42,degradation,motion_blur,mild,none,0.6788990497589111
+PaDiM,capsule,42,degradation,motion_blur,moderate,none,0.5436776876449585
+PaDiM,capsule,42,degradation,motion_blur,severe,none,0.5
+PaDiM,capsule,42,rescue,motion_blur,severe,Wiener (Motion PSF),0.5
+PaDiM,capsule,42,degradation,sensor_noise,mild,none,0.4571200609207153
+PaDiM,capsule,42,degradation,sensor_noise,moderate,none,0.5
+PaDiM,capsule,42,degradation,sensor_noise,severe,none,0.5
+PaDiM,capsule,42,rescue,sensor_noise,severe,NLM Denoise,0.6262465119361877
+PaDiM,capsule,42,degradation,fog_haze,mild,none,0.6880733966827393
+PaDiM,capsule,42,degradation,fog_haze,moderate,none,0.5241324305534363
+PaDiM,capsule,42,degradation,fog_haze,severe,none,0.5
+PaDiM,capsule,42,rescue,fog_haze,severe,Dehaze (Dark Channel),0.5
+PaDiM,capsule,123,baseline,clean,none,none,0.8368567824363708
+PaDiM,capsule,123,degradation,low_light,mild,none,0.6765058040618896
+PaDiM,capsule,123,degradation,low_light,moderate,none,0.4892301559448242
+PaDiM,capsule,123,degradation,low_light,severe,none,0.6459912061691284
+PaDiM,capsule,123,rescue,low_light,severe,CLAHE,0.6242520809173584
+PaDiM,capsule,123,rescue,low_light,severe,Retinex,0.6535699963569641
+PaDiM,capsule,123,degradation,gaussian_blur,mild,none,0.7303550243377686
+PaDiM,capsule,123,degradation,gaussian_blur,moderate,none,0.5265257358551025
+PaDiM,capsule,123,degradation,gaussian_blur,severe,none,0.5
+PaDiM,capsule,123,rescue,gaussian_blur,severe,Wiener,0.5
+PaDiM,capsule,123,degradation,motion_blur,mild,none,0.7351416349411011
+PaDiM,capsule,123,degradation,motion_blur,moderate,none,0.5664140582084656
+PaDiM,capsule,123,degradation,motion_blur,severe,none,0.4704826176166534
+PaDiM,capsule,123,rescue,motion_blur,severe,Wiener (Motion PSF),0.52173912525177
+PaDiM,capsule,123,degradation,sensor_noise,mild,none,0.4964100420475006
+PaDiM,capsule,123,degradation,sensor_noise,moderate,none,0.5287195444107056
+PaDiM,capsule,123,degradation,sensor_noise,severe,none,0.4862385392189026
+PaDiM,capsule,123,rescue,sensor_noise,severe,NLM Denoise,0.4816513657569885
+PaDiM,capsule,123,degradation,fog_haze,mild,none,0.5929397344589233
+PaDiM,capsule,123,degradation,fog_haze,moderate,none,0.4134423732757568
+PaDiM,capsule,123,degradation,fog_haze,severe,none,0.4954128563404083
+PaDiM,capsule,123,rescue,fog_haze,severe,Dehaze (Dark Channel),0.5
+PaDiM,capsule,456,baseline,clean,none,none,0.9525328874588012
+PaDiM,capsule,456,degradation,low_light,mild,none,0.7726365923881531
+PaDiM,capsule,456,degradation,low_light,moderate,none,0.809333860874176
+PaDiM,capsule,456,degradation,low_light,severe,none,0.6529716849327087
+PaDiM,capsule,456,rescue,low_light,severe,CLAHE,0.4672915935516357
+PaDiM,capsule,456,rescue,low_light,severe,Retinex,0.6669325828552246
+PaDiM,capsule,456,degradation,gaussian_blur,mild,none,0.6469884514808655
+PaDiM,capsule,456,degradation,gaussian_blur,moderate,none,0.4770642220973968
+PaDiM,capsule,456,degradation,gaussian_blur,severe,none,0.4944156110286712
+PaDiM,capsule,456,rescue,gaussian_blur,severe,Wiener,0.5
+PaDiM,capsule,456,degradation,motion_blur,mild,none,0.6015157699584961
+PaDiM,capsule,456,degradation,motion_blur,moderate,none,0.4575189352035522
+PaDiM,capsule,456,degradation,motion_blur,severe,none,0.5
+PaDiM,capsule,456,rescue,motion_blur,severe,Wiener (Motion PSF),0.5965297222137451
+PaDiM,capsule,456,degradation,sensor_noise,mild,none,0.4976066946983337
+PaDiM,capsule,456,degradation,sensor_noise,moderate,none,0.5594335794448853
+PaDiM,capsule,456,degradation,sensor_noise,severe,none,0.4954128563404083
+PaDiM,capsule,456,rescue,sensor_noise,severe,NLM Denoise,0.5879536867141724
+PaDiM,capsule,456,degradation,fog_haze,mild,none,0.4938173294067383
+PaDiM,capsule,456,degradation,fog_haze,moderate,none,0.5414838790893555
+PaDiM,capsule,456,degradation,fog_haze,severe,none,0.5
+PaDiM,capsule,456,rescue,fog_haze,severe,Dehaze (Dark Channel),0.512165904045105
+PaDiM,carpet,42,baseline,clean,none,none,0.9775280356407166
+PaDiM,carpet,42,degradation,low_light,mild,none,0.9670947194099426
+PaDiM,carpet,42,degradation,low_light,moderate,none,0.942215085029602
+PaDiM,carpet,42,degradation,low_light,severe,none,0.8226324319839478
+PaDiM,carpet,42,rescue,low_light,severe,CLAHE,0.896869957447052
+PaDiM,carpet,42,rescue,low_light,severe,Retinex,0.9285714030265808
+PaDiM,carpet,42,degradation,gaussian_blur,mild,none,0.7925361394882202
+PaDiM,carpet,42,degradation,gaussian_blur,moderate,none,0.5894863605499268
+PaDiM,carpet,42,degradation,gaussian_blur,severe,none,0.500200629234314
+PaDiM,carpet,42,rescue,gaussian_blur,severe,Wiener,0.4943820238113403
+PaDiM,carpet,42,degradation,motion_blur,mild,none,0.9301766157150269
+PaDiM,carpet,42,degradation,motion_blur,moderate,none,0.6801765561103821
+PaDiM,carpet,42,degradation,motion_blur,severe,none,0.5517656803131104
+PaDiM,carpet,42,rescue,motion_blur,severe,Wiener (Motion PSF),0.4739165008068084
+PaDiM,carpet,42,degradation,sensor_noise,mild,none,0.9008828401565552
+PaDiM,carpet,42,degradation,sensor_noise,moderate,none,0.7259229421615601
+PaDiM,carpet,42,degradation,sensor_noise,severe,none,0.6456661224365234
+PaDiM,carpet,42,rescue,sensor_noise,severe,NLM Denoise,0.6043338775634766
+PaDiM,carpet,42,degradation,fog_haze,mild,none,0.7002407312393188
+PaDiM,carpet,42,degradation,fog_haze,moderate,none,0.5754414200782776
+PaDiM,carpet,42,degradation,fog_haze,severe,none,0.54534512758255
+PaDiM,carpet,42,rescue,fog_haze,severe,Dehaze (Dark Channel),0.504815399646759
+PaDiM,carpet,123,baseline,clean,none,none,0.9931780695915222
+PaDiM,carpet,123,degradation,low_light,mild,none,0.989967942237854
+PaDiM,carpet,123,degradation,low_light,moderate,none,0.971508800983429
+PaDiM,carpet,123,degradation,low_light,severe,none,0.8784109354019165
+PaDiM,carpet,123,rescue,low_light,severe,CLAHE,0.8495184183120728
+PaDiM,carpet,123,rescue,low_light,severe,Retinex,0.932584285736084
+PaDiM,carpet,123,degradation,gaussian_blur,mild,none,0.9803370237350464
+PaDiM,carpet,123,degradation,gaussian_blur,moderate,none,0.5589887499809265
+PaDiM,carpet,123,degradation,gaussian_blur,severe,none,0.5
+PaDiM,carpet,123,rescue,gaussian_blur,severe,Wiener,0.4550561904907226
+PaDiM,carpet,123,degradation,motion_blur,mild,none,0.7764847278594971
+PaDiM,carpet,123,degradation,motion_blur,moderate,none,0.4811396598815918
+PaDiM,carpet,123,degradation,motion_blur,severe,none,0.4971910417079925
+PaDiM,carpet,123,rescue,motion_blur,severe,Wiener (Motion PSF),0.3992776870727539
+PaDiM,carpet,123,degradation,sensor_noise,mild,none,0.961476743221283
+PaDiM,carpet,123,degradation,sensor_noise,moderate,none,0.908507227897644
+PaDiM,carpet,123,degradation,sensor_noise,severe,none,0.8334671258926392
+PaDiM,carpet,123,rescue,sensor_noise,severe,NLM Denoise,0.6380417346954346
+PaDiM,carpet,123,degradation,fog_haze,mild,none,0.947030544281006
+PaDiM,carpet,123,degradation,fog_haze,moderate,none,0.4755216836929321
+PaDiM,carpet,123,degradation,fog_haze,severe,none,0.5738362669944763
+PaDiM,carpet,123,rescue,fog_haze,severe,Dehaze (Dark Channel),0.5431380867958069
+PaDiM,carpet,456,baseline,clean,none,none,0.9606741070747375
+PaDiM,carpet,456,degradation,low_light,mild,none,0.9542536735534668
+PaDiM,carpet,456,degradation,low_light,moderate,none,0.9277689456939696
+PaDiM,carpet,456,degradation,low_light,severe,none,0.6878010034561157
+PaDiM,carpet,456,rescue,low_light,severe,CLAHE,0.875200629234314
+PaDiM,carpet,456,rescue,low_light,severe,Retinex,0.881621241569519
+PaDiM,carpet,456,degradation,gaussian_blur,mild,none,0.8543338775634766
+PaDiM,carpet,456,degradation,gaussian_blur,moderate,none,0.5056179761886597
+PaDiM,carpet,456,degradation,gaussian_blur,severe,none,0.6540930867195129
+PaDiM,carpet,456,rescue,gaussian_blur,severe,Wiener,0.4857544302940368
+PaDiM,carpet,456,degradation,motion_blur,mild,none,0.6930177211761475
+PaDiM,carpet,456,degradation,motion_blur,moderate,none,0.6392455697059631
+PaDiM,carpet,456,degradation,motion_blur,severe,none,0.5738362669944763
+PaDiM,carpet,456,rescue,motion_blur,severe,Wiener (Motion PSF),0.4000802636146545
+PaDiM,carpet,456,degradation,sensor_noise,mild,none,0.9301766157150269
+PaDiM,carpet,456,degradation,sensor_noise,moderate,none,0.8948636054992676
+PaDiM,carpet,456,degradation,sensor_noise,severe,none,0.7411717176437378
+PaDiM,carpet,456,rescue,sensor_noise,severe,NLM Denoise,0.7106741666793823
+PaDiM,carpet,456,degradation,fog_haze,mild,none,0.75
+PaDiM,carpet,456,degradation,fog_haze,moderate,none,0.5445425510406494
+PaDiM,carpet,456,degradation,fog_haze,severe,none,0.5427367687225342
+PaDiM,carpet,456,rescue,fog_haze,severe,Dehaze (Dark Channel),0.545545756816864
+PaDiM,grid,42,baseline,clean,none,none,0.920634925365448
+PaDiM,grid,42,degradation,low_light,mild,none,0.8354219198226929
+PaDiM,grid,42,degradation,low_light,moderate,none,0.8730158805847168
+PaDiM,grid,42,degradation,low_light,severe,none,0.8070175647735596
+PaDiM,grid,42,rescue,low_light,severe,CLAHE,0.7886382341384888
+PaDiM,grid,42,rescue,low_light,severe,Retinex,0.2418546378612518
+PaDiM,grid,42,degradation,gaussian_blur,mild,none,0.8897243738174438
+PaDiM,grid,42,degradation,gaussian_blur,moderate,none,0.8521302938461304
+PaDiM,grid,42,degradation,gaussian_blur,severe,none,0.8830409646034241
+PaDiM,grid,42,rescue,gaussian_blur,severe,Wiener,0.4649122953414917
+PaDiM,grid,42,degradation,motion_blur,mild,none,0.6992481350898743
+PaDiM,grid,42,degradation,motion_blur,moderate,none,0.5747702717781067
+PaDiM,grid,42,degradation,motion_blur,severe,none,0.5430241823196411
+PaDiM,grid,42,rescue,motion_blur,severe,Wiener (Motion PSF),0.5827067494392395
+PaDiM,grid,42,degradation,sensor_noise,mild,none,0.4352547824382782
+PaDiM,grid,42,degradation,sensor_noise,moderate,none,0.4954051375389099
+PaDiM,grid,42,degradation,sensor_noise,severe,none,0.4795321524143219
+PaDiM,grid,42,rescue,sensor_noise,severe,NLM Denoise,0.6641603708267212
+PaDiM,grid,42,degradation,fog_haze,mild,none,0.791979968547821
+PaDiM,grid,42,degradation,fog_haze,moderate,none,0.6040099859237671
+PaDiM,grid,42,degradation,fog_haze,severe,none,0.4381787478923797
+PaDiM,grid,42,rescue,fog_haze,severe,Dehaze (Dark Channel),0.347953200340271
+PaDiM,grid,123,baseline,clean,none,none,0.9281537532806396
+PaDiM,grid,123,degradation,low_light,mild,none,0.7284878492355347
+PaDiM,grid,123,degradation,low_light,moderate,none,0.7786132097244263
+PaDiM,grid,123,degradation,low_light,severe,none,0.7360066175460815
+PaDiM,grid,123,rescue,low_light,severe,CLAHE,0.6783626079559326
+PaDiM,grid,123,rescue,low_light,severe,Retinex,0.682121992111206
+PaDiM,grid,123,degradation,gaussian_blur,mild,none,0.9064327478408812
+PaDiM,grid,123,degradation,gaussian_blur,moderate,none,0.5346699953079224
+PaDiM,grid,123,degradation,gaussian_blur,severe,none,0.4870509505271911
+PaDiM,grid,123,rescue,gaussian_blur,severe,Wiener,0.5
+PaDiM,grid,123,degradation,motion_blur,mild,none,0.7710943818092346
+PaDiM,grid,123,degradation,motion_blur,moderate,none,0.6491228342056274
+PaDiM,grid,123,degradation,motion_blur,severe,none,0.6253132820129395
+PaDiM,grid,123,rescue,motion_blur,severe,Wiener (Motion PSF),0.5012531280517578
+PaDiM,grid,123,degradation,sensor_noise,mild,none,0.7410192489624023
+PaDiM,grid,123,degradation,sensor_noise,moderate,none,0.7886382341384888
+PaDiM,grid,123,degradation,sensor_noise,severe,none,0.7326650023460388
+PaDiM,grid,123,rescue,sensor_noise,severe,NLM Denoise,0.5284043550491333
+PaDiM,grid,123,degradation,fog_haze,mild,none,0.8370926976203918
+PaDiM,grid,123,degradation,fog_haze,moderate,none,0.5513784289360046
+PaDiM,grid,123,degradation,fog_haze,severe,none,0.4043442010879516
+PaDiM,grid,123,rescue,fog_haze,severe,Dehaze (Dark Channel),0.4235588908195495
+PaDiM,grid,456,baseline,clean,none,none,0.9732665419578552
+PaDiM,grid,456,degradation,low_light,mild,none,0.9431913495063782
+PaDiM,grid,456,degradation,low_light,moderate,none,0.9097744226455688
+PaDiM,grid,456,degradation,low_light,severe,none,0.8262322545051575
+PaDiM,grid,456,rescue,low_light,severe,CLAHE,0.7994987368583679
+PaDiM,grid,456,rescue,low_light,severe,Retinex,0.8011695742607117
+PaDiM,grid,456,degradation,gaussian_blur,mild,none,0.6750208735466003
+PaDiM,grid,456,degradation,gaussian_blur,moderate,none,0.5455304980278015
+PaDiM,grid,456,degradation,gaussian_blur,severe,none,0.5680869221687317
+PaDiM,grid,456,rescue,gaussian_blur,severe,Wiener,0.5
+PaDiM,grid,456,degradation,motion_blur,mild,none,0.6023391485214233
+PaDiM,grid,456,degradation,motion_blur,moderate,none,0.5142021775245667
+PaDiM,grid,456,degradation,motion_blur,severe,none,0.5221387147903442
+PaDiM,grid,456,rescue,motion_blur,severe,Wiener (Motion PSF),0.5296574831008911
+PaDiM,grid,456,degradation,sensor_noise,mild,none,0.79365074634552
+PaDiM,grid,456,degradation,sensor_noise,moderate,none,0.6315789222717285
+PaDiM,grid,456,degradation,sensor_noise,severe,none,0.5238094925880432
+PaDiM,grid,456,rescue,sensor_noise,severe,NLM Denoise,0.4845446646213531
+PaDiM,grid,456,degradation,fog_haze,mild,none,0.6691729426383972
+PaDiM,grid,456,degradation,fog_haze,moderate,none,0.5446950197219849
+PaDiM,grid,456,degradation,fog_haze,severe,none,0.5054302215576172
+PaDiM,grid,456,rescue,fog_haze,severe,Dehaze (Dark Channel),0.3366750180721283
+PaDiM,hazelnut,42,baseline,clean,none,none,0.8896428942680359
+PaDiM,hazelnut,42,degradation,low_light,mild,none,0.760357141494751
+PaDiM,hazelnut,42,degradation,low_light,moderate,none,0.5924999713897705
+PaDiM,hazelnut,42,degradation,low_light,severe,none,0.5
+PaDiM,hazelnut,42,rescue,low_light,severe,CLAHE,0.5
+PaDiM,hazelnut,42,rescue,low_light,severe,Retinex,0.7157143354415894
+PaDiM,hazelnut,42,degradation,gaussian_blur,mild,none,0.7953571081161499
+PaDiM,hazelnut,42,degradation,gaussian_blur,moderate,none,0.4746428430080414
+PaDiM,hazelnut,42,degradation,gaussian_blur,severe,none,0.5
+PaDiM,hazelnut,42,rescue,gaussian_blur,severe,Wiener,0.5
+PaDiM,hazelnut,42,degradation,motion_blur,mild,none,0.6521428227424622
+PaDiM,hazelnut,42,degradation,motion_blur,moderate,none,0.5448214411735535
+PaDiM,hazelnut,42,degradation,motion_blur,severe,none,0.470714271068573
+PaDiM,hazelnut,42,rescue,motion_blur,severe,Wiener (Motion PSF),0.4521428644657135
+PaDiM,hazelnut,42,degradation,sensor_noise,mild,none,0.4807142913341522
+PaDiM,hazelnut,42,degradation,sensor_noise,moderate,none,0.5012499690055847
+PaDiM,hazelnut,42,degradation,sensor_noise,severe,none,0.512499988079071
+PaDiM,hazelnut,42,rescue,sensor_noise,severe,NLM Denoise,0.5732142925262451
+PaDiM,hazelnut,42,degradation,fog_haze,mild,none,0.4789285659790039
+PaDiM,hazelnut,42,degradation,fog_haze,moderate,none,0.5
+PaDiM,hazelnut,42,degradation,fog_haze,severe,none,0.5
+PaDiM,hazelnut,42,rescue,fog_haze,severe,Dehaze (Dark Channel),0.5
+PaDiM,hazelnut,123,baseline,clean,none,none,0.8924999833106995
+PaDiM,hazelnut,123,degradation,low_light,mild,none,0.8335714340209961
+PaDiM,hazelnut,123,degradation,low_light,moderate,none,0.616428554058075
+PaDiM,hazelnut,123,degradation,low_light,severe,none,0.5242856740951538
+PaDiM,hazelnut,123,rescue,low_light,severe,CLAHE,0.4342857003211975
+PaDiM,hazelnut,123,rescue,low_light,severe,Retinex,0.614642858505249
+PaDiM,hazelnut,123,degradation,gaussian_blur,mild,none,0.5810713768005371
+PaDiM,hazelnut,123,degradation,gaussian_blur,moderate,none,0.4814285635948181
+PaDiM,hazelnut,123,degradation,gaussian_blur,severe,none,0.5803571343421936
+PaDiM,hazelnut,123,rescue,gaussian_blur,severe,Wiener,0.5692857503890991
+PaDiM,hazelnut,123,degradation,motion_blur,mild,none,0.6324999928474426
+PaDiM,hazelnut,123,degradation,motion_blur,moderate,none,0.5998214483261108
+PaDiM,hazelnut,123,degradation,motion_blur,severe,none,0.6375000476837158
+PaDiM,hazelnut,123,rescue,motion_blur,severe,Wiener (Motion PSF),0.4860714077949524
+PaDiM,hazelnut,123,degradation,sensor_noise,mild,none,0.5321428775787354
+PaDiM,hazelnut,123,degradation,sensor_noise,moderate,none,0.5314285755157471
+PaDiM,hazelnut,123,degradation,sensor_noise,severe,none,0.5410714149475098
+PaDiM,hazelnut,123,rescue,sensor_noise,severe,NLM Denoise,0.4701785743236542
+PaDiM,hazelnut,123,degradation,fog_haze,mild,none,0.5625
+PaDiM,hazelnut,123,degradation,fog_haze,moderate,none,0.4662500023841858
+PaDiM,hazelnut,123,degradation,fog_haze,severe,none,0.5
+PaDiM,hazelnut,123,rescue,fog_haze,severe,Dehaze (Dark Channel),0.4953571557998657
+PaDiM,hazelnut,456,baseline,clean,none,none,0.8571428060531616
+PaDiM,hazelnut,456,degradation,low_light,mild,none,0.7285714149475098
+PaDiM,hazelnut,456,degradation,low_light,moderate,none,0.5
+PaDiM,hazelnut,456,degradation,low_light,severe,none,0.5
+PaDiM,hazelnut,456,rescue,low_light,severe,CLAHE,0.5
+PaDiM,hazelnut,456,rescue,low_light,severe,Retinex,0.7428570985794067
+PaDiM,hazelnut,456,degradation,gaussian_blur,mild,none,0.5994642972946167
+PaDiM,hazelnut,456,degradation,gaussian_blur,moderate,none,0.5099999904632568
+PaDiM,hazelnut,456,degradation,gaussian_blur,severe,none,0.4928571283817291
+PaDiM,hazelnut,456,rescue,gaussian_blur,severe,Wiener,0.5
+PaDiM,hazelnut,456,degradation,motion_blur,mild,none,0.4617857336997986
+PaDiM,hazelnut,456,degradation,motion_blur,moderate,none,0.512499988079071
+PaDiM,hazelnut,456,degradation,motion_blur,severe,none,0.5
+PaDiM,hazelnut,456,rescue,motion_blur,severe,Wiener (Motion PSF),0.5
+PaDiM,hazelnut,456,degradation,sensor_noise,mild,none,0.43857142329216
+PaDiM,hazelnut,456,degradation,sensor_noise,moderate,none,0.5
+PaDiM,hazelnut,456,degradation,sensor_noise,severe,none,0.5
+PaDiM,hazelnut,456,rescue,sensor_noise,severe,NLM Denoise,0.4471428394317627
+PaDiM,hazelnut,456,degradation,fog_haze,mild,none,0.5
+PaDiM,hazelnut,456,degradation,fog_haze,moderate,none,0.5
+PaDiM,hazelnut,456,degradation,fog_haze,severe,none,0.5
+PaDiM,hazelnut,456,rescue,fog_haze,severe,Dehaze (Dark Channel),0.5
+PaDiM,leather,42,baseline,clean,none,none,0.99286687374115
+PaDiM,leather,42,degradation,low_light,mild,none,0.940557062625885
+PaDiM,leather,42,degradation,low_light,moderate,none,0.9045516848564148
+PaDiM,leather,42,degradation,low_light,severe,none,0.90081524848938
+PaDiM,leather,42,rescue,low_light,severe,CLAHE,0.879755437374115
+PaDiM,leather,42,rescue,low_light,severe,Retinex,0.8909647464752197
+PaDiM,leather,42,degradation,gaussian_blur,mild,none,0.93919837474823
+PaDiM,leather,42,degradation,gaussian_blur,moderate,none,0.8413722515106201
+PaDiM,leather,42,degradation,gaussian_blur,severe,none,0.66966712474823
+PaDiM,leather,42,rescue,gaussian_blur,severe,Wiener,0.4555026888847351
+PaDiM,leather,42,degradation,motion_blur,mild,none,0.9368206858634948
+PaDiM,leather,42,degradation,motion_blur,moderate,none,0.8739809989929199
+PaDiM,leather,42,degradation,motion_blur,severe,none,0.8573369383811951
+PaDiM,leather,42,rescue,motion_blur,severe,Wiener (Motion PSF),0.7615488767623901
+PaDiM,leather,42,degradation,sensor_noise,mild,none,0.7601902484893799
+PaDiM,leather,42,degradation,sensor_noise,moderate,none,0.6745923757553101
+PaDiM,leather,42,degradation,sensor_noise,severe,none,0.6185462474822998
+PaDiM,leather,42,rescue,sensor_noise,severe,NLM Denoise,0.56861412525177
+PaDiM,leather,42,degradation,fog_haze,mild,none,0.6195652484893799
+PaDiM,leather,42,degradation,fog_haze,moderate,none,0.6044497489929199
+PaDiM,leather,42,degradation,fog_haze,severe,none,0.51341712474823
+PaDiM,leather,42,rescue,fog_haze,severe,Dehaze (Dark Channel),0.4633152484893799
+PaDiM,leather,123,baseline,clean,none,none,0.999660313129425
+PaDiM,leather,123,degradation,low_light,mild,none,0.9327446222305298
+PaDiM,leather,123,degradation,low_light,moderate,none,0.913722813129425
+PaDiM,leather,123,degradation,low_light,severe,none,0.92866849899292
+PaDiM,leather,123,rescue,low_light,severe,CLAHE,0.90013587474823
+PaDiM,leather,123,rescue,low_light,severe,Retinex,0.8165761232376099
+PaDiM,leather,123,degradation,gaussian_blur,mild,none,0.9833559393882751
+PaDiM,leather,123,degradation,gaussian_blur,moderate,none,0.83152174949646
+PaDiM,leather,123,degradation,gaussian_blur,severe,none,0.8913043141365051
+PaDiM,leather,123,rescue,gaussian_blur,severe,Wiener,0.5336277484893799
+PaDiM,leather,123,degradation,motion_blur,mild,none,0.9786006212234496
+PaDiM,leather,123,degradation,motion_blur,moderate,none,0.945652186870575
+PaDiM,leather,123,degradation,motion_blur,severe,none,0.86888587474823
+PaDiM,leather,123,rescue,motion_blur,severe,Wiener (Motion PSF),0.812160313129425
+PaDiM,leather,123,degradation,sensor_noise,mild,none,0.890285313129425
+PaDiM,leather,123,degradation,sensor_noise,moderate,none,0.868546187877655
+PaDiM,leather,123,degradation,sensor_noise,severe,none,0.8125
+PaDiM,leather,123,rescue,sensor_noise,severe,NLM Denoise,0.5940896272659302
+PaDiM,leather,123,degradation,fog_haze,mild,none,0.8366168141365051
+PaDiM,leather,123,degradation,fog_haze,moderate,none,0.6348505616188049
+PaDiM,leather,123,degradation,fog_haze,severe,none,0.625
+PaDiM,leather,123,rescue,fog_haze,severe,Dehaze (Dark Channel),0.4769021868705749
+PaDiM,leather,456,baseline,clean,none,none,1.0
+PaDiM,leather,456,degradation,low_light,mild,none,0.967391312122345
+PaDiM,leather,456,degradation,low_light,moderate,none,0.9317255020141602
+PaDiM,leather,456,degradation,low_light,severe,none,0.90081524848938
+PaDiM,leather,456,rescue,low_light,severe,CLAHE,0.8974184989929199
+PaDiM,leather,456,rescue,low_light,severe,Retinex,0.90523099899292
+PaDiM,leather,456,degradation,gaussian_blur,mild,none,0.9792799353599548
+PaDiM,leather,456,degradation,gaussian_blur,moderate,none,0.6873301267623901
+PaDiM,leather,456,degradation,gaussian_blur,severe,none,0.65013587474823
+PaDiM,leather,456,rescue,gaussian_blur,severe,Wiener,0.5
+PaDiM,leather,456,degradation,motion_blur,mild,none,0.94802987575531
+PaDiM,leather,456,degradation,motion_blur,moderate,none,0.8104619979858398
+PaDiM,leather,456,degradation,motion_blur,severe,none,0.811650812625885
+PaDiM,leather,456,rescue,motion_blur,severe,Wiener (Motion PSF),0.7917798757553101
+PaDiM,leather,456,degradation,sensor_noise,mild,none,0.98029887676239
+PaDiM,leather,456,degradation,sensor_noise,moderate,none,0.8804348111152649
+PaDiM,leather,456,degradation,sensor_noise,severe,none,0.8770380616188049
+PaDiM,leather,456,rescue,sensor_noise,severe,NLM Denoise,0.8418817520141602
+PaDiM,leather,456,degradation,fog_haze,mild,none,0.688349187374115
+PaDiM,leather,456,degradation,fog_haze,moderate,none,0.5
+PaDiM,leather,456,degradation,fog_haze,severe,none,0.5
+PaDiM,leather,456,rescue,fog_haze,severe,Dehaze (Dark Channel),0.5672553777694702
+PaDiM,metal_nut,42,baseline,clean,none,none,0.934995174407959
+PaDiM,metal_nut,42,degradation,low_light,mild,none,0.8426197171211243
+PaDiM,metal_nut,42,degradation,low_light,moderate,none,0.5869990587234497
+PaDiM,metal_nut,42,degradation,low_light,severe,none,0.5
+PaDiM,metal_nut,42,rescue,low_light,severe,CLAHE,0.5
+PaDiM,metal_nut,42,rescue,low_light,severe,Retinex,0.5
+PaDiM,metal_nut,42,degradation,gaussian_blur,mild,none,0.7023460865020752
+PaDiM,metal_nut,42,degradation,gaussian_blur,moderate,none,0.5058650970458984
+PaDiM,metal_nut,42,degradation,gaussian_blur,severe,none,0.5
+PaDiM,metal_nut,42,rescue,gaussian_blur,severe,Wiener,0.5
+PaDiM,metal_nut,42,degradation,motion_blur,mild,none,0.6111925840377808
+PaDiM,metal_nut,42,degradation,motion_blur,moderate,none,0.5
+PaDiM,metal_nut,42,degradation,motion_blur,severe,none,0.5
+PaDiM,metal_nut,42,rescue,motion_blur,severe,Wiener (Motion PSF),0.5114858150482178
+PaDiM,metal_nut,42,degradation,sensor_noise,mild,none,0.5
+PaDiM,metal_nut,42,degradation,sensor_noise,moderate,none,0.5
+PaDiM,metal_nut,42,degradation,sensor_noise,severe,none,0.5
+PaDiM,metal_nut,42,rescue,sensor_noise,severe,NLM Denoise,0.4882698059082031
+PaDiM,metal_nut,42,degradation,fog_haze,mild,none,0.5227272510528564
+PaDiM,metal_nut,42,degradation,fog_haze,moderate,none,0.5
+PaDiM,metal_nut,42,degradation,fog_haze,severe,none,0.5
+PaDiM,metal_nut,42,rescue,fog_haze,severe,Dehaze (Dark Channel),0.5
+PaDiM,metal_nut,123,baseline,clean,none,none,0.908113420009613
+PaDiM,metal_nut,123,degradation,low_light,mild,none,0.9100683927536012
+PaDiM,metal_nut,123,degradation,low_light,moderate,none,0.6412512063980103
+PaDiM,metal_nut,123,degradation,low_light,severe,none,0.6901270151138306
+PaDiM,metal_nut,123,rescue,low_light,severe,CLAHE,0.6568914651870728
+PaDiM,metal_nut,123,rescue,low_light,severe,Retinex,0.5723362565040588
+PaDiM,metal_nut,123,degradation,gaussian_blur,mild,none,0.5581622123718262
+PaDiM,metal_nut,123,degradation,gaussian_blur,moderate,none,0.5303030014038086
+PaDiM,metal_nut,123,degradation,gaussian_blur,severe,none,0.4946236610412597
+PaDiM,metal_nut,123,rescue,gaussian_blur,severe,Wiener,0.5
+PaDiM,metal_nut,123,degradation,motion_blur,mild,none,0.723607063293457
+PaDiM,metal_nut,123,degradation,motion_blur,moderate,none,0.6722874045372009
+PaDiM,metal_nut,123,degradation,motion_blur,severe,none,0.5
+PaDiM,metal_nut,123,rescue,motion_blur,severe,Wiener (Motion PSF),0.4462365508079529
+PaDiM,metal_nut,123,degradation,sensor_noise,mild,none,0.5826001167297363
+PaDiM,metal_nut,123,degradation,sensor_noise,moderate,none,0.7536656856536865
+PaDiM,metal_nut,123,degradation,sensor_noise,severe,none,0.6813294291496277
+PaDiM,metal_nut,123,rescue,sensor_noise,severe,NLM Denoise,0.5334799289703369
+PaDiM,metal_nut,123,degradation,fog_haze,mild,none,0.5940859913825989
+PaDiM,metal_nut,123,degradation,fog_haze,moderate,none,0.5283479690551758
+PaDiM,metal_nut,123,degradation,fog_haze,severe,none,0.5
+PaDiM,metal_nut,123,rescue,fog_haze,severe,Dehaze (Dark Channel),0.5
+PaDiM,metal_nut,456,baseline,clean,none,none,0.95650053024292
+PaDiM,metal_nut,456,degradation,low_light,mild,none,0.8880743384361267
+PaDiM,metal_nut,456,degradation,low_light,moderate,none,0.6388074159622192
+PaDiM,metal_nut,456,degradation,low_light,severe,none,0.5
+PaDiM,metal_nut,456,rescue,low_light,severe,CLAHE,0.5437438488006592
+PaDiM,metal_nut,456,rescue,low_light,severe,Retinex,0.6314760446548462
+PaDiM,metal_nut,456,degradation,gaussian_blur,mild,none,0.7783479690551758
+PaDiM,metal_nut,456,degradation,gaussian_blur,moderate,none,0.5298143029212952
+PaDiM,metal_nut,456,degradation,gaussian_blur,severe,none,0.5
+PaDiM,metal_nut,456,rescue,gaussian_blur,severe,Wiener,0.5
+PaDiM,metal_nut,456,degradation,motion_blur,mild,none,0.5740469098091125
+PaDiM,metal_nut,456,degradation,motion_blur,moderate,none,0.5
+PaDiM,metal_nut,456,degradation,motion_blur,severe,none,0.5
+PaDiM,metal_nut,456,rescue,motion_blur,severe,Wiener (Motion PSF),0.5
+PaDiM,metal_nut,456,degradation,sensor_noise,mild,none,0.56256103515625
+PaDiM,metal_nut,456,degradation,sensor_noise,moderate,none,0.4816715717315674
+PaDiM,metal_nut,456,degradation,sensor_noise,severe,none,0.5058650970458984
+PaDiM,metal_nut,456,rescue,sensor_noise,severe,NLM Denoise,0.5002444386482239
+PaDiM,metal_nut,456,degradation,fog_haze,mild,none,0.528836727142334
+PaDiM,metal_nut,456,degradation,fog_haze,moderate,none,0.5
+PaDiM,metal_nut,456,degradation,fog_haze,severe,none,0.5
+PaDiM,metal_nut,456,rescue,fog_haze,severe,Dehaze (Dark Channel),0.5
+PaDiM,pill,42,baseline,clean,none,none,0.8213311433792114
+PaDiM,pill,42,degradation,low_light,mild,none,0.5062738656997681
+PaDiM,pill,42,degradation,low_light,moderate,none,0.3216038942337036
+PaDiM,pill,42,degradation,low_light,severe,none,0.4353518784046173
+PaDiM,pill,42,rescue,low_light,severe,CLAHE,0.4986360967159271
+PaDiM,pill,42,rescue,low_light,severe,Retinex,0.5390071272850037
+PaDiM,pill,42,degradation,gaussian_blur,mild,none,0.6276595592498779
+PaDiM,pill,42,degradation,gaussian_blur,moderate,none,0.4672667980194092
+PaDiM,pill,42,degradation,gaussian_blur,severe,none,0.4746317267417907
+PaDiM,pill,42,rescue,gaussian_blur,severe,Wiener,0.5141844153404236
+PaDiM,pill,42,degradation,motion_blur,mild,none,0.4369885325431824
+PaDiM,pill,42,degradation,motion_blur,moderate,none,0.5100927352905273
+PaDiM,pill,42,degradation,motion_blur,severe,none,0.5
+PaDiM,pill,42,rescue,motion_blur,severe,Wiener (Motion PSF),0.4549918174743652
+PaDiM,pill,42,degradation,sensor_noise,mild,none,0.4704037010669708
+PaDiM,pill,42,degradation,sensor_noise,moderate,none,0.4882705807685852
+PaDiM,pill,42,degradation,sensor_noise,severe,none,0.4803600907325744
+PaDiM,pill,42,rescue,sensor_noise,severe,NLM Denoise,0.5504637360572815
+PaDiM,pill,42,degradation,fog_haze,mild,none,0.5512820482254028
+PaDiM,pill,42,degradation,fog_haze,moderate,none,0.5587834119796753
+PaDiM,pill,42,degradation,fog_haze,severe,none,0.4131205677986145
+PaDiM,pill,42,rescue,fog_haze,severe,Dehaze (Dark Channel),0.4716311991214752
+PaDiM,pill,123,baseline,clean,none,none,0.8709765076637268
+PaDiM,pill,123,degradation,low_light,mild,none,0.5853791832923889
+PaDiM,pill,123,degradation,low_light,moderate,none,0.4615384638309479
+PaDiM,pill,123,degradation,low_light,severe,none,0.5010911226272583
+PaDiM,pill,123,rescue,low_light,severe,CLAHE,0.4900436699390411
+PaDiM,pill,123,rescue,low_light,severe,Retinex,0.5
+PaDiM,pill,123,degradation,gaussian_blur,mild,none,0.5964266061782837
+PaDiM,pill,123,degradation,gaussian_blur,moderate,none,0.5
+PaDiM,pill,123,degradation,gaussian_blur,severe,none,0.5
+PaDiM,pill,123,rescue,gaussian_blur,severe,Wiener,0.5
+PaDiM,pill,123,degradation,motion_blur,mild,none,0.5013638734817505
+PaDiM,pill,123,degradation,motion_blur,moderate,none,0.5
+PaDiM,pill,123,degradation,motion_blur,severe,none,0.5
+PaDiM,pill,123,rescue,motion_blur,severe,Wiener (Motion PSF),0.5
+PaDiM,pill,123,degradation,sensor_noise,mild,none,0.4545826613903045
+PaDiM,pill,123,degradation,sensor_noise,moderate,none,0.5951991081237793
+PaDiM,pill,123,degradation,sensor_noise,severe,none,0.486497551202774
+PaDiM,pill,123,rescue,sensor_noise,severe,NLM Denoise,0.5
+PaDiM,pill,123,degradation,fog_haze,mild,none,0.4680851101875305
+PaDiM,pill,123,degradation,fog_haze,moderate,none,0.5
+PaDiM,pill,123,degradation,fog_haze,severe,none,0.5
+PaDiM,pill,123,rescue,fog_haze,severe,Dehaze (Dark Channel),0.5
+PaDiM,pill,456,baseline,clean,none,none,0.9298964142799376
+PaDiM,pill,456,degradation,low_light,mild,none,0.5073649883270264
+PaDiM,pill,456,degradation,low_light,moderate,none,0.4809056222438812
+PaDiM,pill,456,degradation,low_light,severe,none,0.5
+PaDiM,pill,456,rescue,low_light,severe,CLAHE,0.5
+PaDiM,pill,456,rescue,low_light,severe,Retinex,0.6565739512443542
+PaDiM,pill,456,degradation,gaussian_blur,mild,none,0.6260229349136353
+PaDiM,pill,456,degradation,gaussian_blur,moderate,none,0.5733769536018372
+PaDiM,pill,456,degradation,gaussian_blur,severe,none,0.5546917915344238
+PaDiM,pill,456,rescue,gaussian_blur,severe,Wiener,0.5
+PaDiM,pill,456,degradation,motion_blur,mild,none,0.478723406791687
+PaDiM,pill,456,degradation,motion_blur,moderate,none,0.5
+PaDiM,pill,456,degradation,motion_blur,severe,none,0.5
+PaDiM,pill,456,rescue,motion_blur,severe,Wiener (Motion PSF),0.4929077923297882
+PaDiM,pill,456,degradation,sensor_noise,mild,none,0.5900163650512695
+PaDiM,pill,456,degradation,sensor_noise,moderate,none,0.5
+PaDiM,pill,456,degradation,sensor_noise,severe,none,0.5
+PaDiM,pill,456,rescue,sensor_noise,severe,NLM Denoise,0.545417308807373
+PaDiM,pill,456,degradation,fog_haze,mild,none,0.4858156144618988
+PaDiM,pill,456,degradation,fog_haze,moderate,none,0.5
+PaDiM,pill,456,degradation,fog_haze,severe,none,0.5
+PaDiM,pill,456,rescue,fog_haze,severe,Dehaze (Dark Channel),0.5
+PaDiM,screw,42,baseline,clean,none,none,0.6935847401618958
+PaDiM,screw,42,degradation,low_light,mild,none,0.5
+PaDiM,screw,42,degradation,low_light,moderate,none,0.520188570022583
+PaDiM,screw,42,degradation,low_light,severe,none,0.4761221408843994
+PaDiM,screw,42,rescue,low_light,severe,CLAHE,0.5121951103210449
+PaDiM,screw,42,rescue,low_light,severe,Retinex,0.2377536445856094
+PaDiM,screw,42,degradation,gaussian_blur,mild,none,0.5642549991607666
+PaDiM,screw,42,degradation,gaussian_blur,moderate,none,0.5
+PaDiM,screw,42,degradation,gaussian_blur,severe,none,0.5
+PaDiM,screw,42,rescue,gaussian_blur,severe,Wiener,0.5
+PaDiM,screw,42,degradation,motion_blur,mild,none,0.6040172576904297
+PaDiM,screw,42,degradation,motion_blur,moderate,none,0.5
+PaDiM,screw,42,degradation,motion_blur,severe,none,0.5
+PaDiM,screw,42,rescue,motion_blur,severe,Wiener (Motion PSF),0.5983808636665344
+PaDiM,screw,42,degradation,sensor_noise,mild,none,0.5
+PaDiM,screw,42,degradation,sensor_noise,moderate,none,0.5
+PaDiM,screw,42,degradation,sensor_noise,severe,none,0.5
+PaDiM,screw,42,rescue,sensor_noise,severe,NLM Denoise,0.4500922560691833
+PaDiM,screw,42,degradation,fog_haze,mild,none,0.4123795926570892
+PaDiM,screw,42,degradation,fog_haze,moderate,none,0.4159663915634155
+PaDiM,screw,42,degradation,fog_haze,severe,none,0.4915966391563415
+PaDiM,screw,42,rescue,fog_haze,severe,Dehaze (Dark Channel),0.5
+PaDiM,screw,123,baseline,clean,none,none,0.7021931409835815
+PaDiM,screw,123,degradation,low_light,mild,none,0.5087108016014099
+PaDiM,screw,123,degradation,low_light,moderate,none,0.4873949587345123
+PaDiM,screw,123,degradation,low_light,severe,none,0.5523672699928284
+PaDiM,screw,123,rescue,low_light,severe,CLAHE,0.5
+PaDiM,screw,123,rescue,low_light,severe,Retinex,0.4492723941802978
+PaDiM,screw,123,degradation,gaussian_blur,mild,none,0.6058619022369385
+PaDiM,screw,123,degradation,gaussian_blur,moderate,none,0.5
+PaDiM,screw,123,degradation,gaussian_blur,severe,none,0.5
+PaDiM,screw,123,rescue,gaussian_blur,severe,Wiener,0.5
+PaDiM,screw,123,degradation,motion_blur,mild,none,0.6597663164138794
+PaDiM,screw,123,degradation,motion_blur,moderate,none,0.5587210655212402
+PaDiM,screw,123,degradation,motion_blur,severe,none,0.4964132010936737
+PaDiM,screw,123,rescue,motion_blur,severe,Wiener (Motion PSF),0.6015576720237732
+PaDiM,screw,123,degradation,sensor_noise,mild,none,0.483808159828186
+PaDiM,screw,123,degradation,sensor_noise,moderate,none,0.4764296412467956
+PaDiM,screw,123,degradation,sensor_noise,severe,none,0.4392293691635132
+PaDiM,screw,123,rescue,sensor_noise,severe,NLM Denoise,0.5
+PaDiM,screw,123,degradation,fog_haze,mild,none,0.5054314136505127
+PaDiM,screw,123,degradation,fog_haze,moderate,none,0.4361549615859985
+PaDiM,screw,123,degradation,fog_haze,severe,none,0.4957983195781708
+PaDiM,screw,123,rescue,fog_haze,severe,Dehaze (Dark Channel),0.5
+PaDiM,screw,456,baseline,clean,none,none,0.7042426466941833
+PaDiM,screw,456,degradation,low_light,mild,none,0.3546833395957947
+PaDiM,screw,456,degradation,low_light,moderate,none,0.392908364534378
+PaDiM,screw,456,degradation,low_light,severe,none,0.6831318140029907
+PaDiM,screw,456,rescue,low_light,severe,CLAHE,0.4789915978908539
+PaDiM,screw,456,rescue,low_light,severe,Retinex,0.5078909397125244
+PaDiM,screw,456,degradation,gaussian_blur,mild,none,0.4830907881259918
+PaDiM,screw,456,degradation,gaussian_blur,moderate,none,0.5
+PaDiM,screw,456,degradation,gaussian_blur,severe,none,0.5
+PaDiM,screw,456,rescue,gaussian_blur,severe,Wiener,0.5
+PaDiM,screw,456,degradation,motion_blur,mild,none,0.5013322234153748
+PaDiM,screw,456,degradation,motion_blur,moderate,none,0.4957983195781708
+PaDiM,screw,456,degradation,motion_blur,severe,none,0.5
+PaDiM,screw,456,rescue,motion_blur,severe,Wiener (Motion PSF),0.5243902206420898
+PaDiM,screw,456,degradation,sensor_noise,mild,none,0.5
+PaDiM,screw,456,degradation,sensor_noise,moderate,none,0.5
+PaDiM,screw,456,degradation,sensor_noise,severe,none,0.5
+PaDiM,screw,456,rescue,sensor_noise,severe,NLM Denoise,0.4957983195781708
+PaDiM,screw,456,degradation,fog_haze,mild,none,0.5
+PaDiM,screw,456,degradation,fog_haze,moderate,none,0.5
+PaDiM,screw,456,degradation,fog_haze,severe,none,0.5
+PaDiM,screw,456,rescue,fog_haze,severe,Dehaze (Dark Channel),0.5
+PaDiM,tile,42,baseline,clean,none,none,0.9956709146499634
+PaDiM,tile,42,degradation,low_light,mild,none,0.9617604613304138
+PaDiM,tile,42,degradation,low_light,moderate,none,0.9689754843711852
+PaDiM,tile,42,degradation,low_light,severe,none,0.9531024694442748
+PaDiM,tile,42,rescue,low_light,severe,CLAHE,0.9321789741516112
+PaDiM,tile,42,rescue,low_light,severe,Retinex,0.926406979560852
+PaDiM,tile,42,degradation,gaussian_blur,mild,none,0.8535354137420654
+PaDiM,tile,42,degradation,gaussian_blur,moderate,none,0.6150793433189392
+PaDiM,tile,42,degradation,gaussian_blur,severe,none,0.5569985508918762
+PaDiM,tile,42,rescue,gaussian_blur,severe,Wiener,0.4485930800437927
+PaDiM,tile,42,degradation,motion_blur,mild,none,0.8849207162857056
+PaDiM,tile,42,degradation,motion_blur,moderate,none,0.658730149269104
+PaDiM,tile,42,degradation,motion_blur,severe,none,0.6450216770172119
+PaDiM,tile,42,rescue,motion_blur,severe,Wiener (Motion PSF),0.6363636255264282
+PaDiM,tile,42,degradation,sensor_noise,mild,none,0.7503607273101807
+PaDiM,tile,42,degradation,sensor_noise,moderate,none,0.658730149269104
+PaDiM,tile,42,degradation,sensor_noise,severe,none,0.6251803636550903
+PaDiM,tile,42,rescue,sensor_noise,severe,NLM Denoise,0.7471140027046204
+PaDiM,tile,42,degradation,fog_haze,mild,none,0.8715729117393494
+PaDiM,tile,42,degradation,fog_haze,moderate,none,0.7384560108184814
+PaDiM,tile,42,degradation,fog_haze,severe,none,0.6035353541374207
+PaDiM,tile,42,rescue,fog_haze,severe,Dehaze (Dark Channel),0.7095959186553955
+PaDiM,tile,123,baseline,clean,none,none,0.996031641960144
+PaDiM,tile,123,degradation,low_light,mild,none,0.9682539701461792
+PaDiM,tile,123,degradation,low_light,moderate,none,0.9401154518127441
+PaDiM,tile,123,degradation,low_light,severe,none,0.9163059592247009
+PaDiM,tile,123,rescue,low_light,severe,CLAHE,0.9440836906433105
+PaDiM,tile,123,rescue,low_light,severe,Retinex,0.9765512943267822
+PaDiM,tile,123,degradation,gaussian_blur,mild,none,0.85317462682724
+PaDiM,tile,123,degradation,gaussian_blur,moderate,none,0.7610028982162476
+PaDiM,tile,123,degradation,gaussian_blur,severe,none,0.5588022470474243
+PaDiM,tile,123,rescue,gaussian_blur,severe,Wiener,0.49098122119903564
+PaDiM,tile,123,degradation,motion_blur,mild,none,0.7745310068130493
+PaDiM,tile,123,degradation,motion_blur,moderate,none,0.7528860569000244
+PaDiM,tile,123,degradation,motion_blur,severe,none,0.6280664205551147
+PaDiM,tile,123,rescue,motion_blur,severe,Wiener (Motion PSF),0.6233766078948975
+PaDiM,tile,123,degradation,sensor_noise,mild,none,0.9444444179534912
+PaDiM,tile,123,degradation,sensor_noise,moderate,none,0.8924963474273682
+PaDiM,tile,123,degradation,sensor_noise,severe,none,0.8055555820465088
+PaDiM,tile,123,rescue,sensor_noise,severe,NLM Denoise,0.8059163093566895
+PaDiM,tile,123,degradation,fog_haze,mild,none,0.8214285373687744
+PaDiM,tile,123,degradation,fog_haze,moderate,none,0.7813853025436401
+PaDiM,tile,123,degradation,fog_haze,severe,none,0.6316739320755005
+PaDiM,tile,123,rescue,fog_haze,severe,Dehaze (Dark Channel),0.6652235984802246
+PaDiM,tile,456,baseline,clean,none,none,0.994227945804596
+PaDiM,tile,456,degradation,low_light,mild,none,0.9877344369888306
+PaDiM,tile,456,degradation,low_light,moderate,none,0.9671717882156372
+PaDiM,tile,456,degradation,low_light,severe,none,0.9397546648979187
+PaDiM,tile,456,rescue,low_light,severe,CLAHE,0.9581529498100281
+PaDiM,tile,456,rescue,low_light,severe,Retinex,0.9816017746925354
+PaDiM,tile,456,degradation,gaussian_blur,mild,none,0.9224387407302856
+PaDiM,tile,456,degradation,gaussian_blur,moderate,none,0.7857142686843872
+PaDiM,tile,456,degradation,gaussian_blur,severe,none,0.7799422740936279
+PaDiM,tile,456,rescue,gaussian_blur,severe,Wiener,0.5
+PaDiM,tile,456,degradation,motion_blur,mild,none,0.7052669525146484
+PaDiM,tile,456,degradation,motion_blur,moderate,none,0.5876623392105103
+PaDiM,tile,456,degradation,motion_blur,severe,none,0.660714328289032
+PaDiM,tile,456,rescue,motion_blur,severe,Wiener (Motion PSF),0.5869408249855042
+PaDiM,tile,456,degradation,sensor_noise,mild,none,0.927489161491394
+PaDiM,tile,456,degradation,sensor_noise,moderate,none,0.8560605645179749
+PaDiM,tile,456,degradation,sensor_noise,severe,none,0.7853535413742065
+PaDiM,tile,456,rescue,sensor_noise,severe,NLM Denoise,0.5804473161697388
+PaDiM,tile,456,degradation,fog_haze,mild,none,0.9509378671646118
+PaDiM,tile,456,degradation,fog_haze,moderate,none,0.8766233921051025
+PaDiM,tile,456,degradation,fog_haze,severe,none,0.79365074634552
+PaDiM,tile,456,rescue,fog_haze,severe,Dehaze (Dark Channel),0.8463203310966492
+PaDiM,toothbrush,42,baseline,clean,none,none,0.894444465637207
+PaDiM,toothbrush,42,degradation,low_light,mild,none,0.7916666865348816
+PaDiM,toothbrush,42,degradation,low_light,moderate,none,0.7888888716697693
+PaDiM,toothbrush,42,degradation,low_light,severe,none,0.5
+PaDiM,toothbrush,42,rescue,low_light,severe,CLAHE,0.5
+PaDiM,toothbrush,42,rescue,low_light,severe,Retinex,0.574999988079071
+PaDiM,toothbrush,42,degradation,gaussian_blur,mild,none,0.8166666626930237
+PaDiM,toothbrush,42,degradation,gaussian_blur,moderate,none,0.824999988079071
+PaDiM,toothbrush,42,degradation,gaussian_blur,severe,none,0.7333333492279053
+PaDiM,toothbrush,42,rescue,gaussian_blur,severe,Wiener,0.5
+PaDiM,toothbrush,42,degradation,motion_blur,mild,none,0.7708333134651184
+PaDiM,toothbrush,42,degradation,motion_blur,moderate,none,0.8138889074325562
+PaDiM,toothbrush,42,degradation,motion_blur,severe,none,0.5916666984558105
+PaDiM,toothbrush,42,rescue,motion_blur,severe,Wiener (Motion PSF),0.5569444894790649
+PaDiM,toothbrush,42,degradation,sensor_noise,mild,none,0.6027777791023254
+PaDiM,toothbrush,42,degradation,sensor_noise,moderate,none,0.5263888835906982
+PaDiM,toothbrush,42,degradation,sensor_noise,severe,none,0.5
+PaDiM,toothbrush,42,rescue,sensor_noise,severe,NLM Denoise,0.8194444179534912
+PaDiM,toothbrush,42,degradation,fog_haze,mild,none,0.6222222447395325
+PaDiM,toothbrush,42,degradation,fog_haze,moderate,none,0.5166666507720947
+PaDiM,toothbrush,42,degradation,fog_haze,severe,none,0.4833333194255829
+PaDiM,toothbrush,42,rescue,fog_haze,severe,Dehaze (Dark Channel),0.5
+PaDiM,toothbrush,123,baseline,clean,none,none,0.8055555820465088
+PaDiM,toothbrush,123,degradation,low_light,mild,none,0.9555555582046509
+PaDiM,toothbrush,123,degradation,low_light,moderate,none,0.8416666984558105
+PaDiM,toothbrush,123,degradation,low_light,severe,none,0.605555534362793
+PaDiM,toothbrush,123,rescue,low_light,severe,CLAHE,0.5833333730697632
+PaDiM,toothbrush,123,rescue,low_light,severe,Retinex,0.5666666626930237
+PaDiM,toothbrush,123,degradation,gaussian_blur,mild,none,0.7277777791023254
+PaDiM,toothbrush,123,degradation,gaussian_blur,moderate,none,0.45694446563720703
+PaDiM,toothbrush,123,degradation,gaussian_blur,severe,none,0.44999998807907104
+PaDiM,toothbrush,123,rescue,gaussian_blur,severe,Wiener,0.5
+PaDiM,toothbrush,123,degradation,motion_blur,mild,none,0.75
+PaDiM,toothbrush,123,degradation,motion_blur,moderate,none,0.5569444298744202
+PaDiM,toothbrush,123,degradation,motion_blur,severe,none,0.5027777552604675
+PaDiM,toothbrush,123,rescue,motion_blur,severe,Wiener (Motion PSF),0.7777777910232544
+PaDiM,toothbrush,123,degradation,sensor_noise,mild,none,0.7527777552604675
+PaDiM,toothbrush,123,degradation,sensor_noise,moderate,none,0.7666666507720947
+PaDiM,toothbrush,123,degradation,sensor_noise,severe,none,0.7388888597488403
+PaDiM,toothbrush,123,rescue,sensor_noise,severe,NLM Denoise,0.5444444417953491
+PaDiM,toothbrush,123,degradation,fog_haze,mild,none,0.5361111164093018
+PaDiM,toothbrush,123,degradation,fog_haze,moderate,none,0.4166666567325592
+PaDiM,toothbrush,123,degradation,fog_haze,severe,none,0.5
+PaDiM,toothbrush,123,rescue,fog_haze,severe,Dehaze (Dark Channel),0.5249999761581421
+PaDiM,toothbrush,456,baseline,clean,none,none,0.8611111044883728
+PaDiM,toothbrush,456,degradation,low_light,mild,none,0.8722221851348877
+PaDiM,toothbrush,456,degradation,low_light,moderate,none,0.7638888955116272
+PaDiM,toothbrush,456,degradation,low_light,severe,none,0.5
+PaDiM,toothbrush,456,rescue,low_light,severe,CLAHE,0.5
+PaDiM,toothbrush,456,rescue,low_light,severe,Retinex,0.6527777910232544
+PaDiM,toothbrush,456,degradation,gaussian_blur,mild,none,0.7055555582046509
+PaDiM,toothbrush,456,degradation,gaussian_blur,moderate,none,0.5
+PaDiM,toothbrush,456,degradation,gaussian_blur,severe,none,0.5
+PaDiM,toothbrush,456,rescue,gaussian_blur,severe,Wiener,0.5
+PaDiM,toothbrush,456,degradation,motion_blur,mild,none,0.5888888835906982
+PaDiM,toothbrush,456,degradation,motion_blur,moderate,none,0.5
+PaDiM,toothbrush,456,degradation,motion_blur,severe,none,0.5
+PaDiM,toothbrush,456,rescue,motion_blur,severe,Wiener (Motion PSF),0.46666666865348816
+PaDiM,toothbrush,456,degradation,sensor_noise,mild,none,0.8833333253860474
+PaDiM,toothbrush,456,degradation,sensor_noise,moderate,none,0.5
+PaDiM,toothbrush,456,degradation,sensor_noise,severe,none,0.5249999761581421
+PaDiM,toothbrush,456,rescue,sensor_noise,severe,NLM Denoise,0.6083332896232605
+PaDiM,toothbrush,456,degradation,fog_haze,mild,none,0.5
+PaDiM,toothbrush,456,degradation,fog_haze,moderate,none,0.5
+PaDiM,toothbrush,456,degradation,fog_haze,severe,none,0.5
+PaDiM,toothbrush,456,rescue,fog_haze,severe,Dehaze (Dark Channel),0.5
+PaDiM,transistor,42,baseline,clean,none,none,0.9483333826065063
+PaDiM,transistor,42,degradation,low_light,mild,none,0.9041666388511658
+PaDiM,transistor,42,degradation,low_light,moderate,none,0.7329167127609253
+PaDiM,transistor,42,degradation,low_light,severe,none,0.48750001192092896
+PaDiM,transistor,42,rescue,low_light,severe,CLAHE,0.4945833384990692
+PaDiM,transistor,42,rescue,low_light,severe,Retinex,0.5808333158493042
+PaDiM,transistor,42,degradation,gaussian_blur,mild,none,0.9245833158493042
+PaDiM,transistor,42,degradation,gaussian_blur,moderate,none,0.6358333230018616
+PaDiM,transistor,42,degradation,gaussian_blur,severe,none,0.5862500071525574
+PaDiM,transistor,42,rescue,gaussian_blur,severe,Wiener,0.43562501668930054
+PaDiM,transistor,42,degradation,motion_blur,mild,none,0.7941666841506958
+PaDiM,transistor,42,degradation,motion_blur,moderate,none,0.7454167008399963
+PaDiM,transistor,42,degradation,motion_blur,severe,none,0.6089583039283752
+PaDiM,transistor,42,rescue,motion_blur,severe,Wiener (Motion PSF),0.45250001549720764
+PaDiM,transistor,42,degradation,sensor_noise,mild,none,0.6387500166893005
+PaDiM,transistor,42,degradation,sensor_noise,moderate,none,0.5062499642372131
+PaDiM,transistor,42,degradation,sensor_noise,severe,none,0.4462500214576721
+PaDiM,transistor,42,rescue,sensor_noise,severe,NLM Denoise,0.7341666221618652
+PaDiM,transistor,42,degradation,fog_haze,mild,none,0.6295832991600037
+PaDiM,transistor,42,degradation,fog_haze,moderate,none,0.5108332633972168
+PaDiM,transistor,42,degradation,fog_haze,severe,none,0.4235416650772095
+PaDiM,transistor,42,rescue,fog_haze,severe,Dehaze (Dark Channel),0.5779166221618652
+PaDiM,transistor,123,baseline,clean,none,none,0.9650000333786011
+PaDiM,transistor,123,degradation,low_light,mild,none,0.9104166626930237
+PaDiM,transistor,123,degradation,low_light,moderate,none,0.856666624546051
+PaDiM,transistor,123,degradation,low_light,severe,none,0.7933332920074463
+PaDiM,transistor,123,rescue,low_light,severe,CLAHE,0.7987499833106995
+PaDiM,transistor,123,rescue,low_light,severe,Retinex,0.7149999737739563
+PaDiM,transistor,123,degradation,gaussian_blur,mild,none,0.8912500143051147
+PaDiM,transistor,123,degradation,gaussian_blur,moderate,none,0.627916693687439
+PaDiM,transistor,123,degradation,gaussian_blur,severe,none,0.6791666746139526
+PaDiM,transistor,123,rescue,gaussian_blur,severe,Wiener,0.54645836353302
+PaDiM,transistor,123,degradation,motion_blur,mild,none,0.721666693687439
+PaDiM,transistor,123,degradation,motion_blur,moderate,none,0.5800000429153442
+PaDiM,transistor,123,degradation,motion_blur,severe,none,0.4804166853427887
+PaDiM,transistor,123,rescue,motion_blur,severe,Wiener (Motion PSF),0.6158333420753479
+PaDiM,transistor,123,degradation,sensor_noise,mild,none,0.8458333015441895
+PaDiM,transistor,123,degradation,sensor_noise,moderate,none,0.8004167079925537
+PaDiM,transistor,123,degradation,sensor_noise,severe,none,0.6500000357627869
+PaDiM,transistor,123,rescue,sensor_noise,severe,NLM Denoise,0.7124999761581421
+PaDiM,transistor,123,degradation,fog_haze,mild,none,0.6337499618530273
+PaDiM,transistor,123,degradation,fog_haze,moderate,none,0.48124998807907104
+PaDiM,transistor,123,degradation,fog_haze,severe,none,0.5333333015441895
+PaDiM,transistor,123,rescue,fog_haze,severe,Dehaze (Dark Channel),0.50020831823349
+PaDiM,transistor,456,baseline,clean,none,none,0.9325000047683716
+PaDiM,transistor,456,degradation,low_light,mild,none,0.9129166603088379
+PaDiM,transistor,456,degradation,low_light,moderate,none,0.840833306312561
+PaDiM,transistor,456,degradation,low_light,severe,none,0.7595833539962769
+PaDiM,transistor,456,rescue,low_light,severe,CLAHE,0.8212499618530273
+PaDiM,transistor,456,rescue,low_light,severe,Retinex,0.6200000047683716
+PaDiM,transistor,456,degradation,gaussian_blur,mild,none,0.746666669845581
+PaDiM,transistor,456,degradation,gaussian_blur,moderate,none,0.5275000333786011
+PaDiM,transistor,456,degradation,gaussian_blur,severe,none,0.36374998092651367
+PaDiM,transistor,456,rescue,gaussian_blur,severe,Wiener,0.4702083170413971
+PaDiM,transistor,456,degradation,motion_blur,mild,none,0.7041666507720947
+PaDiM,transistor,456,degradation,motion_blur,moderate,none,0.59312504529953
+PaDiM,transistor,456,degradation,motion_blur,severe,none,0.5145833492279053
+PaDiM,transistor,456,rescue,motion_blur,severe,Wiener (Motion PSF),0.5454166531562805
+PaDiM,transistor,456,degradation,sensor_noise,mild,none,0.8658332824707031
+PaDiM,transistor,456,degradation,sensor_noise,moderate,none,0.56208336353302
+PaDiM,transistor,456,degradation,sensor_noise,severe,none,0.5104166269302368
+PaDiM,transistor,456,rescue,sensor_noise,severe,NLM Denoise,0.67208331823349
+PaDiM,transistor,456,degradation,fog_haze,mild,none,0.6033333539962769
+PaDiM,transistor,456,degradation,fog_haze,moderate,none,0.5633333325386047
+PaDiM,transistor,456,degradation,fog_haze,severe,none,0.4787500202655792
+PaDiM,transistor,456,rescue,fog_haze,severe,Dehaze (Dark Channel),0.49416667222976685
+PaDiM,wood,42,baseline,clean,none,none,0.9666666388511658
+PaDiM,wood,42,degradation,low_light,mild,none,0.9526315927505493
+PaDiM,wood,42,degradation,low_light,moderate,none,0.953508734703064
+PaDiM,wood,42,degradation,low_light,severe,none,0.9035087823867798
+PaDiM,wood,42,rescue,low_light,severe,CLAHE,0.8868421316146851
+PaDiM,wood,42,rescue,low_light,severe,Retinex,0.928947389125824
+PaDiM,wood,42,degradation,gaussian_blur,mild,none,0.6622806787490845
+PaDiM,wood,42,degradation,gaussian_blur,moderate,none,0.6394736766815186
+PaDiM,wood,42,degradation,gaussian_blur,severe,none,0.6570175290107727
+PaDiM,wood,42,rescue,gaussian_blur,severe,Wiener,0.5096490979194641
+PaDiM,wood,42,degradation,motion_blur,mild,none,0.7017543315887451
+PaDiM,wood,42,degradation,motion_blur,moderate,none,0.47675439715385437
+PaDiM,wood,42,degradation,motion_blur,severe,none,0.49166667461395264
+PaDiM,wood,42,rescue,motion_blur,severe,Wiener (Motion PSF),0.8614034652709961
+PaDiM,wood,42,degradation,sensor_noise,mild,none,0.6464911699295044
+PaDiM,wood,42,degradation,sensor_noise,moderate,none,0.5745614171028137
+PaDiM,wood,42,degradation,sensor_noise,severe,none,0.6486842632293701
+PaDiM,wood,42,rescue,sensor_noise,severe,NLM Denoise,0.27456140518188477
+PaDiM,wood,42,degradation,fog_haze,mild,none,0.4543859660625458
+PaDiM,wood,42,degradation,fog_haze,moderate,none,0.4350877106189728
+PaDiM,wood,42,degradation,fog_haze,severe,none,0.5486842393875122
+PaDiM,wood,42,rescue,fog_haze,severe,Dehaze (Dark Channel),0.4929824471473694
+PaDiM,wood,123,baseline,clean,none,none,0.9894737005233765
+PaDiM,wood,123,degradation,low_light,mild,none,0.9780701994895935
+PaDiM,wood,123,degradation,low_light,moderate,none,0.9771929979324341
+PaDiM,wood,123,degradation,low_light,severe,none,0.9421052932739258
+PaDiM,wood,123,rescue,low_light,severe,CLAHE,0.949999988079071
+PaDiM,wood,123,rescue,low_light,severe,Retinex,0.969298243522644
+PaDiM,wood,123,degradation,gaussian_blur,mild,none,0.9500000476837158
+PaDiM,wood,123,degradation,gaussian_blur,moderate,none,0.7342105507850647
+PaDiM,wood,123,degradation,gaussian_blur,severe,none,0.7719298601150513
+PaDiM,wood,123,rescue,gaussian_blur,severe,Wiener,0.6741228103637695
+PaDiM,wood,123,degradation,motion_blur,mild,none,0.9543859958648682
+PaDiM,wood,123,degradation,motion_blur,moderate,none,0.9166666269302368
+PaDiM,wood,123,degradation,motion_blur,severe,none,0.8508771657943726
+PaDiM,wood,123,rescue,motion_blur,severe,Wiener (Motion PSF),0.8438596725463867
+PaDiM,wood,123,degradation,sensor_noise,mild,none,0.9385964870452881
+PaDiM,wood,123,degradation,sensor_noise,moderate,none,0.719298243522644
+PaDiM,wood,123,degradation,sensor_noise,severe,none,0.5780701637268066
+PaDiM,wood,123,rescue,sensor_noise,severe,NLM Denoise,0.4780701696872711
+PaDiM,wood,123,degradation,fog_haze,mild,none,0.8736841678619385
+PaDiM,wood,123,degradation,fog_haze,moderate,none,0.8236842155456543
+PaDiM,wood,123,degradation,fog_haze,severe,none,0.586403489112854
+PaDiM,wood,123,rescue,fog_haze,severe,Dehaze (Dark Channel),0.5684210658073425
+PaDiM,wood,456,baseline,clean,none,none,0.9491227865219116
+PaDiM,wood,456,degradation,low_light,mild,none,0.922806978225708
+PaDiM,wood,456,degradation,low_light,moderate,none,0.9184210300445557
+PaDiM,wood,456,degradation,low_light,severe,none,0.8482456207275391
+PaDiM,wood,456,rescue,low_light,severe,CLAHE,0.7903509140014648
+PaDiM,wood,456,rescue,low_light,severe,Retinex,0.9622807502746582
+PaDiM,wood,456,degradation,gaussian_blur,mild,none,0.5526316165924072
+PaDiM,wood,456,degradation,gaussian_blur,moderate,none,0.6640350818634033
+PaDiM,wood,456,degradation,gaussian_blur,severe,none,0.6035087704658508
+PaDiM,wood,456,rescue,gaussian_blur,severe,Wiener,0.4548245668411255
+PaDiM,wood,456,degradation,motion_blur,mild,none,0.6263157725334167
+PaDiM,wood,456,degradation,motion_blur,moderate,none,0.8482456207275391
+PaDiM,wood,456,degradation,motion_blur,severe,none,0.8807017803192139
+PaDiM,wood,456,rescue,motion_blur,severe,Wiener (Motion PSF),0.5100877285003662
+PaDiM,wood,456,degradation,sensor_noise,mild,none,0.8552631735801697
+PaDiM,wood,456,degradation,sensor_noise,moderate,none,0.7236841917037964
+PaDiM,wood,456,degradation,sensor_noise,severe,none,0.711403489112854
+PaDiM,wood,456,rescue,sensor_noise,severe,NLM Denoise,0.5245614051818848
+PaDiM,wood,456,degradation,fog_haze,mild,none,0.46929824352264404
+PaDiM,wood,456,degradation,fog_haze,moderate,none,0.47280701994895935
+PaDiM,wood,456,degradation,fog_haze,severe,none,0.4833333492279053
+PaDiM,wood,456,rescue,fog_haze,severe,Dehaze (Dark Channel),0.5381578803062439
+PaDiM,zipper,42,baseline,clean,none,none,0.9146533012390137
+PaDiM,zipper,42,degradation,low_light,mild,none,0.5
+PaDiM,zipper,42,degradation,low_light,moderate,none,0.5
+PaDiM,zipper,42,degradation,low_light,severe,none,0.5
+PaDiM,zipper,42,rescue,low_light,severe,CLAHE,0.5
+PaDiM,zipper,42,rescue,low_light,severe,Retinex,0.5
+PaDiM,zipper,42,degradation,gaussian_blur,mild,none,0.9283088445663452
+PaDiM,zipper,42,degradation,gaussian_blur,moderate,none,0.7946428060531616
+PaDiM,zipper,42,degradation,gaussian_blur,severe,none,0.633797287940979
+PaDiM,zipper,42,rescue,gaussian_blur,severe,Wiener,0.501838207244873
+PaDiM,zipper,42,degradation,motion_blur,mild,none,0.7455357313156128
+PaDiM,zipper,42,degradation,motion_blur,moderate,none,0.6053045988082886
+PaDiM,zipper,42,degradation,motion_blur,severe,none,0.45378151535987854
+PaDiM,zipper,42,rescue,motion_blur,severe,Wiener (Motion PSF),0.6095063090324402
+PaDiM,zipper,42,degradation,sensor_noise,mild,none,0.5
+PaDiM,zipper,42,degradation,sensor_noise,moderate,none,0.5
+PaDiM,zipper,42,degradation,sensor_noise,severe,none,0.5
+PaDiM,zipper,42,rescue,sensor_noise,severe,NLM Denoise,0.5
+PaDiM,zipper,42,degradation,fog_haze,mild,none,0.5837709903717041
+PaDiM,zipper,42,degradation,fog_haze,moderate,none,0.5974264740943909
+PaDiM,zipper,42,degradation,fog_haze,severe,none,0.5047268867492676
+PaDiM,zipper,42,rescue,fog_haze,severe,Dehaze (Dark Channel),0.6536239385604858
+PaDiM,zipper,123,baseline,clean,none,none,0.9346113204956055
+PaDiM,zipper,123,degradation,low_light,mild,none,0.5107668042182922
+PaDiM,zipper,123,degradation,low_light,moderate,none,0.5074842572212219
+PaDiM,zipper,123,degradation,low_light,severe,none,0.49159663915634155
+PaDiM,zipper,123,rescue,low_light,severe,CLAHE,0.5
+PaDiM,zipper,123,rescue,low_light,severe,Retinex,0.5258666276931763
+PaDiM,zipper,123,degradation,gaussian_blur,mild,none,0.6859243512153625
+PaDiM,zipper,123,degradation,gaussian_blur,moderate,none,0.694459080696106
+PaDiM,zipper,123,degradation,gaussian_blur,severe,none,0.4910714328289032
+PaDiM,zipper,123,rescue,gaussian_blur,severe,Wiener,0.5661764144897461
+PaDiM,zipper,123,degradation,motion_blur,mild,none,0.7423844337463379
+PaDiM,zipper,123,degradation,motion_blur,moderate,none,0.5547531843185425
+PaDiM,zipper,123,degradation,motion_blur,severe,none,0.462184876203537
+PaDiM,zipper,123,rescue,motion_blur,severe,Wiener (Motion PSF),0.5669642686843872
+PaDiM,zipper,123,degradation,sensor_noise,mild,none,0.5
+PaDiM,zipper,123,degradation,sensor_noise,moderate,none,0.5
+PaDiM,zipper,123,degradation,sensor_noise,severe,none,0.5
+PaDiM,zipper,123,rescue,sensor_noise,severe,NLM Denoise,0.5
+PaDiM,zipper,123,degradation,fog_haze,mild,none,0.6276260614395142
+PaDiM,zipper,123,degradation,fog_haze,moderate,none,0.5990021228790283
+PaDiM,zipper,123,degradation,fog_haze,severe,none,0.5422794222831726
+PaDiM,zipper,123,rescue,fog_haze,severe,Dehaze (Dark Channel),0.5853466987609863
+PaDiM,zipper,456,baseline,clean,none,none,0.9632352590560913
+PaDiM,zipper,456,degradation,low_light,mild,none,0.705094575881958
+PaDiM,zipper,456,degradation,low_light,moderate,none,0.7657563090324402
+PaDiM,zipper,456,degradation,low_light,severe,none,0.7371323108673096
+PaDiM,zipper,456,rescue,low_light,severe,CLAHE,0.5267857313156128
+PaDiM,zipper,456,rescue,low_light,severe,Retinex,0.6730567216873169
+PaDiM,zipper,456,degradation,gaussian_blur,mild,none,0.8345588445663452
+PaDiM,zipper,456,degradation,gaussian_blur,moderate,none,0.7041754126548767
+PaDiM,zipper,456,degradation,gaussian_blur,severe,none,0.8203781843185425
+PaDiM,zipper,456,rescue,gaussian_blur,severe,Wiener,0.4957983195781708
+PaDiM,zipper,456,degradation,motion_blur,mild,none,0.8067227005958557
+PaDiM,zipper,456,degradation,motion_blur,moderate,none,0.7019432783126831
+PaDiM,zipper,456,degradation,motion_blur,severe,none,0.703125
+PaDiM,zipper,456,rescue,motion_blur,severe,Wiener (Motion PSF),0.5189075469970703
+PaDiM,zipper,456,degradation,sensor_noise,mild,none,0.5705094933509827
+PaDiM,zipper,456,degradation,sensor_noise,moderate,none,0.4820115566253662
+PaDiM,zipper,456,degradation,sensor_noise,severe,none,0.4797794222831726
+PaDiM,zipper,456,rescue,sensor_noise,severe,NLM Denoise,0.5186449885368347
+PaDiM,zipper,456,degradation,fog_haze,mild,none,0.511817216873169
+PaDiM,zipper,456,degradation,fog_haze,moderate,none,0.5
+PaDiM,zipper,456,degradation,fog_haze,severe,none,0.5
+PaDiM,zipper,456,rescue,fog_haze,severe,Dehaze (Dark Channel),0.6221113204956055
