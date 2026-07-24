@@ -4,7 +4,7 @@ A rigorous 4-way comparative benchmark evaluating **test-time rescue preprocessi
 
 ## Status: ✅ Statistical Significance & Analysis Complete
 
-**6,120 benchmark rows collected, verified, and statistically validated via Wilcoxon signed-rank tests.** All 9 analysis figures (6 descriptive, 3 statistical) are generated and saved in `results/analysis/`.
+**6,120 benchmark rows collected, verified, and statistically validated via Wilcoxon signed-rank tests (with Benjamini-Hochberg FDR correction).** All 9 analysis figures (6 descriptive, 3 statistical) are generated and saved in `results/analysis/`.
 
 ---
 
@@ -17,7 +17,10 @@ A rigorous 4-way comparative benchmark evaluating **test-time rescue preprocessi
 | PaDiM — Clean training | 0.6390 | 35.1% | −0.0456 |
 | PaDiM — Augmented training | **0.7400** (+10.1 pp) | 19.4% | −0.1134 |
 
-**Core finding**: Augmented training significantly improves corruption robustness (up to +24.6 pp for PatchCore/Gaussian blur/severe). Rescue preprocessing is net-harmful in all four conditions — and is *more* harmful when applied to augmented-trained models.
+**Core finding**: Three phenomena are established with statistical significance:
+1. **Augmented training significantly improves robustness** (+12.3 pp PatchCore, +10.1 pp PaDiM, p < 0.001) by expanding the learned normality manifold into corruption-domain feature space.
+2. **Rescue preprocessing is net-harmful** in all 4 conditions — the *preprocessing fallacy* — because restoration algorithms create a third distribution (distinct from both clean training and corrupted images) whose artifacts anomaly detectors score as defects.
+3. **Harm is method-specific**: Wiener deconvolution (−14 to −37 pp via Gibbs spectral ringing) is catastrophic; CLAHE is the only conditionally safe method due to its spatial frequency-preserving contrast adjustment.
 
 ---
 
@@ -91,28 +94,34 @@ Input: previous run's CSV from `patchcore_augmented.csv` / `padim_augmented.csv`
 
 ## Statistical Significance (Wilcoxon Signed-Rank Tests)
 
-We performed paired Wilcoxon signed-rank tests (non-parametric, paired) on the unified dataset of 6,120 rows to validate our core hypotheses. The results are fully documented and visualized in [run_wilcoxon_tests.ipynb](run_wilcoxon_tests.ipynb).
+We performed paired Wilcoxon signed-rank tests (non-parametric, paired) on the unified dataset of 6,120 rows, with **Benjamini-Hochberg FDR correction** applied to the 24 per-method comparisons in Test 3. Results are fully documented in [run_wilcoxon_tests.ipynb](run_wilcoxon_tests.ipynb).
 
 ### 1. Augmentation Gains (H₁: Clean < Augmented)
 Tests whether training-time corruption augmentation yields statistically significant improvements under test-time degradation.
-* **PatchCore** (N = 675 pairs): Mean Gain = **+12.32 pp** ($p = 3.25 \times 10^{-69}$, **highly significant**)
-* **PaDiM** (N = 675 pairs): Mean Gain = **+10.09 pp** ($p = 5.32 \times 10^{-75}$, **highly significant**)
+* **PatchCore** (N = 675 pairs): Mean Gain = **+12.32 pp** ($p = 3.25 \times 10^{-69}$, ***)
+* **PaDiM** (N = 675 pairs): Mean Gain = **+10.09 pp** ($p = 5.32 \times 10^{-75}$, ***)
+
+**Mechanism**: Augmented training expands the normality manifold to encompass corruption-domain features, reducing nearest-neighbour distance inflation (PatchCore) and Mahalanobis distance inflation (PaDiM) for corrupted-but-normal inputs.
 
 *Visualized in `results/analysis/07_wilcoxon_augmentation_gains.png`.*
 
-### 2. Rescue Preprocessing Effectiveness (H₁: Degraded < Rescued)
-Tests whether test-time rescue preprocessing improves performance over degraded inputs. 
-* **PaDiM (Clean)**: Mean Delta = **-4.56 pp** ($p = 8.92 \times 10^{-17}$, **significantly harmful**)
-* **PaDiM (Augmented)**: Mean Delta = **-11.34 pp** ($p = 1.15 \times 10^{-81}$, **significantly harmful**)
-* **PatchCore (Clean)**: Mean Delta = **-7.17 pp** ($p = 1.55 \times 10^{-29}$, **significantly harmful**)
-* **PatchCore (Augmented)**: Mean Delta = **-14.90 pp** ($p = 2.55 \times 10^{-80}$, **significantly harmful**)
+### 2. Rescue Preprocessing Effectiveness (Two-sided Wilcoxon)
+Tests whether test-time rescue preprocessing changes AUROC relative to degraded-only baselines.
+* **PaDiM (Clean)**: Mean Delta = **−4.56 pp** ($p < 0.001$, significantly harmful)
+* **PaDiM (Augmented)**: Mean Delta = **−11.34 pp** ($p < 0.001$, significantly harmful)
+* **PatchCore (Clean)**: Mean Delta = **−7.17 pp** ($p < 0.001$, significantly harmful)
+* **PatchCore (Augmented)**: Mean Delta = **−14.90 pp** ($p < 0.001$, significantly harmful)
+
+**Mechanism (The Preprocessing Fallacy)**: Restoration algorithms create a *third distribution* — distinct from both the clean training set and naturally corrupted images — containing restoration-specific artifacts (Gibbs ringing, illumination maps, over-smoothing). Anomaly detectors score distance from the learned normality distribution; restored images fall further from it than the raw corrupted inputs.
 
 *Visualized in `results/analysis/08_wilcoxon_rescue_deltas.png`.*
 
-### 3. Per-Method Breakdown
-When analyzing individual rescue methods (Wiener deconvolution, Retinex, CLAHE, NLM, Dark Channel Prior):
-* **Wiener Deconvolution** is **categorically and severely harmful** ($p < 0.001$), dropping AUROC by up to **-37.0 pp** due to PSF-mismatch ringing.
-* **CLAHE** on low-light is the only method that shows a conditionally neutral profile ($p = \text{n.s.}$ on PatchCore clean/augmented), indicating it is the least damaging, but still fails to offer statistically significant general gains.
+### 3. Per-Method Breakdown (FDR-corrected)
+When analyzing individual rescue methods, tested with BH-FDR correction across 24 comparisons:
+* **Wiener Deconvolution** is **catastrophically harmful** (q < 0.001), dropping AUROC by **−14 to −37 pp**. Mechanism: Wiener inversion amplifies noise into Gibbs spectral ringing at every edge, creating patch embeddings orthogonal to the entire clean coreset.
+* **Retinex** is consistently harmful (q < 0.001, −3 to −11 pp) via colour channel distortion and high-frequency compression.
+* **CLAHE** is the only conditionally safe method: near-neutral for PatchCore (clean/augmented: ~−0.2 pp, n.s. after FDR). Mechanism: CLAHE adjusts local luminance only, preserving spatial frequencies that deep feature extractors rely on. Exception: PaDiM (augmented) −5.5 pp (q < 0.001) due to spatially non-uniform contrast falling outside uniform brightness augmentation coverage.
+* **NLM Denoise** and **Dehaze (Dark Channel)**: mild but significant harm (−1 to −5 pp, q < 0.05).
 
 *Visualized in `results/analysis/09_wilcoxon_per_method_heatmap.png`.*
 
@@ -131,9 +140,9 @@ All generated plots are saved in `results/analysis/` and categorized as follows:
 6. **[06_category_sensitivity.png](file:///c:/Users/User/Downloads/Anomaly-Detection-main/Anomaly-Detection-main/results/analysis/06_category_sensitivity.png)**: Heatmap showing how sensitive different object/texture categories are to corruptions under clean vs. augmented training.
 
 ### Statistical Wilcoxon Figures
-7. **[07_wilcoxon_augmentation_gains.png](file:///c:/Users/User/Downloads/Anomaly-Detection-main/Anomaly-Detection-main/results/analysis/07_wilcoxon_augmentation_gains.png)**: Bar chart showing average robustness gains from augmented training for PatchCore and PaDiM, annotated with W-statistics and one-sided Wilcoxon significance levels ($***$ for $p < 0.001$).
-8. **[08_wilcoxon_rescue_deltas.png](file:///c:/Users/User/Downloads/Anomaly-Detection-main/Anomaly-Detection-main/results/analysis/08_wilcoxon_rescue_deltas.png)**: Bar chart showing the overall impact of classical rescue preprocessing, proving it is significantly harmful in all four conditions ($***$ for two-sided $p < 0.001$).
-9. **[09_wilcoxon_per_method_heatmap.png](file:///c:/Users/User/Downloads/Anomaly-Detection-main/Anomaly-Detection-main/results/analysis/09_wilcoxon_per_method_heatmap.png)**: Detailed heatmap of Wilcoxon test results broken down per rescue method across all training conditions and models, highlighting that only CLAHE under low-light is conditionally neutral/positive, whereas Wiener deconvolution is categorically catastrophic.
+7. **[07_wilcoxon_augmentation_gains.png](results/analysis/07_wilcoxon_augmentation_gains.png)**: Bar chart showing average robustness gains from augmented training for PatchCore and PaDiM, annotated with W-statistics, one-sided Wilcoxon significance (*** p < 0.001), and absolute baseline AUROC for context.
+8. **[08_wilcoxon_rescue_deltas.png](results/analysis/08_wilcoxon_rescue_deltas.png)**: Bar chart showing the overall impact of classical rescue preprocessing, proving it is significantly harmful in all four conditions (*** two-sided p < 0.001), with per-bar baseline AUROC callouts. Note: aggregate across all 6 rescue methods; Wiener dominates the negative effect.
+9. **[09_wilcoxon_per_method_heatmap.png](results/analysis/09_wilcoxon_per_method_heatmap.png)**: Heatmap of BH-FDR corrected Wilcoxon results per rescue method across all training conditions and models. n.s. shown explicitly. CLAHE is near-neutral for PatchCore; Wiener is catastrophic.
 
 ---
 
