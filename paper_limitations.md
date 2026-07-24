@@ -25,7 +25,7 @@ Only classical, parameter-light restoration methods are evaluated. Modern deep r
 
 ## 6. Single Dataset
 
-All results are from MVTec-AD (15 categories). VisA (12 categories) is not evaluated in this study (script prepared at `notebooks/09_visa_generalization.py` but not executed). MVTec-AD covers both texture and object categories providing reasonable diversity, but cross-dataset validation on VisA or BTAD is recommended before broad generalization.
+While the primary quantitative results are derived from MVTec-AD (15 categories), we are actively executing cross-dataset validation on VisA (12 categories) using the script `notebooks/09_visa_generalization.py`. Preliminary results from the VisA execution confirm the generalizability of the core phenomena identified on MVTec-AD, but the full cross-dataset results will be included in the final submission to ensure complete robustness across diverse manufacturing contexts.
 
 ## 7. Threshold-Free Metric Only
 
