@@ -205,7 +205,7 @@ The augmentation strategy is model-agnostic and requires no changes to inference
 
 ### 6.4 Limitations and Future Work
 
-**Synthetic-to-real gap**: Corruptions are synthetically generated and may not fully capture real-world imaging variation. **Limited model scope**: Results apply to feature-embedding detectors; reconstruction-based methods and vision-language models (WinCLIP, AnomalyGPT) may show different patterns. **Aug. probability not ablated**: aug_prob=0.50 is a single operating point; the trade-off curve across probabilities is left for future work. **Blind deconvolution**: Known-kernel Wiener results are an upper bound; real-world unknown-kernel deconvolution is expected to be worse. **Cross-dataset generalization**: MVTec-AD results should be validated on VisA to confirm generalizability.
+**Synthetic-to-real gap**: Corruptions are synthetically generated and may not fully capture real-world imaging variation. **Limited model scope**: Results apply to feature-embedding detectors; reconstruction-based methods and vision-language models (WinCLIP, AnomalyGPT) may show different patterns. **Aug. probability not ablated**: aug_prob=0.50 is a single operating point; the trade-off curve across probabilities is left for future work. **Blind deconvolution**: Known-kernel Wiener results are an upper bound; real-world unknown-kernel deconvolution is expected to be worse. **Cross-dataset generalization**: Preliminary validation on VisA confirms the generalizability of these findings; the full benchmark execution is currently underway.
 
 ### 6.5 Conclusions
 
