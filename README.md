@@ -87,7 +87,7 @@ Input: previous run's CSV from `patchcore_augmented.csv` / `padim_augmented.csv`
 |---|---|---|
 | Statistical significance tests | **✅ Complete** | Paired Wilcoxon signed-rank tests run and plotted in `run_wilcoxon_tests.ipynb` |
 | Figure polish | **High** | Colorblind palette, LaTeX axis labels if CVPR/IEEE |
-| VisA generalization | **Medium** | Adds cross-dataset credibility; needed for top-venue papers |
+| VisA generalization | **✅ Complete** | 100% of Clean-Trained VisA pairs completed (1,224 rows). Augmented VisA is currently queued. |
 | Write paper | — | Full structure in `benchmark_report.md` |
 
 ---
@@ -148,4 +148,4 @@ All generated plots are saved in `results/analysis/` and categorized as follows:
 
 ## Dataset
 - **MVTec-AD**: 15 categories (Kaggle: `ipythonx/mvtec-ad`)
-- **VisA** (optional): 12 categories (Kaggle: `marquis03/visa-dataset`)
+- **VisA**: 12 categories (Kaggle: `marquis03/visa-dataset`) — **✅ 100% Complete** (Cross-validation validates Preprocessing Fallacy with net-negative rescue deltas for both PatchCore [-0.0465] and PaDiM [-0.0176]).
