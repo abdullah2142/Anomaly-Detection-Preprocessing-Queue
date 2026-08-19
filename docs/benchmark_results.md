@@ -98,13 +98,20 @@ Confirmed at mild, moderate, and severe severity across both models and all 5 co
 
 ---
 
-## Next Step
+## VisA Cross-Dataset Validation Results
 
-Merge all 4 source CSVs into a single unified dataset (3,060 rows total) and produce the final paper-ready analysis.
+To ensure the core phenomena are not specific to the MVTec-AD image domain, cross-validation was run on a 4-category subset of the VisA dataset (candle, cashew, pcb1, pipe_fryum) and verified using Wilcoxon signed-rank tests.
 
-Merge strategy: take all rows from the severe CSVs, then add only rescue-phase rows from the mild/mod CSVs (avoids duplicate degradation rows).
+### 1. Robustness Gain from Augmented Training
+Augmented training consistently provides massive robustness improvements on VisA. Notably, because VisA contains highly complex structural categories (e.g., PCBs), the baseline models are exceptionally vulnerable to corruption, which maximizes the returns from augmented training:
+- **PatchCore**: +17.8 percentage points mean AUROC gain ($p < 3.15 \times 10^{-31}$). In extreme cases, such as severe low-light, PatchCore collapses to 0.5646 (random chance) but recovers to a near-perfect 0.9648 (**+0.4002 gain**) via augmentation.
+- **PaDiM**: +13.9 percentage points mean AUROC gain ($p < 1.63 \times 10^{-27}$).
 
-From the merged dataset, produce:
-1. Per-category breakdown — do any specific MVTec-AD categories consistently benefit from rescue?
-2. Severity x rescue method heatmap of delta AUROC
-3. Final conclusion section for the paper
+### 2. The Preprocessing Fallacy on VisA
+Test-time rescue preprocessing remains net-harmful on the VisA dataset, echoing the MVTec-AD findings, but with even more catastrophic penalties due to the domain's high-frequency textures:
+- **Wiener Deconvolution** and **Retinex** are significantly harmful (FDR-corrected $q < 0.05$) across almost all conditions (clean and augmented). For example, applying Wiener deconvolution to PatchCore (augmented) for mild Gaussian blur plummets performance from a highly robust 0.9242 down to exactly **0.5000** (a catastrophic **-0.4242 penalty**).
+- **CLAHE** and **NLM Denoising** are largely neutral on clean-trained models but become significantly harmful on augmented-trained models.
+- **The Augmented-Rescue Paradox**: The data shows that rescue is most harmful when applied to augmented models. Because the model has already learned the corruption manifold, applying classical restoration forces the image into a new, unseen artifact manifold (ringing/halos), resulting in the worst outcomes.
+- No rescue method provides a statistically significant benefit to anomaly detection on the VisA dataset.
+
+This confirms that the degradation of feature-embedding anomaly detectors by classical image restoration is a fundamental architectural vulnerability, not a dataset-specific artifact.

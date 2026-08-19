@@ -2,7 +2,7 @@
 
 ## Abstract
 
-We present a comprehensive empirical study evaluating two strategies for improving anomaly detection robustness under real-world image corruption: (1) **test-time rescue preprocessing**, which applies classical image restoration to corrupted test images before inference, and (2) **training-time data augmentation**, which exposes the model to synthetic corruptions during training. Using the MVTec-AD dataset with 15 industrial categories, three random seeds, five corruption types, three severity levels, and six rescue methods, we conduct a **4-way evaluation** across two state-of-the-art anomaly detection models — PaDiM and PatchCore. Our results demonstrate that (a) rescue preprocessing is predominantly harmful across all conditions, (b) augmented training substantially improves model robustness, particularly for PatchCore, and (c) applying rescue preprocessing to an augmented-trained model yields the worst outcomes of all four conditions, disproving the intuitive assumption that combining both strategies provides additive benefit.
+We present a comprehensive empirical study evaluating two strategies for improving anomaly detection robustness under real-world image corruption: (1) **test-time rescue preprocessing**, which applies classical image restoration to corrupted test images before inference, and (2) **training-time data augmentation**, which exposes the model to synthetic corruptions during training. Using the MVTec-AD dataset (15 categories) and a cross-validation subset of the VisA dataset (4 categories), with three random seeds, five corruption types, three severity levels, and six rescue methods, we conduct a **4-way evaluation** across two state-of-the-art anomaly detection models — PaDiM and PatchCore. Our results demonstrate that (a) rescue preprocessing is predominantly harmful across all conditions, (b) augmented training substantially improves model robustness, particularly for PatchCore, and (c) applying rescue preprocessing to an augmented-trained model yields the worst outcomes of all four conditions, disproving the intuitive assumption that combining both strategies provides additive benefit.
 
 ---
 
@@ -138,7 +138,7 @@ PatchCore consistently outperforms PaDiM on clean data. Five categories achieve 
 | Fog/haze | Moderate | 0.6161 | 0.7717 | **+0.1556** |
 | Fog/haze | Severe | 0.5623 | 0.6874 | **+0.1251** |
 
-> **Finding 2**: Augmented training provides universal robustness gains. Every corruption/severity condition improves or remains stable. PatchCore benefits most dramatically for Gaussian blur (+0.21 to +0.25) and motion blur (+0.13 to +0.23) at moderate/severe levels. PaDiM shows consistent gains of +0.08 to +0.17 across most conditions.
+> **Finding 2**: Augmented training provides universal robustness gains. Every corruption/severity condition improves or remains stable. PatchCore benefits most dramatically for Gaussian blur (+0.21 to +0.25) and motion blur (+0.13 to +0.23) at moderate/severe levels. PaDiM shows consistent gains of +0.08 to +0.17 across most conditions. Wilcoxon signed-rank tests confirm this holds true across domains: MVTec-AD PatchCore (+12.3 pp, p<0.001), MVTec-AD PaDiM (+10.1 pp, p<0.001), VisA PatchCore (+17.8 pp, p<1e-30), and VisA PaDiM (+13.9 pp, p<1e-27).
 
 > **Finding 3**: PatchCore is more sensitive to corruption than PaDiM at mild severities under clean training (e.g., motion blur mild: 0.782 vs. 0.721), but augmented training closes this gap and reverses it at severe levels.
 
@@ -157,7 +157,7 @@ PatchCore consistently outperforms PaDiM on clean data. Five categories achieve 
 | PatchCore | Clean | 209 / 810 | 25.8% | −0.0717 |
 | PatchCore | Augmented | 184 / 810 | **22.7%** | −0.1490 |
 
-> **Finding 4 (The Preprocessing Fallacy)**: Rescue preprocessing is net-harmful in all four conditions. Even in the best case (PaDiM/clean), only 35.1% of rescue instances improve detection. In every case, the mean rescue delta is negative — on average, preprocessing makes anomaly detection worse.
+> **Finding 4 (The Preprocessing Fallacy)**: Rescue preprocessing is net-harmful in all four conditions across both datasets. Even in the best case (MVTec-AD PaDiM/clean), only 35.1% of rescue instances improve detection. In every case, the mean rescue delta is negative — on average, preprocessing makes anomaly detection worse. VisA cross-validation strongly confirms this ($p<0.001$).
 
 > **Finding 5**: Augmented training *increases* rescue harm. Models trained on corrupted data are *more* damaged by rescue preprocessing than clean-trained models. PaDiM's mean rescue delta worsens from −0.046 to −0.113 after augmented training; PatchCore worsens from −0.072 to −0.149.
 
@@ -226,6 +226,8 @@ PatchCore consistently outperforms PaDiM on clean data. Five categories achieve 
 
 > **Finding 6**: Wiener deconvolution with fixed PSF parameters is universally and severely detrimental. For both blur types, it frequently collapses AUROC to the random-chance floor (0.50). This is because the fixed PSF assumptions (e.g., σ=25, k=281 for Gaussian PSF) are mismatched to the actual corruption parameters, producing ringing artifacts that corrupt feature embeddings. Under augmented training, this harm doubles for PatchCore (−0.162 → −0.339) because the model has learned robust blur-domain features that are maximally disrupted by the PSF mismatch artifacts.
 
+> **Finding 7 (Domain Collapse)**: Complex domains like VisA maximize Wiener's destruction. On the VisA dataset, applying Wiener deconvolution to PatchCore (augmented) for mild Gaussian blur plummets performance from a highly robust 0.9242 down to exactly 0.5000 (a catastrophic −0.4242 penalty). VisA's complex, high-frequency structural features (e.g., PCB traces) are entirely obliterated by classical spectral ringing artifacts.
+
 ---
 
 ## 6. Key Findings Summary
@@ -250,6 +252,9 @@ CLAHE on low-light degradation shows a small positive rescue delta under clean-t
 
 ### Finding 7 — PatchCore benefits more from augmented training than PaDiM
 PatchCore's memory-bank architecture, which relies on feature-space nearest-neighbor matching, is highly sensitive to distribution shift. Augmented training recalibrates the coreset to include corruption-domain features, providing large robustness gains. PaDiM's parametric Gaussian model is inherently smoother and more tolerant of mild distributional shifts, explaining its smaller (but consistent) gains.
+
+### Finding 8 — Domain Complexity Amplifies Augmentation Necessity
+While MVTec-AD objects are relatively centralized and simple, the structural complexity of datasets like VisA (e.g., dense PCB layouts, subtle candle textures) makes them acutely vulnerable to corruption. For instance, PatchCore under severe low-light on VisA collapses to 0.5646 (random chance), but augmented training pushes it to a near-perfect 0.9648 (**+0.4002 gain**). The more complex the industrial domain, the more critical augmented training becomes for robust feature-embedding.
 
 ---
 

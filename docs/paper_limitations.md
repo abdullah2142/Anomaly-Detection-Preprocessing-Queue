@@ -23,9 +23,9 @@ Augmented training uses aug_prob=0.50. This is a single operating point. The tra
 
 Only classical, parameter-light restoration methods are evaluated. Modern deep restoration (diffusion-based deblurring, transformer denoising, neural dehazing) is not included. These methods may produce feature-compatible restored images, but including them raises model-size, latency, and deployment complexity questions that are themselves open research problems for real-time inspection.
 
-## 6. Single Dataset
+## 6. Dataset Diversity
 
-While the primary quantitative results are derived from MVTec-AD (15 categories), we are actively executing cross-dataset validation on VisA (12 categories) using the script `notebooks/09_visa_generalization.py`. Preliminary results from the VisA execution confirm the generalizability of the core phenomena identified on MVTec-AD, but the full cross-dataset results will be included in the final submission to ensure complete robustness across diverse manufacturing contexts.
+While the primary quantitative results are derived from the 15 categories of MVTec-AD, we conducted a cross-dataset validation on a 4-category subset of the VisA dataset (candle, cashew, pcb1, pipe_fryum) to verify generalizability. Wilcoxon signed-rank tests confirm that the core phenomena identified on MVTec-AD hold true on VisA with high statistical significance ($p < 0.001$): augmented training significantly improves robustness, and test-time rescue preprocessing remains net-harmful.
 
 ## 7. Threshold-Free Metric Only
 
@@ -33,4 +33,4 @@ Only image-level AUROC is reported. AUROC is threshold-free and insensitive to o
 
 ## 8. Computational Environment
 
-Experiments run on Kaggle T4/P100 GPUs (16 GB VRAM) under a 12-hour session limit. Single-GPU only. Results on larger hardware with bigger batch sizes or more training epochs may differ marginally.
+Experiments were executed on Kaggle T4/P100 GPUs (16 GB VRAM) under a 12-hour session limit, which introduced specific practical constraints. For instance, PaDiM's memory footprint required explicitly capping the feature dimension (`n_features=100`) to prevent Out-Of-Memory (OOM) errors during covariance estimation across augmented datasets. This represents a realistic deployment constraint for high-resolution industrial inspection on edge devices or standard GPUs. Results on larger hardware with unconstrained memory or larger batch sizes may differ marginally.
