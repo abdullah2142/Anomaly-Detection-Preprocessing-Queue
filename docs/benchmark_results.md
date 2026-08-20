@@ -1,5 +1,5 @@
 # Anomaly Detection Benchmark Results
-## Preprocessing Fallacy Study — PaDiM vs PatchCore on MVTec-AD
+## Preprocessing Fallacy Study — PaDiM vs PatchCore on MVTec-AD & VisA
 
 **Dataset**: MVTec-AD | **Models**: PaDiM (wide_resnet50_2), PatchCore (wide_resnet50_2, k=9)
 **Categories**: 15 | **Seeds**: 3 (42, 123, 456) | **Total rows per model**: 1,530

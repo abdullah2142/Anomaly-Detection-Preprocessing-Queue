@@ -77,7 +77,7 @@ Both models are trained for 1 epoch using Anomalib's Engine with `max_epochs=1`.
 | transistor | 0.9486 | 0.9935 |
 | wood | 0.9684 | 0.9863 |
 | zipper | 0.9375 | 0.9785 |
-| **Mean** | **0.9226** | **0.9822** |
+| **Mean** | **0.9160** | **0.9822** |
 
 PatchCore consistently outperforms PaDiM on clean data. Five categories achieve perfect AUROC (1.0000) under PatchCore.
 
@@ -85,12 +85,12 @@ PatchCore consistently outperforms PaDiM on clean data. Five categories achieve 
 
 | Model | Training | Baseline AUROC (mean ± std) |
 |---|---|---|
-| PaDiM | Clean | 0.9226 ± 0.0818 |
+| PaDiM | Clean | 0.9160 ± 0.0810 |
 | PaDiM | Augmented | 0.8980 ± 0.0885 |
 | PatchCore | Clean | 0.9822 ± 0.0218 |
 | PatchCore | Augmented | 0.9773 ± 0.0249 |
 
-> **Finding 1**: Augmented training incurs a small but measurable clean-image AUROC penalty. PaDiM loses ~2.5 pp; PatchCore loses ~0.5 pp. This trade-off is the cost of corruption robustness.
+> **Finding 1**: Augmented training incurs a small but measurable clean-image AUROC penalty. PaDiM loses ~1.8 pp; PatchCore loses ~0.5 pp. This trade-off is the cost of corruption robustness.
 
 ---
 
@@ -233,7 +233,7 @@ PatchCore consistently outperforms PaDiM on clean data. Five categories achieve 
 ## 6. Key Findings Summary
 
 ### Finding 1 — Augmented training preserves clean-data performance
-Clean-image AUROC decreases by only 0.5 pp (PatchCore) to 2.5 pp (PaDiM), a negligible cost for the robustness gains achieved.
+Clean-image AUROC decreases by only 0.5 pp (PatchCore) to 1.8 pp (PaDiM), a negligible cost for the robustness gains achieved.
 
 ### Finding 2 — Augmented training substantially improves corruption robustness
 PatchCore shows degradation AUROC improvements of up to **+0.25** for Gaussian blur and **+0.23** for motion blur at severe levels. PaDiM shows gains of up to **+0.17** for motion blur/severe. No corruption/severity condition shows a regression under augmented training.
@@ -264,7 +264,7 @@ This study demonstrates that **training-time data augmentation is strictly super
 
 These results challenge a common intuition in applied computer vision: that classical image restoration is a safe preprocessing step. For anomaly detection systems based on deep feature embeddings, the representation-space distortions introduced by restoration filters are at least as damaging as the original corruptions themselves.
 
-**Practical recommendation**: Deploy augmented training with randomized corruption injection at a 50% rate over all corruption types and severities. Do not apply test-time rescue preprocessing. Monitor clean-image AUROC during training to ensure the ≤2.5 pp baseline penalty remains within acceptable bounds.
+**Practical recommendation**: Deploy augmented training with randomized corruption injection at a 50% rate over all corruption types and severities. Do not apply test-time rescue preprocessing. Monitor clean-image AUROC during training to ensure the ≤1.8 pp baseline penalty remains within acceptable bounds.
 
 ---
 
@@ -286,7 +286,4 @@ These results challenge a common intuition in applied computer vision: that clas
 
 | CSV File | Content |
 |---|---|
-| `data/benchmark_clean_all_severities.csv` | Clean training, both models, all severities (3,060 rows) |
-| `patchcore_augmented.csv` | Augmented training, PatchCore, all severities (1,530 rows) |
-| `padim_augmented.csv` | Augmented training, PaDiM, all severities (1,530 rows) |
-| `data/benchmark_full_4way.csv` | Full 4-way unified benchmark (6,120 rows) |
+| `data/benchmark_master_combined.csv` | Full unified benchmark database (MVTec-AD & VisA, all conditions) |

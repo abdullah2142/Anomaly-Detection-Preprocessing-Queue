@@ -28,7 +28,7 @@ This paper fills that gap with a controlled 4-way study. We evaluate PatchCore [
 **Our contributions are:**
 1. The first large-scale, multi-corruption, multi-severity rescue preprocessing benchmark for industrial anomaly detection, covering 6,120 measurements across 4 experimental conditions.
 2. Empirical evidence that rescue preprocessing is net-harmful for feature-embedding anomaly detectors regardless of training regime, with harmful rates of 65–81% across all conditions — the *preprocessing fallacy*.
-3. Empirical evidence that training-time augmentation substantially improves corruption robustness (+10–12 pp mean AUROC) at negligible clean-image cost (−0.5 to −2.5 pp).
+3. Empirical evidence that training-time augmentation substantially improves corruption robustness (+10–12 pp mean AUROC) at negligible clean-image cost (−0.5 to −1.8 pp).
 4. The counter-intuitive finding that augmented training increases rescue harm, not reduces it, providing a mechanistic explanation grounded in feature distribution alignment.
 5. A practical deployment recommendation table for engineers selecting imaging pipelines under constrained budgets.
 
@@ -50,7 +50,7 @@ Classical restoration methods — CLAHE [REF:Pizer1987, REF:Zuiderveld1994], Ret
 
 ### 3.4 Training-Time Augmentation for Robustness
 
-Data augmentation for robustness under corruption is well-studied in classification [REF:AugMix, REF:DeepAugment]. Its application to anomaly detection is constrained by the one-class learning paradigm: augmenting normal training images risks shifting the normal distribution, potentially harming clean-image detection. Our results quantify this trade-off: augmented training costs 0.5–2.5 pp clean-image AUROC while gaining 10–12 pp robustness under corruption.
+Data augmentation for robustness under corruption is well-studied in classification [REF:AugMix, REF:DeepAugment]. Its application to anomaly detection is constrained by the one-class learning paradigm: augmenting normal training images risks shifting the normal distribution, potentially harming clean-image detection. Our results quantify this trade-off: augmented training costs 0.5–1.8 pp clean-image AUROC while gaining 10–12 pp robustness under corruption.
 
 ---
 
@@ -123,9 +123,9 @@ Clean-trained model AUROC on clean test images matches published literature clos
 | Model | This Work | Published |
 |---|---|---|
 | PatchCore | 0.9822 ± 0.0235 | 0.981 [REF:Roth2022] |
-| PaDiM | 0.9226 ± 0.0818 | 0.918 [REF:Defard2021] |
+| PaDiM | 0.9160 ± 0.0810 | 0.918 [REF:Defard2021] |
 
-Augmented training costs −0.5 pp (PatchCore: 0.9773) and −2.5 pp (PaDiM: 0.8979) on clean-image AUROC.
+Augmented training costs −0.5 pp (PatchCore: 0.9773) and −1.8 pp (PaDiM: 0.8979) on clean-image AUROC.
 
 ### 5.2 Effect of Corruption on Clean-Trained Models
 
@@ -189,7 +189,7 @@ This asymmetry is formalised in the *preprocessing fallacy*: restoration algorit
 
 ### 6.2 Augmented Training as the Practical Solution
 
-Augmented training is the clear recommendation. At 50% corruption probability during training, with random type and severity selection, both PatchCore and PaDiM achieve 10–12 pp mean robustness improvement at a cost of 0.5–2.5 pp on clean-image performance. This trade-off is acceptable in virtually any industrial deployment where some proportion of images will be captured under degraded conditions.
+Augmented training is the clear recommendation. At 50% corruption probability during training, with random type and severity selection, both PatchCore and PaDiM achieve 10–12 pp mean robustness improvement at a cost of 0.5–1.8 pp on clean-image performance. This trade-off is acceptable in virtually any industrial deployment where some proportion of images will be captured under degraded conditions.
 
 The augmentation strategy is model-agnostic and requires no changes to inference infrastructure. The implementation overhead is a single pre-processing step (`prepare_augmented_train_data`) that runs once before training.
 
@@ -211,7 +211,7 @@ The augmentation strategy is model-agnostic and requires no changes to inference
 
 We present the first systematic 4-way benchmark of rescue preprocessing and training-time augmentation for robust industrial anomaly detection. Three phenomena are established with statistical significance:
 
-1. **Augmented training significantly improves corruption robustness** (+12.3 pp PatchCore, +10.1 pp PaDiM, Wilcoxon p < 0.001) by expanding the learned normality manifold into corruption-domain feature space, with negligible clean-image cost (−0.5 to −2.5 pp).
+1. **Augmented training significantly improves corruption robustness** (+12.3 pp PatchCore, +10.1 pp PaDiM, Wilcoxon p < 0.001) by expanding the learned normality manifold into corruption-domain feature space, with negligible clean-image cost (−0.5 to −1.8 pp).
 
 2. **Test-time rescue preprocessing is net-harmful** in all 4 conditions (−4.6 to −14.9 pp, all p < 0.001) — the *preprocessing fallacy* — because restoration algorithms produce a third distribution containing novel artifacts that anomaly detectors score as defects.
 

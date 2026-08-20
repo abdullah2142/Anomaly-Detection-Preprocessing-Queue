@@ -81,7 +81,7 @@ A: Yes, we have empirically verified this. While the mechanistic explanations (P
 
 **Q: What is the practical takeaway for an engineer deploying anomaly detection in a factory?**
 
-A: Three rules: (1) If you expect corruption at test time, use augmented training — 50% random corruption of training images, all types and severities. Cost: ≤2.5 pp AUROC on clean images. Benefit: +10–12 pp under real corruption. (2) Do not apply preprocessing pipelines designed for human vision (Wiener, deblurring, NLM denoising, DCP dehazing) before your anomaly detector. (3) The only safe preprocessing exception is CLAHE on PatchCore specifically under low-light conditions. Do not apply CLAHE to PaDiM — it makes detection worse.
+A: Three rules: (1) If you expect corruption at test time, use augmented training — 50% random corruption of training images, all types and severities. Cost: ≤1.8 pp AUROC on clean images. Benefit: +10–12 pp under real corruption. (2) Do not apply preprocessing pipelines designed for human vision (Wiener, deblurring, NLM denoising, DCP dehazing) before your anomaly detector. (3) The only safe preprocessing exception is CLAHE on PatchCore specifically under low-light conditions. Do not apply CLAHE to PaDiM — it makes detection worse.
 
 ---
 
