@@ -5,7 +5,7 @@ mvtec_ad/
 visa/
 
 # Results (generated on Kaggle)
-results/
+
 checkpoints/
 *.ckpt
 
