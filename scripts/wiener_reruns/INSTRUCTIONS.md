@@ -26,7 +26,7 @@ Severe rows are NOT re-run — they were already oracle-correct.
 
 ### Datasets (Kaggle)
 - **MVTec-AD** (notebooks 01–04): [`ipythonx/mvtec-ad`](https://www.kaggle.com/datasets/ipythonx/mvtec-ad)
-- **VisA** (notebooks 05–08): [`marquis03/visa-dataset`](https://www.kaggle.com/datasets/marquis03/visa-dataset)
+- **VisA** (notebooks 05–08): [`ess1004/visa-dataset`](https://www.kaggle.com/datasets/ess1004/visa-anomaly-detection)
 
 ### Configuration File
 Each notebook loads corruption parameters from `data/experiment_config.json`.
