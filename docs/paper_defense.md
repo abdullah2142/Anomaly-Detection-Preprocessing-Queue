@@ -9,7 +9,7 @@ Each Q&A covers a question likely from a reviewer or committee member. Answer co
 
 **Q: Your core claim is that rescue preprocessing hurts anomaly detection. Isn't this obvious — preprocessing changes the image distribution?**
 
-A: It is obvious in retrospect, but it is not the current assumption in industrial practice. Engineers routinely apply CLAHE, denoising, and dehazing as a first step before any vision system, including anomaly detection, without evaluating the effect. The contribution is not a theoretical argument — it is 6,120 controlled measurements quantifying exactly how much and under which conditions this assumption fails. The result that Wiener deconvolution applied with the *exact known kernel* still collapses AUROC to 0.50 is not obvious — it requires knowing that deep feature representations are more sensitive to PSF-mismatch ringing than to the original blur.
+A: It is obvious in retrospect, but it is not the current assumption in industrial practice. Engineers routinely apply CLAHE, denoising, and dehazing as a first step before any vision system, including anomaly detection, without evaluating the effect. The contribution is not a theoretical argument — it is 6,120 controlled measurements quantifying exactly how much and under which conditions this assumption fails. The result that Wiener deconvolution applied with the *exact known kernel* (at severe corruption) still drops AUROC by ~12.5 pp is not obvious — it requires knowing that deep feature representations are more sensitive to PSF-mismatch ringing than to the original blur.
 
 ---
 
@@ -53,7 +53,7 @@ A: No — 0.50 is a single operating point chosen as a reasonable default. The s
 
 ## On the Results
 
-**Q: Wiener deconvolution fails even with the exact known kernel. What does this tell us?**
+**Q: Wiener deconvolution fails even with the exact known kernel (at severe corruption). What does this tell us?**
 
 A: It tells us that the damaging element is not the blur itself — it is the *artifacts introduced by deconvolution*. With an exact PSF, Wiener deconvolution still introduces ringing (Gibbs phenomenon at sharp edges), noise amplification at high spatial frequencies, and boundary effects at image borders. These artifacts look nothing like any normal training image in any MVTec-AD category. A patch embedding of a deconvolved blurred image maps to a region of feature space far from the coreset, producing anomaly scores near or at the random-chance floor. This is a fundamental incompatibility between frequency-domain restoration and patch-level feature matching, not a tuning problem.
 
