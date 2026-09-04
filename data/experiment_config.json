@@ -61,13 +61,16 @@
         },
         "sensor_noise": {
             "mild": {
-                "gauss_var": 0.05
+                "gauss_var": 0.05,
+                "salt_pepper_ratio": 0.05
             },
             "moderate": {
-                "gauss_var": 0.18
+                "gauss_var": 0.18,
+                "salt_pepper_ratio": 0.05
             },
             "severe": {
-                "gauss_var": 0.35
+                "gauss_var": 0.35,
+                "salt_pepper_ratio": 0.05
             }
         },
         "fog_haze": {
