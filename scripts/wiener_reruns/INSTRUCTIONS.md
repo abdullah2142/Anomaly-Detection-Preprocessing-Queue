@@ -79,7 +79,7 @@ You can run these in **3 Kaggle sessions** (or 4 if you prefer smaller batches):
 1. In the right sidebar, click **+ Add Data**
 2. Search for and add:
    - `ipythonx/mvtec-ad` (for MVTec notebooks 01–04)
-   - `marquis03/visa-dataset` (for VisA notebooks 05–08)
+   - `ess1004/visa-dataset` (for VisA notebooks 05–08)
 3. Also add `experiment_config.json` if it's hosted as a separate Kaggle dataset
 
 ### 3. Configure Environment
