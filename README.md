@@ -24,7 +24,7 @@ A rigorous 4-way comparative benchmark evaluating **test-time rescue preprocessi
 
 **Core findings:**
 1. **Augmented training significantly improves robustness** (+12.3 pp PatchCore, +10.1 pp PaDiM on MVTec-AD, category-clustered p ≤ 1.2×10⁻⁴).
-2. **Rescue preprocessing is net-harmful** in all 4 conditions — the *preprocessing fallacy*.
+2. **Rescue preprocessing is net-harmful** in all 4 conditions — the *preprocessing fallacy* — even when the corruption type, severity, and restoration parameters are all known exactly (no degradation-detection step is included).
 3. **Wiener deconvolution is catastrophically harmful** even with oracle PSF parameters at severe corruption (−12.5 pp). At mild/moderate severities where the PSF is mismatched, harm is even greater.
 
 ---
@@ -162,7 +162,11 @@ All generated plots are saved in `results/analysis/`:
 4. **Matched corruption distributions**: Training augmentation uses the same 5 types × 3 severities as the test set. The +12.3 pp gain is a corruption-matched upper bound.
 5. **Fog non-reproducibility**: `A.RandomFog` is not seeded in the original experiment runs (fixed in current codebase).
 6. **Pseudoreplication in notebook 10**: the shipped Wilcoxon notebook treats non-independent cells as independent. Use `scripts/analysis/cluster_robust_stats.py` for the corrected inference.
-7. **Wiener PSF misspecification at mild/moderate**: the published mild/moderate Wiener rows used the severe-tier kernel. Reruns are in `scripts/wiener_reruns/`; affected figures are 22.2% of all rescue rows.
+7. **Oracle corruption identification**: rescue methods are selected by the corruption's ground-truth type and severity. There is no degradation-detection or classification step, so the reported rescue deltas exclude identification error and represent the best case for rescue.
+8. **Rescue never applied to mismatched or clean inputs**: each method only ever sees the corruption it targets. Unconditional deployment preprocessing is unmeasured.
+9. **Single noise realization in augmentation**: augmented training images share one fixed noise/fog realization per corruption type (fixed seed), while test-time corruption varies per image. Biases measured augmentation gains downward.
+10. **MVTec augmented data is seed-invariant**: all three seeds train on byte-identical augmented images (VisA does not share this).
+11. **Wiener PSF misspecification at mild/moderate**: the published mild/moderate Wiener rows used the severe-tier kernel. Reruns are in `scripts/wiener_reruns/`; affected figures are 22.2% of all rescue rows.
 
 ---
 

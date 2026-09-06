@@ -50,3 +50,87 @@ Training augmentation draws from the same 5 corruption types × 3 severity level
 ## 12. Undocumented Salt-and-Pepper Component in Sensor Noise
 
 The `apply_sensor_noise` function adds 5% salt-and-pepper impulse noise on top of the Gaussian noise specified in `experiment_config.json`. This impulse component is not reflected in the configuration file's `gauss_var` parameter. NLM denoising is suboptimal for impulse noise (median filtering is standard), which means the modest harm of NLM rescue (−1 to −3 pp) may partly reflect a rescue-method mismatch rather than a fundamental incompatibility between denoising and anomaly detection.
+
+## 13. Oracle Corruption Identification
+
+Rescue methods are selected by the corruption's ground-truth identity. In the
+evaluation loop the rescue is looked up by corruption type, and the Wiener PSF by
+severity:
+
+```python
+for ctype, severities in config["corruptions"].items():
+    for sev in severities.keys():
+        for r_name, r_func in get_rescue_map(sev, config)[ctype]:
+```
+
+No component inspects the image to decide whether it is degraded, which
+degradation it carries, or how severe that degradation is. A deployed system
+would require four inference steps our benchmark supplies for free: detect that
+an image is degraded, classify the degradation type, estimate its severity, and
+estimate the restoration parameters. Each step can fail, and a misclassification
+applies a restoration matched to the wrong corruption.
+
+**Implication:** this strengthens rather than weakens the central finding. Rescue
+preprocessing is net-harmful *under oracle knowledge of corruption type,
+severity, and restoration parameters* — the most favourable condition that can be
+constructed. Any realistic pipeline must additionally absorb identification
+error, and our own data prices one such error at −32 pp for a 5×-misspecified
+Wiener kernel. Real-world rescue performance is bounded above by the negative
+results reported here.
+
+## 14. Rescue Applied Only to Matched, Known-Degraded Inputs
+
+Each rescue method is only ever applied to the corruption it targets: CLAHE and
+Retinex to low-light images, Wiener to blurred images, NLM to noisy images, DCP
+to foggy images. Two cases are therefore unmeasured:
+
+1. **Mismatched application** — e.g. dehazing a motion-blurred image. A
+   deployment that misclassifies the degradation lands here.
+2. **Application to undegraded images** — no clean image in the benchmark is ever
+   passed through a rescue function.
+
+Case 2 matters for deployment advice. Preprocessing is normally applied
+unconditionally to an entire image stream, most of which may be undegraded. Our
+recommendation that CLAHE is conditionally safe for low-light PatchCore
+implicitly assumes a low-light detector gates it.
+
+**Implication:** the reported rescue deltas describe the best case for rescue —
+correct method, correct target. Unconditional deployment is expected to be worse.
+
+## 15. Single Noise Realization in Training Augmentation
+
+The augmentation pipeline calls `apply_corruption(...)` with a fixed seed for
+every image (`seed=42` on MVTec-AD; `seed=rng_seed` on VisA). Because the noise
+functions draw from `np.random.default_rng(seed)` at the image's shape, every
+augmented image of a given corruption type within a category receives the
+**identical** noise field or fog pattern. Test-time corruption, by contrast, uses
+`seed=42+idx`, which varies per image.
+
+Blur corruptions are deterministic and unaffected; this applies to
+`sensor_noise`, `fog_haze`, and partially to `low_light`.
+
+**Implication:** the augmented models saw one fixed realization of each stochastic
+corruption rather than a distribution, so they had less variation to generalise
+over than the test set presents. This biases the measured augmentation gain
+**downward**, making the reported +12.3 / +10.1 pp conservative with respect to
+this specific defect.
+
+## 16. Augmented Training Data Is Seed-Invariant on MVTec-AD
+
+On MVTec-AD, `prepare_augmented_train_data()` is invoked once at module scope
+with the default `rng_seed=0`, and skips any file already written. All three
+seeds therefore train on byte-identical augmented images; seed variation captures
+only model initialisation and coreset sampling, not augmentation sampling. VisA
+does not share this defect — it passes `rng_seed=seed` per run.
+
+**Implication:** reported seed-to-seed variance on the MVTec-AD augmented arm
+understates the true variance of the augmentation procedure. Inference in this
+paper clusters by category rather than by seed, so significance is unaffected,
+but per-cell standard deviations on that arm should not be read as full
+procedural variance.
+
+> **Not a limitation:** the high rate of AUROC values identical across all three
+> seeds (up to 50% on VisA PatchCore clean-trained) is a consequence of floor
+> saturation, not of seed invariance. Excluding cells pinned at AUROC = 0.5,
+> the identical-across-seeds rate falls to 0.0–3.7% in every condition. See
+> Limitation 9.

@@ -53,6 +53,14 @@ A: No — 0.50 is a single operating point chosen as a reasonable default. The s
 
 ## On the Results
 
+**Q: How does your pipeline know which rescue method to apply to a given test image?**
+
+A: It does not — we tell it. The rescue is selected by the corruption's ground-truth type and the Wiener PSF by its ground-truth severity; nothing inspects the image. This is deliberate, and it makes the finding stronger rather than weaker. A deployed system would need four additional steps we supply for free: detect that an image is degraded, classify which degradation, estimate the severity, then estimate the restoration parameters. Every one of those can fail, and a misclassification applies a restoration matched to the wrong corruption. Our own data prices one such error at −32 pp for a 5×-misspecified Wiener kernel. So the correct reading of our result is: *rescue preprocessing is net-harmful even under oracle knowledge of corruption type, severity, and parameters* — and any real pipeline must absorb identification error on top of that. The negative numbers we report are an upper bound on real-world rescue performance.
+
+A related consequence: we never apply a rescue to a corruption it does not target, and never to an undegraded image. Deployment normally preprocesses an entire stream unconditionally, most of which may be clean. Our one positive recommendation — CLAHE for low-light PatchCore — therefore assumes a low-light detector gates it, and we state that explicitly in the limitations.
+
+---
+
 **Q: Wiener deconvolution fails even with the exact known kernel (at severe corruption). What does this tell us?**
 
 A: It tells us that the damaging element is not the blur itself — it is the *artifacts introduced by deconvolution*. With an exact PSF, Wiener deconvolution still introduces ringing (Gibbs phenomenon at sharp edges), noise amplification at high spatial frequencies, and boundary effects at image borders. These artifacts look nothing like any normal training image in any MVTec-AD category. A patch embedding of a deconvolved blurred image maps to a region of feature space far from the coreset, producing anomaly scores near or at the random-chance floor. This is a fundamental incompatibility between frequency-domain restoration and patch-level feature matching, not a tuning problem.
