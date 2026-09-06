@@ -57,14 +57,31 @@ You can run these in **3 Kaggle sessions** (or 4 if you prefer smaller batches):
 | `rerun_04_mvtec_padim_aug.ipynb` | PaDiM | Augmented | 15 × 3 seeds | ~2.5 hrs |
 | **Total** | | | | **~5 hrs** |
 
-### Session 3 — VisA (all 4 notebooks)
-| Notebook | Model | Training | Categories | Est. Time |
+### Session 3 — VisA augmented (fits comfortably in one session)
+| Notebook | Model | Training | Pairs | Observed Time |
 |---|---|---|---|---|
-| `rerun_05_visa_patchcore_clean.ipynb` | PatchCore | Clean | 12 × 3 seeds | ~1.5 hrs |
-| `rerun_06_visa_patchcore_aug.ipynb` | PatchCore | Augmented | 4 × 3 seeds | ~30 min |
-| `rerun_07_visa_padim_clean.ipynb` | PaDiM | Clean | 12 × 3 seeds | ~1.5 hrs |
-| `rerun_08_visa_padim_aug.ipynb` | PaDiM | Augmented | 4 × 3 seeds | ~30 min |
-| **Total** | | | | **~4 hrs** |
+| `rerun_06_visa_patchcore_aug.ipynb` | PatchCore | Augmented | 4 cats × 3 seeds = 12 | ~4–5 hrs |
+| `rerun_08_visa_padim_aug.ipynb` | PaDiM | Augmented | 4 cats × 3 seeds = 12 | ~4–5 hrs |
+
+### Sessions 4–7 — VisA clean (⚠️ split these; they exceed 12 hours)
+`rerun_05` and `rerun_07` cover **12** VisA categories, three times the work of the
+augmented arm, so a full pass runs ~12–15 hrs against Kaggle's 12-hour limit.
+Split each into two sessions by editing `CATEGORIES` in the config cell:
+
+```python
+# session A
+CATEGORIES = ["candle", "capsules", "cashew", "chewinggum", "fryum", "macaroni1"]
+# session B
+CATEGORIES = ["macaroni2", "pcb1", "pcb2", "pcb3", "pcb4", "pipe_fryum"]
+```
+
+Resume works across sessions: attach the previous session's output as a Kaggle
+dataset and the notebook auto-restores from any `*partial*.csv` under
+`/kaggle/input/`. A `(category, seed)` pair counts as complete at
+`EXPECTED_ROWS_PER_PAIR = 4` rows — the 2 corruptions × 2 severities × 1 Wiener
+rescue this rerun emits. Do not restore that constant to the original
+benchmark's 34; at 34 no pair ever completes and finished rows are dropped
+rather than resumed.
 
 ---
 
