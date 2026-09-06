@@ -100,18 +100,23 @@ Confirmed at mild, moderate, and severe severity across both models and all 5 co
 
 ## VisA Cross-Dataset Validation Results
 
-To ensure the core phenomena are not specific to the MVTec-AD image domain, cross-validation was run on a 4-category subset of the VisA dataset (candle, cashew, pcb1, pipe_fryum) and verified using Wilcoxon signed-rank tests.
+To ensure the core phenomena are not specific to the MVTec-AD image domain, the pipeline was run on VisA: 12 categories with clean training, and a 4-category subset (candle, cashew, pcb1, pipe_fryum) with augmented training.
+
+> **Reading the significance below.** Estimates are clustered by category and tested with an exact permutation test ([`statistical_validation.md`](statistical_validation.md)). The **12-category clean-trained** results support significance testing. The **4-category augmented** arm does not: with 4 clusters the smallest attainable two-sided p is 0.125, so those comparisons are descriptive.
 
 ### 1. Robustness Gain from Augmented Training
 Augmented training consistently provides massive robustness improvements on VisA. Notably, because VisA contains highly complex structural categories (e.g., PCBs), the baseline models are exceptionally vulnerable to corruption, which maximizes the returns from augmented training:
-- **PatchCore**: +17.8 percentage points mean AUROC gain ($p < 3.15 \times 10^{-31}$). In extreme cases, such as severe low-light, PatchCore collapses to 0.5646 (random chance) but recovers to a near-perfect 0.9648 (**+0.4002 gain**) via augmentation.
-- **PaDiM**: +13.9 percentage points mean AUROC gain ($p < 1.63 \times 10^{-27}$).
+- **PatchCore**: +17.8 percentage points mean AUROC gain (4 categories — descriptive, not significance-tested). In extreme cases, such as severe low-light, PatchCore collapses to 0.5646 (random chance) but recovers to a near-perfect 0.9648 (**+0.4002 gain**) via augmentation.
+- **PaDiM**: +13.9 percentage points mean AUROC gain (4 categories — descriptive, not significance-tested).
+
+The direction and magnitude are consistent with the MVTec-AD gains (+12.3 / +10.1 pp), which *are* significant at 15 categories. The VisA augmented arm should be cited as corroboration, not as independent statistical confirmation.
 
 ### 2. The Preprocessing Fallacy on VisA
 Test-time rescue preprocessing remains net-harmful on the VisA dataset, echoing the MVTec-AD findings, but with even more catastrophic penalties due to the domain's high-frequency textures:
-- **Wiener Deconvolution** and **Retinex** are significantly harmful (FDR-corrected $q < 0.05$) across almost all conditions (clean and augmented). For example, applying Wiener deconvolution to PatchCore (augmented) for mild Gaussian blur plummets performance from a highly robust 0.9242 down to exactly **0.5000** (a catastrophic **-0.4242 penalty**).
-- **CLAHE** and **NLM Denoising** are largely neutral on clean-trained models but become significantly harmful on augmented-trained models.
+- **Wiener Deconvolution** and **Retinex** are the most harmful methods across conditions. On clean-trained VisA (12 categories) the pooled rescue harm is significant: PatchCore $\Delta = -6.42$ pp ($p = 4.9\times10^{-4}$), PaDiM $\Delta = -2.74$ pp ($p = 2.9\times10^{-3}$).
+- ⚠️ The often-quoted example — PatchCore (augmented), **mild** Gaussian blur, 0.9242 → 0.5000 — is a **misspecified-kernel** result: mild images were deconvolved with the severe-tier PSF. It measures PSF mismatch, not oracle deconvolution, and is being regenerated (see [`scripts/wiener_reruns/`](../scripts/wiener_reruns/)).
+- **CLAHE** and **NLM Denoising** are largely neutral on clean-trained models but become more harmful on augmented-trained models (VisA augmented: descriptive, 4 categories).
 - **The Augmented-Rescue Paradox**: The data shows that rescue is most harmful when applied to augmented models. Because the model has already learned the corruption manifold, applying classical restoration forces the image into a new, unseen artifact manifold (ringing/halos), resulting in the worst outcomes.
-- No rescue method provides a statistically significant benefit to anomaly detection on the VisA dataset.
+- No rescue method provides a net benefit to anomaly detection on the VisA dataset in any condition measured.
 
 This confirms that the degradation of feature-embedding anomaly detectors by classical image restoration is a fundamental architectural vulnerability, not a dataset-specific artifact.

@@ -8,11 +8,11 @@ This document outlines the defense strategy against the six methodological criti
 
 **1. Statistical Significance (Paired Tests & Confidence)**
 * **The Critique:** Relying on average AUROC values is insufficient; paired statistical tests (Augmented vs Clean, Rescued vs Degraded) are required.
-* **Our Response:** We agree completely and have already overhauled our statistical methodology to address this. We executed non-parametric paired Wilcoxon signed-rank tests across the full 6,120-row dataset, measuring exact paired deltas. Furthermore, we applied the Benjamini-Hochberg False Discovery Rate (FDR) correction ($q < 0.05$) to all 24 multiple comparisons to ensure rigorous statistical confidence. The results remain overwhelmingly significant ($p < 0.001$).
+* **Our Response:** We agree, and have gone further. Paired tests are computed on exact paired deltas, and significance is reported **clustered by category** — the level at which observations are independent — using an exact two-sided permutation test over category means. Our earlier cell-level Wilcoxon tests were pseudoreplicated (15 categories resampled 45 times each), which inflated the p-values by roughly 65 orders of magnitude without changing a single point estimate. The corrected inference is in [`statistical_validation.md`](statistical_validation.md): augmented-training gains on MVTec-AD hold at $p = 6.1\times10^{-5}$ (PaDiM) and $p = 1.2\times10^{-4}$ (PatchCore), and all four MVTec-AD rescue conditions remain significantly negative ($p \le 2.4\times10^{-4}$).
 
 **6. Validation on a Second Dataset**
 * **The Critique:** Experiments are limited to MVTec-AD; validation on a second dataset is required.
-* **Our Response:** We are actively addressing this. We have completed the execution of our entire pipeline on the VisA dataset (12 distinct categories, including PCBs and medical capsules). Preliminary analysis of the fully completed 1,224 Clean/Degraded/Rescued rows perfectly validates the MVTec-AD findings: test-time rescue preprocessing remains net-harmful for both PatchCore ($\Delta = -0.0465$) and PaDiM ($\Delta = -0.0176$). The augmented VisA runs are currently executing.
+* **Our Response:** Complete. We executed the entire pipeline on the VisA dataset (12 distinct categories, including PCBs and medical capsules). The full VisA benchmark (3,264 rows) validates the MVTec-AD findings: test-time rescue preprocessing remains net-harmful for both PatchCore ($\Delta = -0.0642$, 12 categories, clustered $p = 4.9\times10^{-4}$) and PaDiM ($\Delta = -0.0274$, 12 categories, clustered $p = 2.9\times10^{-3}$). The augmented VisA arm covers 4 categories and is reported as descriptive support only — with 4 clusters the smallest attainable two-sided p is 0.125.
 
 ### 🔴 Group B: Deferred & Defended (Points 2, 3, 4, & 5)
 
@@ -20,75 +20,101 @@ This document outlines the defense strategy against the six methodological criti
 
 **5. Feature-Space Evidence (Artifact Proof)** — *DEFERRED to future work*
 * **The Critique:** Support the "Preprocessing Fallacy" claim with feature-space evidence (e.g., measuring how far extracted features are from the normal distribution).
-* **Our Defense:** Our empirical proof is airtight. With overwhelming Wilcoxon significance ($p < 10^{-27}$) across multiple datasets, seeds, and models, we have conclusively proven *that* rescue methods harm performance. Extracting high-dimensional embeddings to calculate Mahalanobis distances or plotting t-SNE clusters would only serve to explain *why* (distributional shift). Because this requires writing custom feature-extraction hooks and regenerating thousands of inferences, it is deferred to future work. The paper is empirically complete without it.
+* **Our Defense:** The effect is established, though not at the significance we previously claimed. Under correct category-clustered inference the rescue harm holds at $p \le 2.4\times10^{-4}$ on MVTec-AD and $p \le 2.9\times10^{-3}$ on clean-trained VisA — consistent across two datasets, two models and three seeds. That establishes *that* rescue methods harm performance. Extracting high-dimensional embeddings to compute Mahalanobis distances or plot t-SNE clusters would explain *why* (distributional shift). Because that requires custom feature-extraction hooks and thousands of regenerated inferences, it is deferred to future work and declared as such in the limitations.
 
 **2. Augmentation Probability Ablation (0.25, 0.50, 0.75, 1.00)**
 * **Our Defense:** Ablating probabilities would require retraining and re-inferencing the entire dataset 3 more times (~18,000 additional inferences). The Kaggle compute cost is prohibitive. More importantly, our current operating point ($p=0.50$) achieved up to +24 percentage points of AUROC gain. The scientific claim that "augmented training works" is fully proven; finding the mathematically optimal $p$ is an engineering optimization detail, not a scientific necessity.
 
 **3. Unseen-Corruption Experiment (Train on A, Test on B)**
-* **Our Defense:** Testing on unseen corruptions shifts the scope of the paper into "Zero-Shot Domain Generalization," a distinct sub-field of machine learning. Our paper evaluates targeted interventions for known industrial problems (e.g., a factory knows its specific camera setup causes low-light sensor noise). Evaluating generalization to entirely unknown corruptions is out of scope for our targeted robustness research question.
+* **Our Position (revised):** This is the one control that separates "augmentation works" from "we trained on the test distribution," and it should not be waved off. Our augmentation draws from the *same* 5 types × 3 severities used at test time, so the reported +12.3 pp / +10.1 pp gains are explicitly a **corruption-matched oracle upper bound**, declared as such in the limitations. Our scope claim stands — we evaluate targeted interventions for known imaging problems, where the corruption is characterised in advance — but the honest framing is that generalisation to unseen corruptions is *untested*, not out of scope.
+* **Bounded control (recommended):** a leave-one-corruption-out run does not require repeating the whole benchmark. Holding out one corruption type, training the augmented arm on the remaining four, and testing only on the held-out type over a 5-category subset at 1 seed is roughly 1/9 of the augmented arm's cost and would convert an admitted weakness into a positive result.
 
 **4. Rescue Parameter Tuning**
-* **Our Defense:** We deliberately evaluated rescue methods under **best-case, Oracle conditions** to establish a theoretical upper bound. For example, our Wiener deconvolution uses the *exact* Point Spread Function (PSF) used to generate the blur. It still failed catastrophically due to high-frequency spectral ringing artifacts destroying the feature embeddings. If a perfect "Oracle" filter fails, parameter-tuning a blind filter will mathematically perform worse. There is no justification to run this.
+* **Our Defense (corrected):** The oracle-PSF argument holds **only at severe severity**, and we have corrected the record. The published mild and moderate Wiener rows were produced with the severe-tier kernel ($\sigma=25$, $k=281$; motion $k=151$) hardcoded across all severities, so they measure kernel *misspecification*, not oracle deconvolution. At severe corruption, where the kernel was correct, Wiener still costs ~−12.5 pp — an exact-PSF filter failing on spectral ringing. That result carries the argument: if the oracle filter fails, a blind filter performs no better. The mild/moderate cells are being rerun with per-severity PSFs ([`scripts/wiener_reruns/`](../scripts/wiener_reruns/)); until they land, only the severe tier may be described as oracle.
 
 ---
 
 ## Part 2: Current Inventory of Completed Runs
 
 ### MVTec-AD (Complete ✅)
-| Notebook | Model | Training | Status |
+| Notebook (current) | Model | Training | Status |
 |---|---|---|---|
-| `01-patchcore.ipynb` | PatchCore | Clean | ✅ Complete (15 categories × 3 seeds = 1,530 rows) |
-| `01-patchcore-augmented.ipynb` | PatchCore | Augmented | ✅ Complete (15 categories × 3 seeds = 1,530 rows) |
-| `02-padim.ipynb` | PaDiM | Clean | ✅ Complete (15 categories × 3 seeds = 1,530 rows) |
-| `02-padim-augmented.ipynb` | PaDiM | Augmented | ✅ Complete (15 categories × 3 seeds = 1,530 rows) |
-| **Total:** | | | **6,120 rows in `benchmark_full_4way.csv`** |
+| `01_mvtec_patchcore_clean.ipynb` | PatchCore | Clean | ✅ Complete (15 categories × 3 seeds = 1,530 rows) |
+| `02_mvtec_patchcore_augmented.ipynb` | PatchCore | Augmented | ✅ Complete (15 categories × 3 seeds = 1,530 rows) |
+| `03_mvtec_padim_clean.ipynb` | PaDiM | Clean | ✅ Complete (15 categories × 3 seeds = 1,530 rows) |
+| `04_mvtec_padim_augmented.ipynb` | PaDiM | Augmented | ✅ Complete (15 categories × 3 seeds = 1,530 rows) |
+| **Total:** | | | **6,120 rows** |
+
+> **Provenance.** The committed clean-training notebooks are consolidated versions.
+> The rows themselves were produced on Kaggle by split shards — one per severity
+> band — plus dedicated rescue runners, all of which are recoverable from git
+> history (`01-baseline-patchcore-mod-mild.ipynb`,
+> `02-padim-baseline-mild-moderate.ipynb`, `run_patchcore_rescue.py`,
+> `run_padim_rescue.py`; added in `21ce8ef`, 2026-05-30). A reader cannot
+> reconstruct the full original run from the current `notebooks/` directory alone.
+> The Wiener reruns in `scripts/wiener_reruns/` are self-contained and do not have
+> this problem.
 
 ### VisA Dataset
 | Notebook | Model | Training | Status |
 |---|---|---|---|
-| `03-visa-patchcore.ipynb` | PatchCore | Clean | ✅ Complete (12 categories × 3 seeds = 1,224 rows) |
-| `04-visa-padim.ipynb` | PaDiM | Clean | ✅ Complete on Kaggle — **download CSV** |
-| `visa-patchcore-augmented.ipynb` | PatchCore | Augmented | ✅ Complete (4 target categories = 408 rows) |
-| `visa-padim-augmented.ipynb` | PaDiM | Augmented | 🟡 Partial: candle ×3 only (102/1,224 rows) |
+| `05_visa_patchcore_clean.ipynb` | PatchCore | Clean | ✅ Complete (12 categories × 3 seeds) |
+| `07_visa_padim_clean.ipynb` | PaDiM | Clean | ✅ Complete (12 categories × 3 seeds) |
+| `06_visa_patchcore_augmented.ipynb` | PatchCore | Augmented | ✅ Complete (4 categories × 3 seeds) |
+| `08_visa_padim_augmented.ipynb` | PaDiM | Augmented | ✅ Complete (4 categories × 3 seeds) |
+| **Total:** | | | **3,264 rows** |
 
-> **Note:** The file `visa_padim_partial.csv` (102 rows, candle only) is from the **augmented** run, not unaugmented. VisA PaDiM unaugmented has been run on Kaggle but the results CSV has not been downloaded yet.
+All VisA results are merged into `data/benchmark_master_combined.csv` (9,384 rows:
+6,120 MVTec-AD + 3,264 VisA). Every (category, seed) pair carries 34 rows; no
+duplicates, no nulls.
 
 ---
 
 ## Part 3: Final Action Plan
 
-### Priority 1: Download VisA PaDiM Unaugmented Results
-- [ ] **Download `visa_padim_partial.csv` (or `visa_padim.csv`) from Kaggle** — Already run, just needs the output CSV retrieved
-- Rename appropriately to avoid confusion with the augmented partial CSV already on disk
+### Priority 1: Wiener PSF rerun 🔄 IN PROGRESS
+The published mild and moderate Wiener rows were deconvolved with the severe-tier
+PSF. Eight rerun notebooks in [`scripts/wiener_reruns/`](../scripts/wiener_reruns/)
+retrain each model identically and re-execute **only** the affected rescue
+inferences with per-severity PSFs.
 
-### Priority 2: VisA Augmented Subset (4 representative categories)
-Run both models on the same 4 structurally diverse categories to demonstrate augmentation benefit generalizes to VisA:
-- `candle` (texture) — already done for both models
-- `pcb1` (fine-grained structure)  
-- `cashew` (organic shape)
-- `pipe_fryum` (complex geometry)
+- [ ] Execute reruns 01–08 on Kaggle (see `scripts/wiener_reruns/INSTRUCTIONS.md`)
+- [ ] Merge corrected rescue rows into the master CSV, replacing the misspecified ones
+- [ ] Affected: 1,104 of 4,968 rescue rows (22.2%)
 
-- [x] **PatchCore augmented** — Run `visa-patchcore-augmented.ipynb` with `CATEGORIES = ['pcb1', 'cashew', 'pipe_fryum']` (candle already done)
-- [x] **PaDiM augmented** — Run `visa-padim-augmented.ipynb` with `CATEGORIES = ['pcb1', 'cashew', 'pipe_fryum']` (candle already done)
-- Each category takes ~9 hours on CPU (heavy NLM/Wiener filters on native-resolution images)
-- Split across multiple Kaggle CPU notebooks for parallelism
-- Can run on CPU-only sessions (does NOT consume GPU quota)
+### Priority 2: Re-run the statistics after the merge
+Rescue-side numbers depend on the Wiener rows, so every rescue statistic must be
+recomputed once Priority 1 lands. Augmentation-gain statistics do **not** depend on
+rescue rows and are already final.
 
-### Priority 3: Data Assembly & Statistical Testing
-- [x] **Add `training` column** to all VisA CSVs (`'clean'` for unaugmented, `'augmented'` for augmented runs)
-- [x] **Add `dataset` column** to all CSVs (`'MVTec-AD'` or `'VisA'`)
-- [x] **Merge into master CSV** combining MVTec 4-way + VisA results
-- [x] **Run `wilcoxon-testing.ipynb`** on the combined dataset (stratified by dataset)
-- [x] **Generate per-corruption-type breakdown table** from existing MVTec and VisA CSVs
+- [ ] `python scripts/analysis/cluster_robust_stats.py --out docs/statistical_validation.md --wiener "per-severity PSF (corrected)"`
+- [ ] Re-run `notebooks/10_wilcoxon_testing.ipynb` to regenerate figures 07–09
+- [ ] Regenerate figures 04 (rescue delta heatmap) and 05 (rescue success rates)
+- [ ] Update the rescue delta columns in `README.md`, `benchmark_report.md` and `per_corruption_tables.md`
+
+Expected direction: pooled rescue harm softens by roughly 1–4 pp per condition. The
+MVTec-AD conclusion is not expected to change; clean-trained VisA PaDiM is the one
+condition close enough to zero to warrant rechecking.
+
+### Priority 3: Statistical hygiene ✅ DONE
+- [x] **Cluster inference by category** — `scripts/analysis/cluster_robust_stats.py`, results in [`statistical_validation.md`](statistical_validation.md)
+- [x] **Report effective N** after zero-difference dropping (645–806, not 810)
+- [x] **Report AUROC floor saturation** (23.1% of rows; 545 uninformative pairs)
+- [x] **Stop claiming significance for the 4-category VisA augmented arm** (p floor = 0.125)
 
 ### Priority 4: Paper Writing
-- [ ] **Write the paper** using the completed statistical results
-- [ ] **Frame VisA augmented as representative subset**: "Augmented training was validated on a representative subset of 4 VisA categories spanning diverse product types"
-- [ ] **Limitations section**: Acknowledge subset evaluation on VisA augmented, single aug_prob operating point, and no unseen-corruption test
+- [ ] **Write the paper** using the corrected statistical results
+- [ ] **Frame VisA augmented as a representative subset**: "Augmented training was validated on a representative subset of 4 VisA categories spanning diverse product types" — descriptive, not significance-tested
+- [ ] **Limitations section**: subset evaluation on VisA augmented, single aug_prob operating point, no unseen-corruption test, train/test resolution mismatch, AUROC floor censoring
+- [ ] **Provenance note**: state which notebook shard produced which CSV rows, so a reader can reconstruct the run
 
-### Kaggle Execution Strategy
-- **VisA PaDiM unaugmented**: Already done — just download the CSV
-- **VisA augmented (6 category-model combos)**: Run on CPU-only. Split 1 category per notebook = 6 CPU notebooks simultaneously. Each finishes in ~9 hours (within 12-hour limit)
-- **Total Kaggle GPU time needed**: 0 hours
-- **Total Kaggle CPU time needed**: ~54 hours (runs in parallel, wall-clock ~9 hours)
+### Optional: bounded leave-one-corruption-out control
+Holding out one corruption type, training the augmented arm on the remaining four
+and testing only on the held-out type — over a 5-category subset at 1 seed — is
+roughly 1/9 of the augmented arm's cost and would convert the "corruption-matched
+oracle" limitation into a positive generalisation result.
+
+### Kaggle Execution Strategy (Wiener reruns)
+- **GPU required**: the reruns retrain each model before re-executing the rescue inferences
+- **Session plan and time estimates**: `scripts/wiener_reruns/INSTRUCTIONS.md`
+- Resume logic keys on `(category, seed)`; notebooks 06 and 08 additionally resume at row level

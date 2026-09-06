@@ -26,7 +26,7 @@ Severe rows are NOT re-run — they were already oracle-correct.
 
 ### Datasets (Kaggle)
 - **MVTec-AD** (notebooks 01–04): [`ipythonx/mvtec-ad`](https://www.kaggle.com/datasets/ipythonx/mvtec-ad)
-- **VisA** (notebooks 05–08): [`ess1004/visa-dataset`](https://www.kaggle.com/datasets/ess1004/visa-anomaly-detection)
+- **VisA** (notebooks 05–08): [`ess1004/visa-anomaly-detection`](https://www.kaggle.com/datasets/ess1004/visa-anomaly-detection)
 
 ### Configuration File
 Each notebook loads corruption parameters from `data/experiment_config.json`.
@@ -79,7 +79,7 @@ You can run these in **3 Kaggle sessions** (or 4 if you prefer smaller batches):
 1. In the right sidebar, click **+ Add Data**
 2. Search for and add:
    - `ipythonx/mvtec-ad` (for MVTec notebooks 01–04)
-   - `ess1004/visa-dataset` (for VisA notebooks 05–08)
+   - `ess1004/visa-anomaly-detection` (for VisA notebooks 05–08)
 3. Also add `experiment_config.json` if it's hosted as a separate Kaggle dataset
 
 ### 3. Configure Environment
@@ -90,7 +90,7 @@ You can run these in **3 Kaggle sessions** (or 4 if you prefer smaller batches):
 ### 4. Verify Paths
 The notebooks expect:
 - **MVTec-AD**: `/kaggle/input/mvtec-ad/` (or similar — check your dataset mount path)
-- **VisA**: `/kaggle/input/visa-dataset/` (or similar)
+- **VisA**: `/kaggle/input/visa-anomaly-detection/` (or similar)
 - **Config**: The config JSON path — update `CONFIG_FILE` if your mount path differs
 
 ### 5. Run All Cells

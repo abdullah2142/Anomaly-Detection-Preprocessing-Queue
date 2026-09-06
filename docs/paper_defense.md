@@ -41,7 +41,7 @@ A: MVTec-AD's lab conditions are a feature, not a limitation, for this specific 
 
 **Q: You use 3 seeds. Is that statistically sufficient?**
 
-A: With 15 categories × 3 seeds = 45 data points per condition and effect sizes of 10–12 pp for augmented training, the signal is unambiguous without significance testing. For the rescue results (mean delta −0.046 to −0.149), the consistency across all 810 instances per condition (65–81% harmful) is the primary evidence of reliability rather than mean alone. To ensure maximum statistical rigour, we conducted paired Wilcoxon signed-rank tests across the full 6,120-row benchmark. After applying the Benjamini-Hochberg False Discovery Rate (FDR) correction, the results remain overwhelmingly significant ($q < 0.001$), confirming that the findings are robust and not an artifact of random seed variation.
+A: With 15 categories × 3 seeds = 45 data points per condition and effect sizes of 10–12 pp for augmented training, the signal is unambiguous without significance testing. For the rescue results (mean delta −0.046 to −0.149), the consistency across the 810 instances per condition (65–81% harmful; effective N 645–806 after zero differences are dropped) is the primary evidence of reliability rather than the mean alone. Significance is computed **clustered by category** — an exact two-sided permutation test over the 15 category means — because the 45 cells per category are not independent. All four conditions remain significant ($p \le 2.4\times10^{-4}$), confirming the findings are not an artifact of random seed variation. We report the clustered result rather than the cell-level one precisely because the latter overstates significance by roughly 65 orders of magnitude.
 
 ---
 
@@ -75,7 +75,7 @@ A: Both statements are true simultaneously. At severe corruption, clean-trained 
 
 **Q: Would these results hold on VisA or other datasets?**
 
-A: Yes, we have empirically verified this. While the mechanistic explanations (PSF-mismatch ringing harms coreset matching; augmented training recalibrates the normal distribution) are inherently not dataset-specific, we executed a cross-dataset validation on a 4-category subset of the VisA dataset to confirm. Wilcoxon signed-rank tests over these runs provide conclusive statistical evidence: augmented training significantly improves robustness (mean AUROC gain +13.9 pp for PaDiM, p<1e-27; +17.8 pp for PatchCore, p<1e-30), and the preprocessing fallacy holds true, with rescue remaining net-harmful for both models ($p < 0.001$).
+A: Yes, we ran the pipeline on VisA. While the mechanistic explanations (PSF-mismatch ringing harms coreset matching; augmented training recalibrates the normal distribution) are inherently not dataset-specific, the empirical check matters. The preprocessing fallacy replicates **with significance** on the 12 clean-trained VisA categories: rescue remains net-harmful for PatchCore (−6.4 pp, category-clustered $p = 4.9\times10^{-4}$) and PaDiM (−2.7 pp, $p = 2.9\times10^{-3}$). The augmented VisA arm spans 4 categories and shows gains in the same direction and of larger magnitude than MVTec-AD (+17.8 pp PatchCore, +13.9 pp PaDiM), but we report those descriptively: with 4 clusters, no test can return a two-sided p below 0.125, so we do not claim significance for them.
 
 ---
 

@@ -138,7 +138,7 @@ PatchCore consistently outperforms PaDiM on clean data. Five categories achieve 
 | Fog/haze | Moderate | 0.6161 | 0.7717 | **+0.1556** |
 | Fog/haze | Severe | 0.5623 | 0.6874 | **+0.1251** |
 
-> **Finding 2**: Augmented training provides universal robustness gains. Every corruption/severity condition improves or remains stable. PatchCore benefits most dramatically for Gaussian blur (+0.21 to +0.25) and motion blur (+0.13 to +0.23) at moderate/severe levels. PaDiM shows consistent gains of +0.08 to +0.17 across most conditions. Wilcoxon signed-rank tests confirm this holds true across domains: MVTec-AD PatchCore (+12.3 pp, p<0.001), MVTec-AD PaDiM (+10.1 pp, p<0.001), VisA PatchCore (+17.8 pp, p<1e-30), and VisA PaDiM (+13.9 pp, p<1e-27).
+> **Finding 2**: Augmented training provides universal robustness gains. Every corruption/severity condition improves or remains stable. PatchCore benefits most dramatically for Gaussian blur (+0.21 to +0.25) and motion blur (+0.13 to +0.23) at moderate/severe levels. PaDiM shows consistent gains of +0.08 to +0.17 across most conditions. Category-clustered permutation tests confirm this on MVTec-AD: PatchCore (+12.3 pp, $p = 1.2\times10^{-4}$) and PaDiM (+10.1 pp, $p = 6.1\times10^{-5}$). The VisA gains (PatchCore +17.8 pp, PaDiM +13.9 pp) point the same way but rest on 4 categories and are reported as descriptive; see [`statistical_validation.md`](statistical_validation.md).
 
 > **Finding 3**: PatchCore is more sensitive to corruption than PaDiM at mild severities under clean training (e.g., motion blur mild: 0.782 vs. 0.721), but augmented training closes this gap and reverses it at severe levels.
 
@@ -157,7 +157,9 @@ PatchCore consistently outperforms PaDiM on clean data. Five categories achieve 
 | PatchCore | Clean | 209 / 810 | 25.8% | −0.0717 |
 | PatchCore | Augmented | 184 / 810 | **22.7%** | −0.1490 |
 
-> **Finding 4 (The Preprocessing Fallacy)**: Rescue preprocessing is net-harmful in all four conditions across both datasets. Even in the best case (MVTec-AD PaDiM/clean), only 35.1% of rescue instances improve detection. In every case, the mean rescue delta is negative — on average, preprocessing makes anomaly detection worse. VisA cross-validation strongly confirms this ($p<0.001$).
+> **Finding 4 (The Preprocessing Fallacy)**: Rescue preprocessing is net-harmful in all four conditions across both datasets. Even in the best case (MVTec-AD PaDiM/clean), only 35.1% of rescue instances improve detection. In every case, the mean rescue delta is negative — on average, preprocessing makes anomaly detection worse. All four MVTec-AD conditions are significant under category-clustered testing ($p \le 2.4\times10^{-4}$), as is clean-trained VisA across its 12 categories ($p \le 2.9\times10^{-3}$).
+>
+> ⚠️ These pooled deltas include Wiener mild/moderate rows produced with a misspecified kernel (22.2% of all rescue rows). When the corrected reruns land they are expected to move the pooled figures upward by roughly 1–4 pp; the direction of the finding is not expected to change on MVTec-AD.
 
 > **Finding 5**: Augmented training *increases* rescue harm. Models trained on corrupted data are *more* damaged by rescue preprocessing than clean-trained models. PaDiM's mean rescue delta worsens from −0.046 to −0.113 after augmented training; PatchCore worsens from −0.072 to −0.149.
 

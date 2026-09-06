@@ -25,7 +25,7 @@ Only classical, parameter-light restoration methods are evaluated. Modern deep r
 
 ## 6. Dataset Diversity
 
-While the primary quantitative results are derived from the 15 categories of MVTec-AD, we conducted a cross-dataset validation on a 4-category subset of the VisA dataset (candle, cashew, pcb1, pipe_fryum) to verify generalizability. Wilcoxon signed-rank tests confirm that the core phenomena identified on MVTec-AD hold true on VisA with high statistical significance (p < 0.001): augmented training significantly improves robustness, and test-time rescue preprocessing remains net-harmful.
+While the primary quantitative results are derived from the 15 categories of MVTec-AD, we conducted a cross-dataset validation on a 4-category subset of the VisA dataset (candle, cashew, pcb1, pipe_fryum) to verify generalizability. The core phenomena identified on MVTec-AD hold on VisA. Under category-clustered testing, the clean-trained VisA rescue harm is significant across its 12 categories (PatchCore $p = 4.9\times10^{-4}$, PaDiM $p = 2.9\times10^{-3}$). The augmented VisA arm spans only 4 categories, where the smallest attainable two-sided p is 0.125; its gains (+17.8 / +13.9 pp) are therefore reported as descriptive corroboration of the MVTec-AD result rather than as independent significance.
 
 ## 7. Threshold-Free Metric Only
 
