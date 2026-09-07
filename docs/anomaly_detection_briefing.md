@@ -187,10 +187,10 @@ Augmented training gains are consistent across all 15 corruption×severity combi
 
 | Condition | Rescue Success Rate | Mean Rescue Δ |
 | :--- | :--- | :--- |
-| PaDiM — Clean | 35.1% | −0.046 |
-| PatchCore — Clean | 25.8% | −0.072 |
-| PatchCore — Augmented | 22.7% | −0.149 |
-| PaDiM — Augmented | 19.4% | −0.113 |
+| PaDiM — Clean | 38.4% | −0.028 |
+| PatchCore — Clean | 29.8% | −0.039 |
+| PatchCore — Augmented | 24.0% | −0.118 |
+| PaDiM — Augmented | 21.1% | −0.096 |
 
 **Core finding:** Rescue preprocessing is net-harmful in all 4 conditions. Augmented training makes rescue *more* harmful, not less. The only conditionally positive rescue is CLAHE on low-light/severe for PatchCore clean (+3.5 pp) and augmented (+1.0 pp).
 

@@ -1,5 +1,12 @@
 # Per-Corruption Type Breakdown Tables
 
+This file is generated. Do not edit by hand -- rerun
+`python scripts/analysis/build_per_corruption_tables.py` after any change to
+the benchmark CSV.
+
+Wiener rescue rows use per-severity PSF parameters matched to the corruption
+that generated the blur.
+
 ## 1. Augmented Training Gains by Corruption Type
 
 ### Dataset: MVTec-AD
@@ -81,8 +88,8 @@
 | PaDiM | augmented | fog_haze | mild | Dehaze (Dark Channel) | 0.7238 | 0.6839 | -0.0399 |
 | PaDiM | augmented | fog_haze | moderate | Dehaze (Dark Channel) | 0.6218 | 0.5828 | -0.0389 |
 | PaDiM | augmented | fog_haze | severe | Dehaze (Dark Channel) | 0.5592 | 0.5577 | -0.0015 |
-| PaDiM | augmented | gaussian_blur | mild | Wiener | 0.8478 | 0.5425 | -0.3053 |
-| PaDiM | augmented | gaussian_blur | moderate | Wiener | 0.7475 | 0.5471 | -0.2005 |
+| PaDiM | augmented | gaussian_blur | mild | Wiener | 0.8478 | 0.6911 | -0.1567 |
+| PaDiM | augmented | gaussian_blur | moderate | Wiener | 0.7475 | 0.5422 | -0.2053 |
 | PaDiM | augmented | gaussian_blur | severe | Wiener | 0.7107 | 0.5161 | -0.1946 |
 | PaDiM | augmented | low_light | mild | CLAHE | 0.8545 | 0.7894 | -0.0651 |
 | PaDiM | augmented | low_light | mild | Retinex | 0.8545 | 0.7221 | -0.1324 |
@@ -90,8 +97,8 @@
 | PaDiM | augmented | low_light | moderate | Retinex | 0.8400 | 0.7331 | -0.1069 |
 | PaDiM | augmented | low_light | severe | CLAHE | 0.8012 | 0.7742 | -0.0270 |
 | PaDiM | augmented | low_light | severe | Retinex | 0.8012 | 0.7166 | -0.0846 |
-| PaDiM | augmented | motion_blur | mild | Wiener (Motion PSF) | 0.8163 | 0.5481 | -0.2682 |
-| PaDiM | augmented | motion_blur | moderate | Wiener (Motion PSF) | 0.7709 | 0.5612 | -0.2097 |
+| PaDiM | augmented | motion_blur | mild | Wiener (Motion PSF) | 0.8163 | 0.6876 | -0.1286 |
+| PaDiM | augmented | motion_blur | moderate | Wiener (Motion PSF) | 0.7709 | 0.5999 | -0.1710 |
 | PaDiM | augmented | motion_blur | severe | Wiener (Motion PSF) | 0.7377 | 0.5798 | -0.1580 |
 | PaDiM | augmented | sensor_noise | mild | NLM Denoise | 0.7225 | 0.7089 | -0.0136 |
 | PaDiM | augmented | sensor_noise | moderate | NLM Denoise | 0.6925 | 0.6299 | -0.0627 |
@@ -99,8 +106,8 @@
 | PaDiM | clean | fog_haze | mild | Dehaze (Dark Channel) | 0.6243 | 0.6229 | -0.0015 |
 | PaDiM | clean | fog_haze | moderate | Dehaze (Dark Channel) | 0.5539 | 0.5554 | +0.0015 |
 | PaDiM | clean | fog_haze | severe | Dehaze (Dark Channel) | 0.5214 | 0.5320 | +0.0106 |
-| PaDiM | clean | gaussian_blur | mild | Wiener | 0.7723 | 0.5261 | -0.2462 |
-| PaDiM | clean | gaussian_blur | moderate | Wiener | 0.6129 | 0.5160 | -0.0969 |
+| PaDiM | clean | gaussian_blur | mild | Wiener | 0.7723 | 0.6927 | -0.0796 |
+| PaDiM | clean | gaussian_blur | moderate | Wiener | 0.6129 | 0.5202 | -0.0927 |
 | PaDiM | clean | gaussian_blur | severe | Wiener | 0.5813 | 0.5011 | -0.0802 |
 | PaDiM | clean | low_light | mild | CLAHE | 0.7742 | 0.7641 | -0.0101 |
 | PaDiM | clean | low_light | mild | Retinex | 0.7742 | 0.6976 | -0.0766 |
@@ -108,8 +115,8 @@
 | PaDiM | clean | low_light | moderate | Retinex | 0.7174 | 0.6997 | -0.0177 |
 | PaDiM | clean | low_light | severe | CLAHE | 0.6640 | 0.6569 | -0.0071 |
 | PaDiM | clean | low_light | severe | Retinex | 0.6640 | 0.6758 | +0.0118 |
-| PaDiM | clean | motion_blur | mild | Wiener (Motion PSF) | 0.7207 | 0.5431 | -0.1777 |
-| PaDiM | clean | motion_blur | moderate | Wiener (Motion PSF) | 0.6294 | 0.5347 | -0.0947 |
+| PaDiM | clean | motion_blur | mild | Wiener (Motion PSF) | 0.7207 | 0.6552 | -0.0656 |
+| PaDiM | clean | motion_blur | moderate | Wiener (Motion PSF) | 0.6294 | 0.5775 | -0.0519 |
 | PaDiM | clean | motion_blur | severe | Wiener (Motion PSF) | 0.5681 | 0.5594 | -0.0087 |
 | PaDiM | clean | sensor_noise | mild | NLM Denoise | 0.6569 | 0.6512 | -0.0057 |
 | PaDiM | clean | sensor_noise | moderate | NLM Denoise | 0.6105 | 0.5898 | -0.0207 |
@@ -117,8 +124,8 @@
 | PatchCore | augmented | fog_haze | mild | Dehaze (Dark Channel) | 0.8491 | 0.7996 | -0.0495 |
 | PatchCore | augmented | fog_haze | moderate | Dehaze (Dark Channel) | 0.7717 | 0.6607 | -0.1110 |
 | PatchCore | augmented | fog_haze | severe | Dehaze (Dark Channel) | 0.6874 | 0.6134 | -0.0740 |
-| PatchCore | augmented | gaussian_blur | mild | Wiener | 0.9274 | 0.5000 | -0.4274 |
-| PatchCore | augmented | gaussian_blur | moderate | Wiener | 0.8588 | 0.5027 | -0.3562 |
+| PatchCore | augmented | gaussian_blur | mild | Wiener | 0.9274 | 0.8792 | -0.0482 |
+| PatchCore | augmented | gaussian_blur | moderate | Wiener | 0.8588 | 0.5089 | -0.3499 |
 | PatchCore | augmented | gaussian_blur | severe | Wiener | 0.8292 | 0.5022 | -0.3270 |
 | PatchCore | augmented | low_light | mild | CLAHE | 0.9548 | 0.9453 | -0.0095 |
 | PatchCore | augmented | low_light | mild | Retinex | 0.9548 | 0.8416 | -0.1131 |
@@ -126,8 +133,8 @@
 | PatchCore | augmented | low_light | moderate | Retinex | 0.9356 | 0.8214 | -0.1142 |
 | PatchCore | augmented | low_light | severe | CLAHE | 0.8746 | 0.8850 | +0.0105 |
 | PatchCore | augmented | low_light | severe | Retinex | 0.8746 | 0.7853 | -0.0893 |
-| PatchCore | augmented | motion_blur | mild | Wiener (Motion PSF) | 0.9159 | 0.5528 | -0.3631 |
-| PatchCore | augmented | motion_blur | moderate | Wiener (Motion PSF) | 0.8760 | 0.5610 | -0.3150 |
+| PatchCore | augmented | motion_blur | mild | Wiener (Motion PSF) | 0.9159 | 0.6767 | -0.2392 |
+| PatchCore | augmented | motion_blur | moderate | Wiener (Motion PSF) | 0.8760 | 0.6120 | -0.2640 |
 | PatchCore | augmented | motion_blur | severe | Wiener (Motion PSF) | 0.8389 | 0.5930 | -0.2459 |
 | PatchCore | augmented | sensor_noise | mild | NLM Denoise | 0.8942 | 0.8730 | -0.0211 |
 | PatchCore | augmented | sensor_noise | moderate | NLM Denoise | 0.8535 | 0.8199 | -0.0337 |
@@ -135,8 +142,8 @@
 | PatchCore | clean | fog_haze | mild | Dehaze (Dark Channel) | 0.7098 | 0.7005 | -0.0093 |
 | PatchCore | clean | fog_haze | moderate | Dehaze (Dark Channel) | 0.6161 | 0.5859 | -0.0303 |
 | PatchCore | clean | fog_haze | severe | Dehaze (Dark Channel) | 0.5623 | 0.5729 | +0.0107 |
-| PatchCore | clean | gaussian_blur | mild | Wiener | 0.9173 | 0.5000 | -0.4173 |
-| PatchCore | clean | gaussian_blur | moderate | Wiener | 0.6483 | 0.5000 | -0.1483 |
+| PatchCore | clean | gaussian_blur | mild | Wiener | 0.9173 | 0.8813 | -0.0361 |
+| PatchCore | clean | gaussian_blur | moderate | Wiener | 0.6483 | 0.5176 | -0.1307 |
 | PatchCore | clean | gaussian_blur | severe | Wiener | 0.5831 | 0.5157 | -0.0674 |
 | PatchCore | clean | low_light | mild | CLAHE | 0.9607 | 0.9079 | -0.0527 |
 | PatchCore | clean | low_light | mild | Retinex | 0.9607 | 0.8478 | -0.1129 |
@@ -144,8 +151,8 @@
 | PatchCore | clean | low_light | moderate | Retinex | 0.8910 | 0.8248 | -0.0662 |
 | PatchCore | clean | low_light | severe | CLAHE | 0.7840 | 0.8195 | +0.0354 |
 | PatchCore | clean | low_light | severe | Retinex | 0.7840 | 0.7456 | -0.0384 |
-| PatchCore | clean | motion_blur | mild | Wiener (Motion PSF) | 0.7824 | 0.5550 | -0.2274 |
-| PatchCore | clean | motion_blur | moderate | Wiener (Motion PSF) | 0.6595 | 0.5626 | -0.0969 |
+| PatchCore | clean | motion_blur | mild | Wiener (Motion PSF) | 0.7824 | 0.6750 | -0.1075 |
+| PatchCore | clean | motion_blur | moderate | Wiener (Motion PSF) | 0.6595 | 0.6245 | -0.0351 |
 | PatchCore | clean | motion_blur | severe | Wiener (Motion PSF) | 0.6127 | 0.5977 | -0.0150 |
 | PatchCore | clean | sensor_noise | mild | NLM Denoise | 0.8470 | 0.8140 | -0.0330 |
 | PatchCore | clean | sensor_noise | moderate | NLM Denoise | 0.7638 | 0.7455 | -0.0183 |
@@ -158,8 +165,8 @@
 | PaDiM | augmented | fog_haze | mild | Dehaze (Dark Channel) | 0.6405 | 0.5573 | -0.0832 |
 | PaDiM | augmented | fog_haze | moderate | Dehaze (Dark Channel) | 0.5796 | 0.5402 | -0.0394 |
 | PaDiM | augmented | fog_haze | severe | Dehaze (Dark Channel) | 0.5324 | 0.5097 | -0.0226 |
-| PaDiM | augmented | gaussian_blur | mild | Wiener | 0.7753 | 0.5222 | -0.2530 |
-| PaDiM | augmented | gaussian_blur | moderate | Wiener | 0.6316 | 0.5202 | -0.1114 |
+| PaDiM | augmented | gaussian_blur | mild | Wiener | 0.7753 | 0.6250 | -0.1503 |
+| PaDiM | augmented | gaussian_blur | moderate | Wiener | 0.6316 | 0.5019 | -0.1297 |
 | PaDiM | augmented | gaussian_blur | severe | Wiener | 0.6401 | 0.5012 | -0.1389 |
 | PaDiM | augmented | low_light | mild | CLAHE | 0.8755 | 0.7728 | -0.1027 |
 | PaDiM | augmented | low_light | mild | Retinex | 0.8755 | 0.6516 | -0.2239 |
@@ -167,8 +174,8 @@
 | PaDiM | augmented | low_light | moderate | Retinex | 0.8695 | 0.5850 | -0.2845 |
 | PaDiM | augmented | low_light | severe | CLAHE | 0.8171 | 0.7919 | -0.0253 |
 | PaDiM | augmented | low_light | severe | Retinex | 0.8171 | 0.6339 | -0.1832 |
-| PaDiM | augmented | motion_blur | mild | Wiener (Motion PSF) | 0.7635 | 0.5142 | -0.2493 |
-| PaDiM | augmented | motion_blur | moderate | Wiener (Motion PSF) | 0.7137 | 0.5183 | -0.1954 |
+| PaDiM | augmented | motion_blur | mild | Wiener (Motion PSF) | 0.7635 | 0.6390 | -0.1245 |
+| PaDiM | augmented | motion_blur | moderate | Wiener (Motion PSF) | 0.7137 | 0.5555 | -0.1582 |
 | PaDiM | augmented | motion_blur | severe | Wiener (Motion PSF) | 0.6979 | 0.5331 | -0.1648 |
 | PaDiM | augmented | sensor_noise | mild | NLM Denoise | 0.6754 | 0.6389 | -0.0365 |
 | PaDiM | augmented | sensor_noise | moderate | NLM Denoise | 0.6330 | 0.5917 | -0.0413 |
@@ -176,8 +183,8 @@
 | PaDiM | clean | fog_haze | mild | Dehaze (Dark Channel) | 0.5650 | 0.5515 | -0.0135 |
 | PaDiM | clean | fog_haze | moderate | Dehaze (Dark Channel) | 0.5245 | 0.5342 | +0.0097 |
 | PaDiM | clean | fog_haze | severe | Dehaze (Dark Channel) | 0.5009 | 0.5224 | +0.0215 |
-| PaDiM | clean | gaussian_blur | mild | Wiener | 0.6778 | 0.5069 | -0.1710 |
-| PaDiM | clean | gaussian_blur | moderate | Wiener | 0.5367 | 0.5132 | -0.0235 |
+| PaDiM | clean | gaussian_blur | mild | Wiener | 0.6778 | 0.6877 | +0.0098 |
+| PaDiM | clean | gaussian_blur | moderate | Wiener | 0.5367 | 0.5182 | -0.0185 |
 | PaDiM | clean | gaussian_blur | severe | Wiener | 0.5094 | 0.5161 | +0.0068 |
 | PaDiM | clean | low_light | mild | CLAHE | 0.7112 | 0.6754 | -0.0358 |
 | PaDiM | clean | low_light | mild | Retinex | 0.7112 | 0.6081 | -0.1031 |
@@ -185,8 +192,8 @@
 | PaDiM | clean | low_light | moderate | Retinex | 0.6481 | 0.5842 | -0.0639 |
 | PaDiM | clean | low_light | severe | CLAHE | 0.5436 | 0.5821 | +0.0384 |
 | PaDiM | clean | low_light | severe | Retinex | 0.5436 | 0.5416 | -0.0020 |
-| PaDiM | clean | motion_blur | mild | Wiener (Motion PSF) | 0.6529 | 0.5019 | -0.1510 |
-| PaDiM | clean | motion_blur | moderate | Wiener (Motion PSF) | 0.5568 | 0.5007 | -0.0561 |
+| PaDiM | clean | motion_blur | mild | Wiener (Motion PSF) | 0.6529 | 0.6486 | -0.0044 |
+| PaDiM | clean | motion_blur | moderate | Wiener (Motion PSF) | 0.5568 | 0.5507 | -0.0061 |
 | PaDiM | clean | motion_blur | severe | Wiener (Motion PSF) | 0.5373 | 0.5350 | -0.0024 |
 | PaDiM | clean | sensor_noise | mild | NLM Denoise | 0.6011 | 0.5748 | -0.0263 |
 | PaDiM | clean | sensor_noise | moderate | NLM Denoise | 0.5496 | 0.5773 | +0.0277 |
@@ -194,7 +201,7 @@
 | PatchCore | augmented | fog_haze | mild | Dehaze (Dark Channel) | 0.7650 | 0.7040 | -0.0610 |
 | PatchCore | augmented | fog_haze | moderate | Dehaze (Dark Channel) | 0.6458 | 0.5439 | -0.1018 |
 | PatchCore | augmented | fog_haze | severe | Dehaze (Dark Channel) | 0.5759 | 0.5165 | -0.0594 |
-| PatchCore | augmented | gaussian_blur | mild | Wiener | 0.9242 | 0.5000 | -0.4242 |
+| PatchCore | augmented | gaussian_blur | mild | Wiener | 0.9242 | 0.8897 | -0.0346 |
 | PatchCore | augmented | gaussian_blur | moderate | Wiener | 0.7459 | 0.5000 | -0.2459 |
 | PatchCore | augmented | gaussian_blur | severe | Wiener | 0.7377 | 0.5000 | -0.2377 |
 | PatchCore | augmented | low_light | mild | CLAHE | 0.9723 | 0.9027 | -0.0696 |
@@ -203,8 +210,8 @@
 | PatchCore | augmented | low_light | moderate | Retinex | 0.9640 | 0.6403 | -0.3237 |
 | PatchCore | augmented | low_light | severe | CLAHE | 0.9648 | 0.9370 | -0.0278 |
 | PatchCore | augmented | low_light | severe | Retinex | 0.9648 | 0.6091 | -0.3557 |
-| PatchCore | augmented | motion_blur | mild | Wiener (Motion PSF) | 0.9116 | 0.5000 | -0.4116 |
-| PatchCore | augmented | motion_blur | moderate | Wiener (Motion PSF) | 0.8298 | 0.5000 | -0.3298 |
+| PatchCore | augmented | motion_blur | mild | Wiener (Motion PSF) | 0.9116 | 0.5985 | -0.3132 |
+| PatchCore | augmented | motion_blur | moderate | Wiener (Motion PSF) | 0.8298 | 0.5001 | -0.3298 |
 | PatchCore | augmented | motion_blur | severe | Wiener (Motion PSF) | 0.8328 | 0.5521 | -0.2807 |
 | PatchCore | augmented | sensor_noise | mild | NLM Denoise | 0.8987 | 0.7992 | -0.0995 |
 | PatchCore | augmented | sensor_noise | moderate | NLM Denoise | 0.8382 | 0.8162 | -0.0220 |
@@ -212,8 +219,8 @@
 | PatchCore | clean | fog_haze | mild | Dehaze (Dark Channel) | 0.6104 | 0.5849 | -0.0255 |
 | PatchCore | clean | fog_haze | moderate | Dehaze (Dark Channel) | 0.5024 | 0.5040 | +0.0016 |
 | PatchCore | clean | fog_haze | severe | Dehaze (Dark Channel) | 0.5002 | 0.5013 | +0.0010 |
-| PatchCore | clean | gaussian_blur | mild | Wiener | 0.8277 | 0.5000 | -0.3277 |
-| PatchCore | clean | gaussian_blur | moderate | Wiener | 0.5392 | 0.5000 | -0.0392 |
+| PatchCore | clean | gaussian_blur | mild | Wiener | 0.8277 | 0.8453 | +0.0176 |
+| PatchCore | clean | gaussian_blur | moderate | Wiener | 0.5392 | 0.5006 | -0.0386 |
 | PatchCore | clean | gaussian_blur | severe | Wiener | 0.5000 | 0.5000 | +0.0000 |
 | PatchCore | clean | low_light | mild | CLAHE | 0.8668 | 0.7756 | -0.0912 |
 | PatchCore | clean | low_light | mild | Retinex | 0.8668 | 0.7230 | -0.1438 |
@@ -221,10 +228,9 @@
 | PatchCore | clean | low_light | moderate | Retinex | 0.7754 | 0.6496 | -0.1258 |
 | PatchCore | clean | low_light | severe | CLAHE | 0.5646 | 0.6352 | +0.0706 |
 | PatchCore | clean | low_light | severe | Retinex | 0.5646 | 0.5267 | -0.0379 |
-| PatchCore | clean | motion_blur | mild | Wiener (Motion PSF) | 0.7366 | 0.5000 | -0.2366 |
-| PatchCore | clean | motion_blur | moderate | Wiener (Motion PSF) | 0.5047 | 0.5000 | -0.0047 |
+| PatchCore | clean | motion_blur | mild | Wiener (Motion PSF) | 0.7366 | 0.6270 | -0.1096 |
+| PatchCore | clean | motion_blur | moderate | Wiener (Motion PSF) | 0.5047 | 0.5124 | +0.0077 |
 | PatchCore | clean | motion_blur | severe | Wiener (Motion PSF) | 0.5000 | 0.5000 | -0.0000 |
 | PatchCore | clean | sensor_noise | mild | NLM Denoise | 0.7495 | 0.6723 | -0.0772 |
 | PatchCore | clean | sensor_noise | moderate | NLM Denoise | 0.6645 | 0.6236 | -0.0408 |
 | PatchCore | clean | sensor_noise | severe | NLM Denoise | 0.5939 | 0.5306 | -0.0633 |
-

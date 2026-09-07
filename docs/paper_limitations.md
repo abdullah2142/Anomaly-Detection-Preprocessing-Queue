@@ -6,7 +6,22 @@ All five corruption types are synthetically generated using parameterized functi
 
 ## 2. Wiener PSF Specification
 
-Wiener deconvolution uses the exact PSF used to generate the blur only at **severe** severity. At mild and moderate severities, the PSF parameters are matched to the corruption severity in the corrected codebase, but original published results used hardcoded severe-tier parameters at all severities. Real-world blur kernels are camera-, motion-, and scene-dependent and must be estimated blindly. Our severe-tier Wiener results (oracle PSF, mean Δ ≈ −12.5 pp) therefore represent an **upper bound** on deconvolution performance; blind deconvolution on unknown kernels is expected to be substantially worse.
+Wiener deconvolution uses the exact PSF that generated the blur at **every**
+severity. The originally published mild and moderate rows were produced with the
+severe-tier kernel hardcoded across all severities; all 1,104 affected rows were
+regenerated with per-severity parameters and merged (see
+`scripts/wiener_reruns/` and `scripts/analysis/merge_wiener_reruns.py`).
+
+Real-world blur kernels are camera-, motion-, and scene-dependent and must be
+estimated blindly. Our Wiener results are therefore an **upper bound** on
+deconvolution performance: an oracle PSF still costs −5.7 pp (mild), −15.1 pp
+(moderate) and −12.5 pp (severe) for Gaussian blur.
+
+The superseded misspecified-kernel run is retained in git history and reported as
+a deliberate sensitivity comparison: a kernel 5× too wide deepens the mild-severity
+penalty from −5.7 pp to −32.2 pp. This quantifies the additional cost that blind
+deconvolution — which must estimate the kernel — has to pay, and is a stronger
+statement than the oracle result alone.
 
 ## 3. Limited Model Diversity
 
@@ -38,6 +53,14 @@ Experiments were executed on Kaggle T4/P100 GPUs (16 GB VRAM) under a 12-hour se
 ## 9. AUROC Floor Saturation
 
 23.1% of all benchmark rows (2,169 / 9,384) exhibit AUROC = 0.5000 exactly, indicating fully tied anomaly scores with zero ranking ability. This is concentrated at severe corruption: 52.2% of severe Gaussian blur rows hit the floor. Reported mean AUROC values are therefore censored at a floor of 0.5 and may understate the true severity of model collapse under extreme corruption. Wilcoxon tests on rescue deltas also have reduced effective N where both degraded and rescued AUROC are 0.5 (zero differences are silently dropped).
+
+A second consequence: rescue *deltas* are censored at severe severity. Because
+33% of severe degraded baselines already sit at 0.5, a rescue applied to them
+cannot push the score lower, compressing the measured delta toward zero. Apparent
+declines in rescue harm as severity rises — visible for motion-blur Wiener
+(−12.2 pp mild, −10.6 pp moderate, −8.9 pp severe) — are therefore not evidence
+that restoration becomes safer under worse degradation. They should not be read
+as a severity trend.
 
 ## 10. Train/Test Resolution Mismatch
 

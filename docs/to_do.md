@@ -12,7 +12,7 @@ This document outlines the defense strategy against the six methodological criti
 
 **6. Validation on a Second Dataset**
 * **The Critique:** Experiments are limited to MVTec-AD; validation on a second dataset is required.
-* **Our Response:** Complete. We executed the entire pipeline on the VisA dataset (12 distinct categories, including PCBs and medical capsules). The full VisA benchmark (3,264 rows) validates the MVTec-AD findings: test-time rescue preprocessing remains net-harmful for both PatchCore ($\Delta = -0.0642$, 12 categories, clustered $p = 4.9\times10^{-4}$) and PaDiM ($\Delta = -0.0274$, 12 categories, clustered $p = 2.9\times10^{-3}$). The augmented VisA arm covers 4 categories and is reported as descriptive support only — with 4 clusters the smallest attainable two-sided p is 0.125.
+* **Our Response:** Complete. We executed the entire pipeline on the VisA dataset (12 distinct categories, including PCBs and medical capsules). The full VisA benchmark (3,264 rows) validates the MVTec-AD findings: test-time rescue preprocessing remains significantly net-harmful for PatchCore ($\Delta = -0.0373$, 12 categories, clustered $p = 4.9\times10^{-4}$). For PaDiM it is $\Delta = -0.0061$ at $p = 0.375$ — not distinguishable from zero once the Wiener PSF is corrected, and we do not claim the fallacy for that condition. The augmented VisA arm covers 4 categories and is reported as descriptive support only — with 4 clusters the smallest attainable two-sided p is 0.125.
 
 ### 🔴 Group B: Deferred & Defended (Points 2, 3, 4, & 5)
 
@@ -20,7 +20,7 @@ This document outlines the defense strategy against the six methodological criti
 
 **5. Feature-Space Evidence (Artifact Proof)** — *DEFERRED to future work*
 * **The Critique:** Support the "Preprocessing Fallacy" claim with feature-space evidence (e.g., measuring how far extracted features are from the normal distribution).
-* **Our Defense:** The effect is established, though not at the significance we previously claimed. Under correct category-clustered inference the rescue harm holds at $p \le 2.4\times10^{-4}$ on MVTec-AD and $p \le 2.9\times10^{-3}$ on clean-trained VisA — consistent across two datasets, two models and three seeds. That establishes *that* rescue methods harm performance. Extracting high-dimensional embeddings to compute Mahalanobis distances or plot t-SNE clusters would explain *why* (distributional shift). Because that requires custom feature-extraction hooks and thousands of regenerated inferences, it is deferred to future work and declared as such in the limitations.
+* **Our Defense:** The effect is established, though not at the significance we previously claimed. Under correct category-clustered inference the rescue harm holds at $p \le 2.1\times10^{-3}$ across all four MVTec-AD conditions and for clean-trained VisA PatchCore ($p = 4.9\times10^{-4}$); clean-trained VisA PaDiM is the one exception at $p = 0.375$. That establishes *that* rescue methods harm performance. Extracting high-dimensional embeddings to compute Mahalanobis distances or plot t-SNE clusters would explain *why* (distributional shift). Because that requires custom feature-extraction hooks and thousands of regenerated inferences, it is deferred to future work and declared as such in the limitations.
 
 **2. Augmentation Probability Ablation (0.25, 0.50, 0.75, 1.00)**
 * **Our Defense:** Ablating probabilities would require retraining and re-inferencing the entire dataset 3 more times (~18,000 additional inferences). The Kaggle compute cost is prohibitive. More importantly, our current operating point ($p=0.50$) achieved up to +24 percentage points of AUROC gain. The scientific claim that "augmented training works" is fully proven; finding the mathematically optimal $p$ is an engineering optimization detail, not a scientific necessity.
@@ -72,29 +72,31 @@ duplicates, no nulls.
 
 ## Part 3: Final Action Plan
 
-### Priority 1: Wiener PSF rerun 🔄 IN PROGRESS
-The published mild and moderate Wiener rows were deconvolved with the severe-tier
-PSF. Eight rerun notebooks in [`scripts/wiener_reruns/`](../scripts/wiener_reruns/)
-retrain each model identically and re-execute **only** the affected rescue
-inferences with per-severity PSFs.
+### Priority 1: Wiener PSF rerun ✅ DONE
+All 1,104 mild/moderate Wiener rescue rows (22.2% of rescue rows) were
+regenerated with per-severity PSFs by the eight notebooks in
+[`scripts/wiener_reruns/`](../scripts/wiener_reruns/) and merged into the master
+CSV by [`merge_wiener_reruns.py`](../scripts/analysis/merge_wiener_reruns.py),
+which asserts a 1:1 join before writing.
 
-- [ ] Execute reruns 01–08 on Kaggle (see `scripts/wiener_reruns/INSTRUCTIONS.md`)
-- [ ] Merge corrected rescue rows into the master CSV, replacing the misspecified ones
-- [ ] Affected: 1,104 of 4,968 rescue rows (22.2%)
+- [x] Execute reruns 01–08 on Kaggle
+- [x] Merge corrected rescue rows into the master CSV (872 of 1,104 values changed)
+- [x] Rescue cells pinned at the AUROC floor fell from 795 to 238
 
-### Priority 2: Re-run the statistics after the merge
-Rescue-side numbers depend on the Wiener rows, so every rescue statistic must be
-recomputed once Priority 1 lands. Augmentation-gain statistics do **not** depend on
-rescue rows and are already final.
+### Priority 2: Re-run the statistics after the merge ✅ DONE
+- [x] Regenerated [`statistical_validation.md`](statistical_validation.md)
+- [x] Regenerated [`per_corruption_tables.md`](per_corruption_tables.md) by script
+- [x] Updated rescue figures in `README.md`, `benchmark_report.md`,
+      `benchmark_results.md`, `paper_sections.md`
+- [ ] Re-run `notebooks/10_wilcoxon_testing.ipynb` to regenerate figures 04, 05, 07–09
 
-- [ ] `python scripts/analysis/cluster_robust_stats.py --out docs/statistical_validation.md --wiener "per-severity PSF (corrected)"`
-- [ ] Re-run `notebooks/10_wilcoxon_testing.ipynb` to regenerate figures 07–09
-- [ ] Regenerate figures 04 (rescue delta heatmap) and 05 (rescue success rates)
-- [ ] Update the rescue delta columns in `README.md`, `benchmark_report.md` and `per_corruption_tables.md`
-
-Expected direction: pooled rescue harm softens by roughly 1–4 pp per condition. The
-MVTec-AD conclusion is not expected to change; clean-trained VisA PaDiM is the one
-condition close enough to zero to warrant rechecking.
+**Outcome.** Pooled rescue harm softened by 1.4–3.2 pp per condition, as
+projected. All four MVTec-AD conditions remain significantly negative
+(−2.75 to −11.79 pp, $p \le 2.1\times10^{-3}$), as does clean-trained VisA
+PatchCore (−3.73 pp, $p = 4.9\times10^{-4}$). **Clean-trained VisA PaDiM moved to
+−0.61 pp at $p = 0.375$ and is no longer distinguishable from zero** — the one
+condition where the preprocessing fallacy does not hold, and it must not be
+claimed there.
 
 ### Priority 3: Statistical hygiene ✅ DONE
 - [x] **Cluster inference by category** — `scripts/analysis/cluster_robust_stats.py`, results in [`statistical_validation.md`](statistical_validation.md)

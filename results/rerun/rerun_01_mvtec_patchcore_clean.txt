@@ -1,0 +1,181 @@
+model,category,seed,phase,ctype,severity,rescue,image_AUROC
+PatchCore,bottle,42,rescue,gaussian_blur,mild,Wiener,0.9960317015647888
+PatchCore,bottle,42,rescue,gaussian_blur,moderate,Wiener,0.7714285850524902
+PatchCore,bottle,42,rescue,motion_blur,mild,Wiener (Motion PSF),0.8476190567016602
+PatchCore,bottle,42,rescue,motion_blur,moderate,Wiener (Motion PSF),0.6960317492485046
+PatchCore,bottle,123,rescue,gaussian_blur,mild,Wiener,0.9976189732551575
+PatchCore,bottle,123,rescue,gaussian_blur,moderate,Wiener,0.7873016595840454
+PatchCore,bottle,123,rescue,motion_blur,mild,Wiener (Motion PSF),0.8428571224212646
+PatchCore,bottle,123,rescue,motion_blur,moderate,Wiener (Motion PSF),0.6944444179534912
+PatchCore,bottle,456,rescue,gaussian_blur,mild,Wiener,0.9976189732551575
+PatchCore,bottle,456,rescue,gaussian_blur,moderate,Wiener,0.7817460894584656
+PatchCore,bottle,456,rescue,motion_blur,mild,Wiener (Motion PSF),0.8428571224212646
+PatchCore,bottle,456,rescue,motion_blur,moderate,Wiener (Motion PSF),0.6984127163887024
+PatchCore,cable,42,rescue,gaussian_blur,mild,Wiener,0.9497750997543335
+PatchCore,cable,42,rescue,gaussian_blur,moderate,Wiener,0.5030921697616577
+PatchCore,cable,42,rescue,motion_blur,mild,Wiener (Motion PSF),0.5762743949890137
+PatchCore,cable,42,rescue,motion_blur,moderate,Wiener (Motion PSF),0.5624063014984131
+PatchCore,cable,123,rescue,gaussian_blur,mild,Wiener,0.9473388195037842
+PatchCore,cable,123,rescue,gaussian_blur,moderate,Wiener,0.48725637793540955
+PatchCore,cable,123,rescue,motion_blur,mild,Wiener (Motion PSF),0.5888305902481079
+PatchCore,cable,123,rescue,motion_blur,moderate,Wiener (Motion PSF),0.5858320593833923
+PatchCore,cable,456,rescue,gaussian_blur,mild,Wiener,0.946401834487915
+PatchCore,cable,456,rescue,gaussian_blur,moderate,Wiener,0.5032795667648315
+PatchCore,cable,456,rescue,motion_blur,mild,Wiener (Motion PSF),0.5766491889953613
+PatchCore,cable,456,rescue,motion_blur,moderate,Wiener (Motion PSF),0.566154420375824
+PatchCore,capsule,42,rescue,gaussian_blur,mild,Wiener,0.7758276462554932
+PatchCore,capsule,42,rescue,gaussian_blur,moderate,Wiener,0.5
+PatchCore,capsule,42,rescue,motion_blur,mild,Wiener (Motion PSF),0.5
+PatchCore,capsule,42,rescue,motion_blur,moderate,Wiener (Motion PSF),0.5
+PatchCore,capsule,123,rescue,gaussian_blur,mild,Wiener,0.7850019931793213
+PatchCore,capsule,123,rescue,gaussian_blur,moderate,Wiener,0.5
+PatchCore,capsule,123,rescue,motion_blur,mild,Wiener (Motion PSF),0.5
+PatchCore,capsule,123,rescue,motion_blur,moderate,Wiener (Motion PSF),0.5
+PatchCore,capsule,456,rescue,gaussian_blur,mild,Wiener,0.7758277058601379
+PatchCore,capsule,456,rescue,gaussian_blur,moderate,Wiener,0.5
+PatchCore,capsule,456,rescue,motion_blur,mild,Wiener (Motion PSF),0.5
+PatchCore,capsule,456,rescue,motion_blur,moderate,Wiener (Motion PSF),0.5
+PatchCore,carpet,42,rescue,gaussian_blur,mild,Wiener,0.9823434948921204
+PatchCore,carpet,42,rescue,gaussian_blur,moderate,Wiener,0.49438202381134033
+PatchCore,carpet,42,rescue,motion_blur,mild,Wiener (Motion PSF),0.9442214965820312
+PatchCore,carpet,42,rescue,motion_blur,moderate,Wiener (Motion PSF),0.564606785774231
+PatchCore,carpet,123,rescue,gaussian_blur,mild,Wiener,0.9803370833396912
+PatchCore,carpet,123,rescue,gaussian_blur,moderate,Wiener,0.5
+PatchCore,carpet,123,rescue,motion_blur,mild,Wiener (Motion PSF),0.9430176019668579
+PatchCore,carpet,123,rescue,motion_blur,moderate,Wiener (Motion PSF),0.5521669387817383
+PatchCore,carpet,456,rescue,gaussian_blur,mild,Wiener,0.9855537414550781
+PatchCore,carpet,456,rescue,gaussian_blur,moderate,Wiener,0.49438202381134033
+PatchCore,carpet,456,rescue,motion_blur,mild,Wiener (Motion PSF),0.9438202381134033
+PatchCore,carpet,456,rescue,motion_blur,moderate,Wiener (Motion PSF),0.5537720918655396
+PatchCore,grid,42,rescue,gaussian_blur,mild,Wiener,0.6524645090103149
+PatchCore,grid,42,rescue,gaussian_blur,moderate,Wiener,0.5
+PatchCore,grid,42,rescue,motion_blur,mild,Wiener (Motion PSF),0.5062656402587891
+PatchCore,grid,42,rescue,motion_blur,moderate,Wiener (Motion PSF),0.523809552192688
+PatchCore,grid,123,rescue,gaussian_blur,mild,Wiener,0.6608186960220337
+PatchCore,grid,123,rescue,gaussian_blur,moderate,Wiener,0.5
+PatchCore,grid,123,rescue,motion_blur,mild,Wiener (Motion PSF),0.5146198868751526
+PatchCore,grid,123,rescue,motion_blur,moderate,Wiener (Motion PSF),0.523809552192688
+PatchCore,grid,456,rescue,gaussian_blur,mild,Wiener,0.6574770212173462
+PatchCore,grid,456,rescue,gaussian_blur,moderate,Wiener,0.5
+PatchCore,grid,456,rescue,motion_blur,mild,Wiener (Motion PSF),0.4979114532470703
+PatchCore,grid,456,rescue,motion_blur,moderate,Wiener (Motion PSF),0.5154553055763245
+PatchCore,hazelnut,42,rescue,gaussian_blur,mild,Wiener,0.9996428489685059
+PatchCore,hazelnut,42,rescue,gaussian_blur,moderate,Wiener,0.48250001668930054
+PatchCore,hazelnut,42,rescue,motion_blur,mild,Wiener (Motion PSF),0.662142813205719
+PatchCore,hazelnut,42,rescue,motion_blur,moderate,Wiener (Motion PSF),0.5903571248054504
+PatchCore,hazelnut,123,rescue,gaussian_blur,mild,Wiener,0.9992856979370117
+PatchCore,hazelnut,123,rescue,gaussian_blur,moderate,Wiener,0.5132142901420593
+PatchCore,hazelnut,123,rescue,motion_blur,mild,Wiener (Motion PSF),0.6610714197158813
+PatchCore,hazelnut,123,rescue,motion_blur,moderate,Wiener (Motion PSF),0.5900000333786011
+PatchCore,hazelnut,456,rescue,gaussian_blur,mild,Wiener,0.9989285469055176
+PatchCore,hazelnut,456,rescue,gaussian_blur,moderate,Wiener,0.4917857050895691
+PatchCore,hazelnut,456,rescue,motion_blur,mild,Wiener (Motion PSF),0.6603571772575378
+PatchCore,hazelnut,456,rescue,motion_blur,moderate,Wiener (Motion PSF),0.5753571391105652
+PatchCore,leather,42,rescue,gaussian_blur,mild,Wiener,1.0
+PatchCore,leather,42,rescue,gaussian_blur,moderate,Wiener,0.5
+PatchCore,leather,42,rescue,motion_blur,mild,Wiener (Motion PSF),0.9972826242446899
+PatchCore,leather,42,rescue,motion_blur,moderate,Wiener (Motion PSF),0.9273097515106201
+PatchCore,leather,123,rescue,gaussian_blur,mild,Wiener,1.0
+PatchCore,leather,123,rescue,gaussian_blur,moderate,Wiener,0.5
+PatchCore,leather,123,rescue,motion_blur,mild,Wiener (Motion PSF),0.9972826242446899
+PatchCore,leather,123,rescue,motion_blur,moderate,Wiener (Motion PSF),0.9296875596046448
+PatchCore,leather,456,rescue,gaussian_blur,mild,Wiener,1.0
+PatchCore,leather,456,rescue,gaussian_blur,moderate,Wiener,0.5
+PatchCore,leather,456,rescue,motion_blur,mild,Wiener (Motion PSF),0.9962636232376099
+PatchCore,leather,456,rescue,motion_blur,moderate,Wiener (Motion PSF),0.93138587474823
+PatchCore,metal_nut,42,rescue,gaussian_blur,mild,Wiener,0.9775171875953674
+PatchCore,metal_nut,42,rescue,gaussian_blur,moderate,Wiener,0.5
+PatchCore,metal_nut,42,rescue,motion_blur,mild,Wiener (Motion PSF),0.48924732208251953
+PatchCore,metal_nut,42,rescue,motion_blur,moderate,Wiener (Motion PSF),0.49462366104125977
+PatchCore,metal_nut,123,rescue,gaussian_blur,mild,Wiener,0.9696969985961914
+PatchCore,metal_nut,123,rescue,gaussian_blur,moderate,Wiener,0.5
+PatchCore,metal_nut,123,rescue,motion_blur,mild,Wiener (Motion PSF),0.5454545021057129
+PatchCore,metal_nut,123,rescue,motion_blur,moderate,Wiener (Motion PSF),0.49462366104125977
+PatchCore,metal_nut,456,rescue,gaussian_blur,mild,Wiener,0.9765396118164062
+PatchCore,metal_nut,456,rescue,gaussian_blur,moderate,Wiener,0.5
+PatchCore,metal_nut,456,rescue,motion_blur,mild,Wiener (Motion PSF),0.531280517578125
+PatchCore,metal_nut,456,rescue,motion_blur,moderate,Wiener (Motion PSF),0.46236559748649597
+PatchCore,pill,42,rescue,gaussian_blur,mild,Wiener,0.8472449779510498
+PatchCore,pill,42,rescue,gaussian_blur,moderate,Wiener,0.5
+PatchCore,pill,42,rescue,motion_blur,mild,Wiener (Motion PSF),0.5
+PatchCore,pill,42,rescue,motion_blur,moderate,Wiener (Motion PSF),0.5
+PatchCore,pill,123,rescue,gaussian_blur,mild,Wiener,0.8363338708877563
+PatchCore,pill,123,rescue,gaussian_blur,moderate,Wiener,0.5
+PatchCore,pill,123,rescue,motion_blur,mild,Wiener (Motion PSF),0.5
+PatchCore,pill,123,rescue,motion_blur,moderate,Wiener (Motion PSF),0.5
+PatchCore,pill,456,rescue,gaussian_blur,mild,Wiener,0.8379706144332886
+PatchCore,pill,456,rescue,gaussian_blur,moderate,Wiener,0.5
+PatchCore,pill,456,rescue,motion_blur,mild,Wiener (Motion PSF),0.5
+PatchCore,pill,456,rescue,motion_blur,moderate,Wiener (Motion PSF),0.5
+PatchCore,screw,42,rescue,gaussian_blur,mild,Wiener,0.6122156381607056
+PatchCore,screw,42,rescue,gaussian_blur,moderate,Wiener,0.5
+PatchCore,screw,42,rescue,motion_blur,mild,Wiener (Motion PSF),0.5
+PatchCore,screw,42,rescue,motion_blur,moderate,Wiener (Motion PSF),0.5
+PatchCore,screw,123,rescue,gaussian_blur,mild,Wiener,0.6143677234649658
+PatchCore,screw,123,rescue,gaussian_blur,moderate,Wiener,0.5
+PatchCore,screw,123,rescue,motion_blur,mild,Wiener (Motion PSF),0.5
+PatchCore,screw,123,rescue,motion_blur,moderate,Wiener (Motion PSF),0.5
+PatchCore,screw,456,rescue,gaussian_blur,mild,Wiener,0.6167247891426086
+PatchCore,screw,456,rescue,gaussian_blur,moderate,Wiener,0.5
+PatchCore,screw,456,rescue,motion_blur,mild,Wiener (Motion PSF),0.5
+PatchCore,screw,456,rescue,motion_blur,moderate,Wiener (Motion PSF),0.5
+PatchCore,tile,42,rescue,gaussian_blur,mild,Wiener,0.8737373948097229
+PatchCore,tile,42,rescue,gaussian_blur,moderate,Wiener,0.5
+PatchCore,tile,42,rescue,motion_blur,mild,Wiener (Motion PSF),0.7774170637130737
+PatchCore,tile,42,rescue,motion_blur,moderate,Wiener (Motion PSF),0.7368326187133789
+PatchCore,tile,123,rescue,gaussian_blur,mild,Wiener,0.8766233921051025
+PatchCore,tile,123,rescue,gaussian_blur,moderate,Wiener,0.5
+PatchCore,tile,123,rescue,motion_blur,mild,Wiener (Motion PSF),0.7896825075149536
+PatchCore,tile,123,rescue,motion_blur,moderate,Wiener (Motion PSF),0.7258297204971313
+PatchCore,tile,456,rescue,gaussian_blur,mild,Wiener,0.8766233921051025
+PatchCore,tile,456,rescue,gaussian_blur,moderate,Wiener,0.5
+PatchCore,tile,456,rescue,motion_blur,mild,Wiener (Motion PSF),0.7370129823684692
+PatchCore,tile,456,rescue,motion_blur,moderate,Wiener (Motion PSF),0.744949460029602
+PatchCore,toothbrush,42,rescue,gaussian_blur,mild,Wiener,0.7861111164093018
+PatchCore,toothbrush,42,rescue,gaussian_blur,moderate,Wiener,0.5
+PatchCore,toothbrush,42,rescue,motion_blur,mild,Wiener (Motion PSF),0.4833333194255829
+PatchCore,toothbrush,42,rescue,motion_blur,moderate,Wiener (Motion PSF),0.5416666269302368
+PatchCore,toothbrush,123,rescue,gaussian_blur,mild,Wiener,0.7805555462837219
+PatchCore,toothbrush,123,rescue,gaussian_blur,moderate,Wiener,0.5
+PatchCore,toothbrush,123,rescue,motion_blur,mild,Wiener (Motion PSF),0.5
+PatchCore,toothbrush,123,rescue,motion_blur,moderate,Wiener (Motion PSF),0.5
+PatchCore,toothbrush,456,rescue,gaussian_blur,mild,Wiener,0.7583333253860474
+PatchCore,toothbrush,456,rescue,gaussian_blur,moderate,Wiener,0.5
+PatchCore,toothbrush,456,rescue,motion_blur,mild,Wiener (Motion PSF),0.4833333194255829
+PatchCore,toothbrush,456,rescue,motion_blur,moderate,Wiener (Motion PSF),0.5416666269302368
+PatchCore,transistor,42,rescue,gaussian_blur,mild,Wiener,0.8920833468437195
+PatchCore,transistor,42,rescue,gaussian_blur,moderate,Wiener,0.5
+PatchCore,transistor,42,rescue,motion_blur,mild,Wiener (Motion PSF),0.5741666555404663
+PatchCore,transistor,42,rescue,motion_blur,moderate,Wiener (Motion PSF),0.4749999940395355
+PatchCore,transistor,123,rescue,gaussian_blur,mild,Wiener,0.8916666507720947
+PatchCore,transistor,123,rescue,gaussian_blur,moderate,Wiener,0.5
+PatchCore,transistor,123,rescue,motion_blur,mild,Wiener (Motion PSF),0.57791668176651
+PatchCore,transistor,123,rescue,motion_blur,moderate,Wiener (Motion PSF),0.4829166531562805
+PatchCore,transistor,456,rescue,gaussian_blur,mild,Wiener,0.8841666579246521
+PatchCore,transistor,456,rescue,gaussian_blur,moderate,Wiener,0.5
+PatchCore,transistor,456,rescue,motion_blur,mild,Wiener (Motion PSF),0.5799999833106995
+PatchCore,transistor,456,rescue,motion_blur,moderate,Wiener (Motion PSF),0.4829166531562805
+PatchCore,wood,42,rescue,gaussian_blur,mild,Wiener,0.9754385948181152
+PatchCore,wood,42,rescue,gaussian_blur,moderate,Wiener,0.49166667461395264
+PatchCore,wood,42,rescue,motion_blur,mild,Wiener (Motion PSF),0.9745614528656006
+PatchCore,wood,42,rescue,motion_blur,moderate,Wiener (Motion PSF),0.9149122834205627
+PatchCore,wood,123,rescue,gaussian_blur,mild,Wiener,0.9736841917037964
+PatchCore,wood,123,rescue,gaussian_blur,moderate,Wiener,0.5
+PatchCore,wood,123,rescue,motion_blur,mild,Wiener (Motion PSF),0.9736841917037964
+PatchCore,wood,123,rescue,motion_blur,moderate,Wiener (Motion PSF),0.9175438284873962
+PatchCore,wood,456,rescue,gaussian_blur,mild,Wiener,0.97543865442276
+PatchCore,wood,456,rescue,gaussian_blur,moderate,Wiener,0.49166667461395264
+PatchCore,wood,456,rescue,motion_blur,mild,Wiener (Motion PSF),0.9719297885894775
+PatchCore,wood,456,rescue,motion_blur,moderate,Wiener (Motion PSF),0.917543888092041
+PatchCore,zipper,42,rescue,gaussian_blur,mild,Wiener,0.9104516506195068
+PatchCore,zipper,42,rescue,gaussian_blur,moderate,Wiener,0.5
+PatchCore,zipper,42,rescue,motion_blur,mild,Wiener (Motion PSF),0.754989504814148
+PatchCore,zipper,42,rescue,motion_blur,moderate,Wiener (Motion PSF),0.8642331957817078
+PatchCore,zipper,123,rescue,gaussian_blur,mild,Wiener,0.918067216873169
+PatchCore,zipper,123,rescue,gaussian_blur,moderate,Wiener,0.5
+PatchCore,zipper,123,rescue,motion_blur,mild,Wiener (Motion PSF),0.763130247592926
+PatchCore,zipper,123,rescue,motion_blur,moderate,Wiener (Motion PSF),0.8629201650619507
+PatchCore,zipper,456,rescue,gaussian_blur,mild,Wiener,0.9073004126548767
+PatchCore,zipper,456,rescue,gaussian_blur,moderate,Wiener,0.5
+PatchCore,zipper,456,rescue,motion_blur,mild,Wiener (Motion PSF),0.7673318982124329
+PatchCore,zipper,456,rescue,motion_blur,moderate,Wiener (Motion PSF),0.8592436909675598

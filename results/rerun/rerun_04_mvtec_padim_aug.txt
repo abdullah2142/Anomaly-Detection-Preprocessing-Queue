@@ -1,0 +1,181 @@
+model,category,seed,phase,ctype,severity,rescue,image_AUROC
+PaDiM,bottle,42,rescue,gaussian_blur,mild,Wiener,0.9365079402923584
+PaDiM,bottle,42,rescue,gaussian_blur,moderate,Wiener,0.8158730268478394
+PaDiM,bottle,42,rescue,motion_blur,mild,Wiener (Motion PSF),0.8134920597076416
+PaDiM,bottle,42,rescue,motion_blur,moderate,Wiener (Motion PSF),0.238095223903656
+PaDiM,bottle,123,rescue,gaussian_blur,mild,Wiener,0.9746031761169434
+PaDiM,bottle,123,rescue,gaussian_blur,moderate,Wiener,0.5
+PaDiM,bottle,123,rescue,motion_blur,mild,Wiener (Motion PSF),0.7079365253448486
+PaDiM,bottle,123,rescue,motion_blur,moderate,Wiener (Motion PSF),0.44999998807907104
+PaDiM,bottle,456,rescue,gaussian_blur,mild,Wiener,1.0
+PaDiM,bottle,456,rescue,gaussian_blur,moderate,Wiener,0.6428571343421936
+PaDiM,bottle,456,rescue,motion_blur,mild,Wiener (Motion PSF),0.7658730149269104
+PaDiM,bottle,456,rescue,motion_blur,moderate,Wiener (Motion PSF),0.2916666865348816
+PaDiM,cable,42,rescue,gaussian_blur,mild,Wiener,0.6639804840087891
+PaDiM,cable,42,rescue,gaussian_blur,moderate,Wiener,0.5186468958854675
+PaDiM,cable,42,rescue,motion_blur,mild,Wiener (Motion PSF),0.5106821060180664
+PaDiM,cable,42,rescue,motion_blur,moderate,Wiener (Motion PSF),0.4730134904384613
+PaDiM,cable,123,rescue,gaussian_blur,mild,Wiener,0.6915292143821716
+PaDiM,cable,123,rescue,gaussian_blur,moderate,Wiener,0.5
+PaDiM,cable,123,rescue,motion_blur,mild,Wiener (Motion PSF),0.45558470487594604
+PaDiM,cable,123,rescue,motion_blur,moderate,Wiener (Motion PSF),0.4923163652420044
+PaDiM,cable,456,rescue,gaussian_blur,mild,Wiener,0.492316335439682
+PaDiM,cable,456,rescue,gaussian_blur,moderate,Wiener,0.4651423990726471
+PaDiM,cable,456,rescue,motion_blur,mild,Wiener (Motion PSF),0.4490255117416382
+PaDiM,cable,456,rescue,motion_blur,moderate,Wiener (Motion PSF),0.5305472612380981
+PaDiM,capsule,42,rescue,gaussian_blur,mild,Wiener,0.5783805847167969
+PaDiM,capsule,42,rescue,gaussian_blur,moderate,Wiener,0.5
+PaDiM,capsule,42,rescue,motion_blur,mild,Wiener (Motion PSF),0.5819705128669739
+PaDiM,capsule,42,rescue,motion_blur,moderate,Wiener (Motion PSF),0.4954128563404083
+PaDiM,capsule,123,rescue,gaussian_blur,mild,Wiener,0.6035101413726807
+PaDiM,capsule,123,rescue,gaussian_blur,moderate,Wiener,0.5
+PaDiM,capsule,123,rescue,motion_blur,mild,Wiener (Motion PSF),0.6673314571380615
+PaDiM,capsule,123,rescue,motion_blur,moderate,Wiener (Motion PSF),0.4986039102077484
+PaDiM,capsule,456,rescue,gaussian_blur,mild,Wiener,0.6537694334983826
+PaDiM,capsule,456,rescue,gaussian_blur,moderate,Wiener,0.5025927424430847
+PaDiM,capsule,456,rescue,motion_blur,mild,Wiener (Motion PSF),0.5588352680206299
+PaDiM,capsule,456,rescue,motion_blur,moderate,Wiener (Motion PSF),0.6816912889480591
+PaDiM,carpet,42,rescue,gaussian_blur,mild,Wiener,0.882022500038147
+PaDiM,carpet,42,rescue,gaussian_blur,moderate,Wiener,0.5196629762649536
+PaDiM,carpet,42,rescue,motion_blur,mild,Wiener (Motion PSF),0.8033708333969116
+PaDiM,carpet,42,rescue,motion_blur,moderate,Wiener (Motion PSF),0.6560995578765869
+PaDiM,carpet,123,rescue,gaussian_blur,mild,Wiener,0.9530497789382935
+PaDiM,carpet,123,rescue,gaussian_blur,moderate,Wiener,0.5104333758354187
+PaDiM,carpet,123,rescue,motion_blur,mild,Wiener (Motion PSF),0.9570626020431519
+PaDiM,carpet,123,rescue,motion_blur,moderate,Wiener (Motion PSF),0.6119582653045654
+PaDiM,carpet,456,rescue,gaussian_blur,mild,Wiener,0.9337880611419678
+PaDiM,carpet,456,rescue,gaussian_blur,moderate,Wiener,0.5509630441665649
+PaDiM,carpet,456,rescue,motion_blur,mild,Wiener (Motion PSF),0.9237560033798218
+PaDiM,carpet,456,rescue,motion_blur,moderate,Wiener (Motion PSF),0.4638844132423401
+PaDiM,grid,42,rescue,gaussian_blur,mild,Wiener,0.5350877046585083
+PaDiM,grid,42,rescue,gaussian_blur,moderate,Wiener,0.43024230003356934
+PaDiM,grid,42,rescue,motion_blur,mild,Wiener (Motion PSF),0.611528754234314
+PaDiM,grid,42,rescue,motion_blur,moderate,Wiener (Motion PSF),0.61654132604599
+PaDiM,grid,123,rescue,gaussian_blur,mild,Wiener,0.6157059669494629
+PaDiM,grid,123,rescue,gaussian_blur,moderate,Wiener,0.5
+PaDiM,grid,123,rescue,motion_blur,mild,Wiener (Motion PSF),0.5563910007476807
+PaDiM,grid,123,rescue,motion_blur,moderate,Wiener (Motion PSF),0.6908938884735107
+PaDiM,grid,456,rescue,gaussian_blur,mild,Wiener,0.5162907242774963
+PaDiM,grid,456,rescue,gaussian_blur,moderate,Wiener,0.5
+PaDiM,grid,456,rescue,motion_blur,mild,Wiener (Motion PSF),0.6240601539611816
+PaDiM,grid,456,rescue,motion_blur,moderate,Wiener (Motion PSF),0.5756056308746338
+PaDiM,hazelnut,42,rescue,gaussian_blur,mild,Wiener,0.46642857789993286
+PaDiM,hazelnut,42,rescue,gaussian_blur,moderate,Wiener,0.5532143115997314
+PaDiM,hazelnut,42,rescue,motion_blur,mild,Wiener (Motion PSF),0.4808928668498993
+PaDiM,hazelnut,42,rescue,motion_blur,moderate,Wiener (Motion PSF),0.5710713863372803
+PaDiM,hazelnut,123,rescue,gaussian_blur,mild,Wiener,0.5635714530944824
+PaDiM,hazelnut,123,rescue,gaussian_blur,moderate,Wiener,0.5425000190734863
+PaDiM,hazelnut,123,rescue,motion_blur,mild,Wiener (Motion PSF),0.7339285612106323
+PaDiM,hazelnut,123,rescue,motion_blur,moderate,Wiener (Motion PSF),0.5864285826683044
+PaDiM,hazelnut,456,rescue,gaussian_blur,mild,Wiener,0.476250022649765
+PaDiM,hazelnut,456,rescue,gaussian_blur,moderate,Wiener,0.550000011920929
+PaDiM,hazelnut,456,rescue,motion_blur,mild,Wiener (Motion PSF),0.49392858147621155
+PaDiM,hazelnut,456,rescue,motion_blur,moderate,Wiener (Motion PSF),0.5146428346633911
+PaDiM,leather,42,rescue,gaussian_blur,mild,Wiener,0.9133831262588501
+PaDiM,leather,42,rescue,gaussian_blur,moderate,Wiener,0.5224184989929199
+PaDiM,leather,42,rescue,motion_blur,mild,Wiener (Motion PSF),0.9181386232376099
+PaDiM,leather,42,rescue,motion_blur,moderate,Wiener (Motion PSF),0.9147418737411499
+PaDiM,leather,123,rescue,gaussian_blur,mild,Wiener,0.99558424949646
+PaDiM,leather,123,rescue,gaussian_blur,moderate,Wiener,0.48556387424468994
+PaDiM,leather,123,rescue,motion_blur,mild,Wiener (Motion PSF),0.9758831858634949
+PaDiM,leather,123,rescue,motion_blur,moderate,Wiener (Motion PSF),0.79076087474823
+PaDiM,leather,456,rescue,gaussian_blur,mild,Wiener,0.8243886232376099
+PaDiM,leather,456,rescue,gaussian_blur,moderate,Wiener,0.6569293737411499
+PaDiM,leather,456,rescue,motion_blur,mild,Wiener (Motion PSF),0.90455162525177
+PaDiM,leather,456,rescue,motion_blur,moderate,Wiener (Motion PSF),0.792119562625885
+PaDiM,metal_nut,42,rescue,gaussian_blur,mild,Wiener,0.7126100063323975
+PaDiM,metal_nut,42,rescue,gaussian_blur,moderate,Wiener,0.5615835785865784
+PaDiM,metal_nut,42,rescue,motion_blur,mild,Wiener (Motion PSF),0.5161290168762207
+PaDiM,metal_nut,42,rescue,motion_blur,moderate,Wiener (Motion PSF),0.49217984080314636
+PaDiM,metal_nut,123,rescue,gaussian_blur,mild,Wiener,0.619012713432312
+PaDiM,metal_nut,123,rescue,gaussian_blur,moderate,Wiener,0.49462366104125977
+PaDiM,metal_nut,123,rescue,motion_blur,mild,Wiener (Motion PSF),0.6168133020401001
+PaDiM,metal_nut,123,rescue,motion_blur,moderate,Wiener (Motion PSF),0.5742912888526917
+PaDiM,metal_nut,456,rescue,gaussian_blur,mild,Wiener,0.6994134783744812
+PaDiM,metal_nut,456,rescue,gaussian_blur,moderate,Wiener,0.582844614982605
+PaDiM,metal_nut,456,rescue,motion_blur,mild,Wiener (Motion PSF),0.5874877572059631
+PaDiM,metal_nut,456,rescue,motion_blur,moderate,Wiener (Motion PSF),0.5122189521789551
+PaDiM,pill,42,rescue,gaussian_blur,mild,Wiener,0.6688488721847534
+PaDiM,pill,42,rescue,gaussian_blur,moderate,Wiener,0.515821099281311
+PaDiM,pill,42,rescue,motion_blur,mild,Wiener (Motion PSF),0.40452808141708374
+PaDiM,pill,42,rescue,motion_blur,moderate,Wiener (Motion PSF),0.4566284716129303
+PaDiM,pill,123,rescue,gaussian_blur,mild,Wiener,0.6767594218254089
+PaDiM,pill,123,rescue,gaussian_blur,moderate,Wiener,0.5
+PaDiM,pill,123,rescue,motion_blur,mild,Wiener (Motion PSF),0.4929077923297882
+PaDiM,pill,123,rescue,motion_blur,moderate,Wiener (Motion PSF),0.4929077923297882
+PaDiM,pill,456,rescue,gaussian_blur,mild,Wiener,0.6440261602401733
+PaDiM,pill,456,rescue,gaussian_blur,moderate,Wiener,0.4931805729866028
+PaDiM,pill,456,rescue,motion_blur,mild,Wiener (Motion PSF),0.5024549961090088
+PaDiM,pill,456,rescue,motion_blur,moderate,Wiener (Motion PSF),0.4819967448711395
+PaDiM,screw,42,rescue,gaussian_blur,mild,Wiener,0.5975610017776489
+PaDiM,screw,42,rescue,gaussian_blur,moderate,Wiener,0.5
+PaDiM,screw,42,rescue,motion_blur,mild,Wiener (Motion PSF),0.5458086133003235
+PaDiM,screw,42,rescue,motion_blur,moderate,Wiener (Motion PSF),0.5322811603546143
+PaDiM,screw,123,rescue,gaussian_blur,mild,Wiener,0.5587210655212402
+PaDiM,screw,123,rescue,gaussian_blur,moderate,Wiener,0.5
+PaDiM,screw,123,rescue,motion_blur,mild,Wiener (Motion PSF),0.6149826049804688
+PaDiM,screw,123,rescue,motion_blur,moderate,Wiener (Motion PSF),0.6636605858802795
+PaDiM,screw,456,rescue,gaussian_blur,mild,Wiener,0.5742980241775513
+PaDiM,screw,456,rescue,gaussian_blur,moderate,Wiener,0.5
+PaDiM,screw,456,rescue,motion_blur,mild,Wiener (Motion PSF),0.592334508895874
+PaDiM,screw,456,rescue,motion_blur,moderate,Wiener (Motion PSF),0.5365853309631348
+PaDiM,tile,42,rescue,gaussian_blur,mild,Wiener,0.7128427028656006
+PaDiM,tile,42,rescue,gaussian_blur,moderate,Wiener,0.5685425400733948
+PaDiM,tile,42,rescue,motion_blur,mild,Wiener (Motion PSF),0.8636363744735718
+PaDiM,tile,42,rescue,motion_blur,moderate,Wiener (Motion PSF),0.616161584854126
+PaDiM,tile,123,rescue,gaussian_blur,mild,Wiener,0.6695526242256165
+PaDiM,tile,123,rescue,gaussian_blur,moderate,Wiener,0.4285714030265808
+PaDiM,tile,123,rescue,motion_blur,mild,Wiener (Motion PSF),0.8611111640930176
+PaDiM,tile,123,rescue,motion_blur,moderate,Wiener (Motion PSF),0.6085858345031738
+PaDiM,tile,456,rescue,gaussian_blur,mild,Wiener,0.6702741384506226
+PaDiM,tile,456,rescue,gaussian_blur,moderate,Wiener,0.5465368032455444
+PaDiM,tile,456,rescue,motion_blur,mild,Wiener (Motion PSF),0.6632394790649414
+PaDiM,tile,456,rescue,motion_blur,moderate,Wiener (Motion PSF),0.6237373352050781
+PaDiM,toothbrush,42,rescue,gaussian_blur,mild,Wiener,0.5
+PaDiM,toothbrush,42,rescue,gaussian_blur,moderate,Wiener,0.5
+PaDiM,toothbrush,42,rescue,motion_blur,mild,Wiener (Motion PSF),0.7277777791023254
+PaDiM,toothbrush,42,rescue,motion_blur,moderate,Wiener (Motion PSF),0.6166666746139526
+PaDiM,toothbrush,123,rescue,gaussian_blur,mild,Wiener,0.46666666865348816
+PaDiM,toothbrush,123,rescue,gaussian_blur,moderate,Wiener,0.5
+PaDiM,toothbrush,123,rescue,motion_blur,mild,Wiener (Motion PSF),0.5916666984558105
+PaDiM,toothbrush,123,rescue,motion_blur,moderate,Wiener (Motion PSF),0.6305555105209351
+PaDiM,toothbrush,456,rescue,gaussian_blur,mild,Wiener,0.5
+PaDiM,toothbrush,456,rescue,gaussian_blur,moderate,Wiener,0.5
+PaDiM,toothbrush,456,rescue,motion_blur,mild,Wiener (Motion PSF),0.6333333253860474
+PaDiM,toothbrush,456,rescue,motion_blur,moderate,Wiener (Motion PSF),0.6291667222976685
+PaDiM,transistor,42,rescue,gaussian_blur,mild,Wiener,0.6262500286102295
+PaDiM,transistor,42,rescue,gaussian_blur,moderate,Wiener,0.48750001192092896
+PaDiM,transistor,42,rescue,motion_blur,mild,Wiener (Motion PSF),0.7775000333786011
+PaDiM,transistor,42,rescue,motion_blur,moderate,Wiener (Motion PSF),0.5687500238418579
+PaDiM,transistor,123,rescue,gaussian_blur,mild,Wiener,0.6504167318344116
+PaDiM,transistor,123,rescue,gaussian_blur,moderate,Wiener,0.5349999666213989
+PaDiM,transistor,123,rescue,motion_blur,mild,Wiener (Motion PSF),0.7849999666213989
+PaDiM,transistor,123,rescue,motion_blur,moderate,Wiener (Motion PSF),0.7083333730697632
+PaDiM,transistor,456,rescue,gaussian_blur,mild,Wiener,0.5924999713897705
+PaDiM,transistor,456,rescue,gaussian_blur,moderate,Wiener,0.6120833158493042
+PaDiM,transistor,456,rescue,motion_blur,mild,Wiener (Motion PSF),0.7599999904632568
+PaDiM,transistor,456,rescue,motion_blur,moderate,Wiener (Motion PSF),0.5672916769981384
+PaDiM,wood,42,rescue,gaussian_blur,mild,Wiener,0.9403508901596069
+PaDiM,wood,42,rescue,gaussian_blur,moderate,Wiener,0.536403477191925
+PaDiM,wood,42,rescue,motion_blur,mild,Wiener (Motion PSF),0.936842143535614
+PaDiM,wood,42,rescue,motion_blur,moderate,Wiener (Motion PSF),0.9631578922271729
+PaDiM,wood,123,rescue,gaussian_blur,mild,Wiener,0.9166666269302368
+PaDiM,wood,123,rescue,gaussian_blur,moderate,Wiener,0.8184210062026978
+PaDiM,wood,123,rescue,motion_blur,mild,Wiener (Motion PSF),0.9508771896362305
+PaDiM,wood,123,rescue,motion_blur,moderate,Wiener (Motion PSF),0.7973684072494507
+PaDiM,wood,456,rescue,gaussian_blur,mild,Wiener,0.6885964870452881
+PaDiM,wood,456,rescue,gaussian_blur,moderate,Wiener,0.7315789461135864
+PaDiM,wood,456,rescue,motion_blur,mild,Wiener (Motion PSF),0.9184210300445557
+PaDiM,wood,456,rescue,motion_blur,moderate,Wiener (Motion PSF),0.7491227388381958
+PaDiM,zipper,42,rescue,gaussian_blur,mild,Wiener,0.661239504814148
+PaDiM,zipper,42,rescue,gaussian_blur,moderate,Wiener,0.5136554837226868
+PaDiM,zipper,42,rescue,motion_blur,mild,Wiener (Motion PSF),0.7455357313156128
+PaDiM,zipper,42,rescue,motion_blur,moderate,Wiener (Motion PSF),0.8395482897758484
+PaDiM,zipper,123,rescue,gaussian_blur,mild,Wiener,0.7316176891326904
+PaDiM,zipper,123,rescue,gaussian_blur,moderate,Wiener,0.723739504814148
+PaDiM,zipper,123,rescue,motion_blur,mild,Wiener (Motion PSF),0.5349264740943909
+PaDiM,zipper,123,rescue,motion_blur,moderate,Wiener (Motion PSF),0.5940126180648804
+PaDiM,zipper,456,rescue,gaussian_blur,mild,Wiener,0.7507878541946411
+PaDiM,zipper,456,rescue,gaussian_blur,moderate,Wiener,0.4831932783126831
+PaDiM,zipper,456,rescue,motion_blur,mild,Wiener (Motion PSF),0.8266806602478027
+PaDiM,zipper,456,rescue,motion_blur,moderate,Wiener (Motion PSF),0.8054096102714539

@@ -1,0 +1,49 @@
+model,dataset,category,seed,phase,ctype,severity,rescue,image_AUROC
+PaDiM,VisA,candle,42,rescue,gaussian_blur,mild,Wiener,0.5861499905586243
+PaDiM,VisA,candle,42,rescue,gaussian_blur,moderate,Wiener,0.5
+PaDiM,VisA,candle,42,rescue,motion_blur,mild,Wiener (Motion PSF),0.5
+PaDiM,VisA,candle,42,rescue,motion_blur,moderate,Wiener (Motion PSF),0.5
+PaDiM,VisA,candle,123,rescue,gaussian_blur,mild,Wiener,0.5407000184059143
+PaDiM,VisA,candle,123,rescue,gaussian_blur,moderate,Wiener,0.5
+PaDiM,VisA,candle,123,rescue,motion_blur,mild,Wiener (Motion PSF),0.5130249857902527
+PaDiM,VisA,candle,123,rescue,motion_blur,moderate,Wiener (Motion PSF),0.5377749800682068
+PaDiM,VisA,candle,456,rescue,gaussian_blur,mild,Wiener,0.3826499879360199
+PaDiM,VisA,candle,456,rescue,gaussian_blur,moderate,Wiener,0.4924500286579132
+PaDiM,VisA,candle,456,rescue,motion_blur,mild,Wiener (Motion PSF),0.6772500276565552
+PaDiM,VisA,candle,456,rescue,motion_blur,moderate,Wiener (Motion PSF),0.5
+PaDiM,VisA,pcb1,42,rescue,gaussian_blur,mild,Wiener,0.4804999828338623
+PaDiM,VisA,pcb1,42,rescue,gaussian_blur,moderate,Wiener,0.5000500082969666
+PaDiM,VisA,pcb1,42,rescue,motion_blur,mild,Wiener (Motion PSF),0.637374997138977
+PaDiM,VisA,pcb1,42,rescue,motion_blur,moderate,Wiener (Motion PSF),0.6501500010490417
+PaDiM,VisA,pcb1,123,rescue,gaussian_blur,mild,Wiener,0.5538250207901001
+PaDiM,VisA,pcb1,123,rescue,gaussian_blur,moderate,Wiener,0.47974997758865356
+PaDiM,VisA,pcb1,123,rescue,motion_blur,mild,Wiener (Motion PSF),0.6908999681472778
+PaDiM,VisA,pcb1,123,rescue,motion_blur,moderate,Wiener (Motion PSF),0.466949999332428
+PaDiM,VisA,pcb1,456,rescue,gaussian_blur,mild,Wiener,0.5565000176429749
+PaDiM,VisA,pcb1,456,rescue,gaussian_blur,moderate,Wiener,0.48192501068115234
+PaDiM,VisA,pcb1,456,rescue,motion_blur,mild,Wiener (Motion PSF),0.5613500475883484
+PaDiM,VisA,pcb1,456,rescue,motion_blur,moderate,Wiener (Motion PSF),0.45237502455711365
+PaDiM,VisA,cashew,42,rescue,gaussian_blur,mild,Wiener,0.6654000282287598
+PaDiM,VisA,cashew,42,rescue,gaussian_blur,moderate,Wiener,0.5497499704360962
+PaDiM,VisA,cashew,42,rescue,motion_blur,mild,Wiener (Motion PSF),0.7170000076293945
+PaDiM,VisA,cashew,42,rescue,motion_blur,moderate,Wiener (Motion PSF),0.5309000015258789
+PaDiM,VisA,cashew,123,rescue,gaussian_blur,mild,Wiener,0.6902499794960022
+PaDiM,VisA,cashew,123,rescue,gaussian_blur,moderate,Wiener,0.4783000349998474
+PaDiM,VisA,cashew,123,rescue,motion_blur,mild,Wiener (Motion PSF),0.6865000128746033
+PaDiM,VisA,cashew,123,rescue,motion_blur,moderate,Wiener (Motion PSF),0.5324000120162964
+PaDiM,VisA,cashew,456,rescue,gaussian_blur,mild,Wiener,0.7210999727249146
+PaDiM,VisA,cashew,456,rescue,gaussian_blur,moderate,Wiener,0.5033499598503113
+PaDiM,VisA,cashew,456,rescue,motion_blur,mild,Wiener (Motion PSF),0.6771000027656555
+PaDiM,VisA,cashew,456,rescue,motion_blur,moderate,Wiener (Motion PSF),0.6333000063896179
+PaDiM,VisA,pipe_fryum,42,rescue,gaussian_blur,mild,Wiener,0.7687000036239624
+PaDiM,VisA,pipe_fryum,42,rescue,gaussian_blur,moderate,Wiener,0.5577000379562378
+PaDiM,VisA,pipe_fryum,42,rescue,motion_blur,mild,Wiener (Motion PSF),0.6512999534606934
+PaDiM,VisA,pipe_fryum,42,rescue,motion_blur,moderate,Wiener (Motion PSF),0.7360000014305115
+PaDiM,VisA,pipe_fryum,123,rescue,gaussian_blur,mild,Wiener,0.7689000368118286
+PaDiM,VisA,pipe_fryum,123,rescue,gaussian_blur,moderate,Wiener,0.5
+PaDiM,VisA,pipe_fryum,123,rescue,motion_blur,mild,Wiener (Motion PSF),0.6712999939918518
+PaDiM,VisA,pipe_fryum,123,rescue,motion_blur,moderate,Wiener (Motion PSF),0.4491000175476074
+PaDiM,VisA,pipe_fryum,456,rescue,gaussian_blur,mild,Wiener,0.7854999899864197
+PaDiM,VisA,pipe_fryum,456,rescue,gaussian_blur,moderate,Wiener,0.4791000485420227
+PaDiM,VisA,pipe_fryum,456,rescue,motion_blur,mild,Wiener (Motion PSF),0.6854000091552734
+PaDiM,VisA,pipe_fryum,456,rescue,motion_blur,moderate,Wiener (Motion PSF),0.6776000261306763

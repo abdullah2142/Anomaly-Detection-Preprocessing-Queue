@@ -15,7 +15,7 @@ A: It is obvious in retrospect, but it is not the current assumption in industri
 
 **Q: You show rescue is harmful on average. But in 35% of cases it helps for PaDiM. Isn't that significant?**
 
-A: 35% is the best-case condition (PaDiM, clean training). The mean delta is still −0.046, meaning the expected value of applying rescue is a net loss even in this best case. More importantly, there is no reliable way to predict in advance which specific (category, corruption type, severity) combinations will benefit — the effect is not systematic enough to be actionable. CLAHE on PatchCore/low-light/severe is the only consistently positive rescue across seeds, and it provides only +3.5 pp — while the same method applied to PaDiM causes −0.7 pp. A practitioner cannot safely apply CLAHE without knowing which model they are running.
+A: 38% is the best-case condition (PaDiM, clean training). The mean delta is still −0.028, meaning the expected value of applying rescue is a net loss even in this best case. More importantly, there is no reliable way to predict in advance which specific (category, corruption type, severity) combinations will benefit — the effect is not systematic enough to be actionable. CLAHE on PatchCore/low-light/severe is the only consistently positive rescue across seeds, and it provides only +3.5 pp — while the same method applied to PaDiM causes −0.7 pp. A practitioner cannot safely apply CLAHE without knowing which model they are running.
 
 ---
 
@@ -41,7 +41,7 @@ A: MVTec-AD's lab conditions are a feature, not a limitation, for this specific 
 
 **Q: You use 3 seeds. Is that statistically sufficient?**
 
-A: With 15 categories × 3 seeds = 45 data points per condition and effect sizes of 10–12 pp for augmented training, the signal is unambiguous without significance testing. For the rescue results (mean delta −0.046 to −0.149), the consistency across the 810 instances per condition (65–81% harmful; effective N 645–806 after zero differences are dropped) is the primary evidence of reliability rather than the mean alone. Significance is computed **clustered by category** — an exact two-sided permutation test over the 15 category means — because the 45 cells per category are not independent. All four conditions remain significant ($p \le 2.4\times10^{-4}$), confirming the findings are not an artifact of random seed variation. We report the clustered result rather than the cell-level one precisely because the latter overstates significance by roughly 65 orders of magnitude.
+A: With 15 categories × 3 seeds = 45 data points per condition and effect sizes of 10–12 pp for augmented training, the signal is unambiguous without significance testing. For the rescue results (mean delta −0.028 to −0.118), the consistency across the 810 instances per condition (52–78% harmful; effective N 661–806 after zero differences are dropped) is the primary evidence of reliability rather than the mean alone. Significance is computed **clustered by category** — an exact two-sided permutation test over the 15 category means — because the 45 cells per category are not independent. All four MVTec-AD conditions remain significant ($p \le 2.1\times10^{-3}$), confirming the findings are not an artifact of random seed variation. We report the clustered result rather than the cell-level one precisely because the latter overstates significance by roughly 65 orders of magnitude.
 
 ---
 
@@ -83,7 +83,7 @@ A: Both statements are true simultaneously. At severe corruption, clean-trained 
 
 **Q: Would these results hold on VisA or other datasets?**
 
-A: Yes, we ran the pipeline on VisA. While the mechanistic explanations (PSF-mismatch ringing harms coreset matching; augmented training recalibrates the normal distribution) are inherently not dataset-specific, the empirical check matters. The preprocessing fallacy replicates **with significance** on the 12 clean-trained VisA categories: rescue remains net-harmful for PatchCore (−6.4 pp, category-clustered $p = 4.9\times10^{-4}$) and PaDiM (−2.7 pp, $p = 2.9\times10^{-3}$). The augmented VisA arm spans 4 categories and shows gains in the same direction and of larger magnitude than MVTec-AD (+17.8 pp PatchCore, +13.9 pp PaDiM), but we report those descriptively: with 4 clusters, no test can return a two-sided p below 0.125, so we do not claim significance for them.
+A: Yes, we ran the pipeline on VisA. While the mechanistic explanations (PSF-mismatch ringing harms coreset matching; augmented training recalibrates the normal distribution) are inherently not dataset-specific, the empirical check matters. The preprocessing fallacy replicates **with significance** on the 12 clean-trained VisA categories for PatchCore (−3.7 pp, category-clustered $p = 4.9\times10^{-4}$). It does **not** replicate for clean-trained VisA PaDiM, which sits at −0.6 pp with $p = 0.375$ once the Wiener PSF is corrected — the single condition in the benchmark where rescue is indistinguishable from neutral. We report it rather than claim the effect universally. The augmented VisA arm spans 4 categories and shows gains in the same direction and of larger magnitude than MVTec-AD (+17.8 pp PatchCore, +13.9 pp PaDiM), but we report those descriptively: with 4 clusters, no test can return a two-sided p below 0.125, so we do not claim significance for them.
 
 ---
 

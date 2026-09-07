@@ -152,16 +152,18 @@ PatchCore consistently outperforms PaDiM on clean data. Five categories achieve 
 
 | Model | Training | Beneficial / Total | Success Rate | Mean Δ (rescue − deg) |
 |---|---|---|---|---|
-| PaDiM | Clean | 284 / 810 | **35.1%** | −0.0456 |
-| PaDiM | Augmented | 157 / 810 | 19.4% | −0.1134 |
-| PatchCore | Clean | 209 / 810 | 25.8% | −0.0717 |
-| PatchCore | Augmented | 184 / 810 | **22.7%** | −0.1490 |
+| PaDiM | Clean | 311 / 810 | **38.4%** | −0.0275 |
+| PaDiM | Augmented | 171 / 810 | 21.1% | −0.0955 |
+| PatchCore | Clean | 241 / 810 | 29.8% | −0.0394 |
+| PatchCore | Augmented | 194 / 810 | **24.0%** | −0.1179 |
 
-> **Finding 4 (The Preprocessing Fallacy)**: Rescue preprocessing is net-harmful in all four conditions across both datasets. Even in the best case (MVTec-AD PaDiM/clean), only 35.1% of rescue instances improve detection. In every case, the mean rescue delta is negative — on average, preprocessing makes anomaly detection worse. All four MVTec-AD conditions are significant under category-clustered testing ($p \le 2.4\times10^{-4}$), as is clean-trained VisA across its 12 categories ($p \le 2.9\times10^{-3}$).
+> **Finding 4 (The Preprocessing Fallacy)**: Rescue preprocessing is net-harmful in all four MVTec-AD conditions. Even in the best case (MVTec-AD PaDiM/clean), only 38.4% of rescue instances improve detection. In every case, the mean rescue delta is negative — on average, preprocessing makes anomaly detection worse. All four MVTec-AD conditions are significant under category-clustered testing ($p \le 2.1\times10^{-3}$).
 >
-> ⚠️ These pooled deltas include Wiener mild/moderate rows produced with a misspecified kernel (22.2% of all rescue rows). When the corrected reruns land they are expected to move the pooled figures upward by roughly 1–4 pp; the direction of the finding is not expected to change on MVTec-AD.
+> On VisA the picture is now split: PatchCore clean-trained holds (−3.73 pp, $p = 4.9\times10^{-4}$), but **PaDiM clean-trained is −0.61 pp at $p = 0.375$** — indistinguishable from zero. The fallacy should be claimed for MVTec-AD and for VisA PatchCore, not universally.
+>
+> All Wiener rows here use per-severity oracle PSFs.
 
-> **Finding 5**: Augmented training *increases* rescue harm. Models trained on corrupted data are *more* damaged by rescue preprocessing than clean-trained models. PaDiM's mean rescue delta worsens from −0.046 to −0.113 after augmented training; PatchCore worsens from −0.072 to −0.149.
+> **Finding 5**: Augmented training *increases* rescue harm. Models trained on corrupted data are *more* damaged by rescue preprocessing than clean-trained models. PaDiM's mean rescue delta worsens from −0.0275 to −0.0955 after augmented training; PatchCore worsens from −0.0394 to −0.1179.
 
 ### 4.2 Rescue Delta Table — PaDiM
 
@@ -221,12 +223,14 @@ PatchCore consistently outperforms PaDiM on clean data. Five categories achieve 
 
 | Model | Training | Mean Δ | Min Δ | Max Δ |
 |---|---|---|---|---|
-| PaDiM | Clean | −0.1174 | −0.5610 | +0.3697 |
-| PaDiM | Augmented | −0.2227 | −0.5154 | +0.1510 |
-| PatchCore | Clean | −0.1621 | −0.5000 | +0.3222 |
-| PatchCore | Augmented | −0.3391 | −0.5492 | +0.0036 |
+| PaDiM | Clean | −0.0631 | −0.5595 | +0.4566 |
+| PaDiM | Augmented | −0.1690 | −0.7048 | +0.1705 |
+| PatchCore | Clean | −0.0653 | −0.5000 | +0.3671 |
+| PatchCore | Augmented | −0.2457 | −0.5291 | +0.0105 |
 
-> **Finding 6**: Wiener deconvolution with fixed PSF parameters is universally and severely detrimental. For both blur types, it frequently collapses AUROC to the random-chance floor (0.50). This is because the fixed PSF assumptions (e.g., σ=25, k=281 for Gaussian PSF) are mismatched to the actual corruption parameters, producing ringing artifacts that corrupt feature embeddings. Under augmented training, this harm doubles for PatchCore (−0.162 → −0.339) because the model has learned robust blur-domain features that are maximally disrupted by the PSF mismatch artifacts.
+> **Finding 6**: Wiener deconvolution is the most detrimental rescue for both blur types, **even with a point-spread function matched to the severity that generated the blur**. It still drives a substantial share of cells to the random-chance floor (0.50): 40.7% of Wiener rows for PatchCore clean-trained, 36.7% augmented. Deconvolution ringing — not kernel misspecification — is therefore the mechanism; misspecification compounds it but is not required. Under augmented training the harm roughly quadruples for PatchCore (−0.065 → −0.246), because the model has learned blur-domain features that deconvolution artifacts maximally disrupt.
+>
+> The superseded run, which applied the severe-tier PSF (σ=25, k=281) at every severity, is retained as a sensitivity comparison: a 5×-too-wide kernel deepens the mild Gaussian penalty from −5.7 pp to −32.2 pp, pricing the cost of the kernel estimation error that blind deconvolution must incur.
 
 > **Finding 7 (Domain Collapse)**: Complex domains like VisA maximize Wiener's destruction. On the VisA dataset, applying Wiener deconvolution to PatchCore (augmented) for mild Gaussian blur plummets performance from a highly robust 0.9242 down to exactly 0.5000 (a catastrophic −0.4242 penalty). VisA's complex, high-frequency structural features (e.g., PCB traces) are entirely obliterated by classical spectral ringing artifacts.
 
@@ -241,10 +245,10 @@ Clean-image AUROC decreases by only 0.5 pp (PatchCore) to 1.8 pp (PaDiM), a negl
 PatchCore shows degradation AUROC improvements of up to **+0.25** for Gaussian blur and **+0.23** for motion blur at severe levels. PaDiM shows gains of up to **+0.17** for motion blur/severe. No corruption/severity condition shows a regression under augmented training.
 
 ### Finding 3 — Rescue preprocessing is predominantly harmful (the preprocessing fallacy)
-Across 810 test cases per model per training condition, rescue methods are beneficial in only 19–35% of instances. The mean rescue delta is negative in all four conditions. Classical restoration pipelines — designed for human visual quality — misalign with the learned feature distributions of deep anomaly detectors.
+Across 810 test cases per model per training condition, rescue methods are beneficial in only 21–38% of instances. The mean rescue delta is negative in all four conditions. Classical restoration pipelines — designed for human visual quality — misalign with the learned feature distributions of deep anomaly detectors.
 
 ### Finding 4 — Augmented training exacerbates rescue harm
-Combining augmented training with rescue preprocessing produces the worst outcome. A model trained to recognize corruption patterns is maximally confused by preprocessing that removes those patterns inconsistently. PatchCore's mean rescue delta worsens from −0.072 (clean) to −0.149 (augmented).
+Combining augmented training with rescue preprocessing produces the worst outcome. A model trained to recognize corruption patterns is maximally confused by preprocessing that removes those patterns inconsistently. PatchCore's mean rescue delta worsens from −0.0394 (clean) to −0.1179 (augmented).
 
 ### Finding 5 — Wiener deconvolution is categorically harmful
 Fixed-parameter Wiener deconvolution should not be applied as a preprocessing step for anomaly detection. It consistently collapses AUROC to the random-chance floor, particularly at mild/moderate severities where the mismatch between fixed PSF and actual degradation is largest.
