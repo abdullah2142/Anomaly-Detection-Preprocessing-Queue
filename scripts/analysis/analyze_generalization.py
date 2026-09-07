@@ -27,7 +27,10 @@ from pathlib import Path
 import numpy as np
 import pandas as pd
 
-KEY = ["model", "category", "ctype"]
+# severity must be part of the join key: the leave-one-corruption-out run carries
+# three severities per (model, category, corruption), so joining without it would
+# cross-join each run row against all three master rows.
+KEY = ["model", "category", "ctype", "severity"]
 
 
 def exact_signflip(values) -> tuple[float, float, int]:
@@ -56,6 +59,9 @@ def load(run_path: str, master_path: str) -> pd.DataFrame:
         side = base[base.training == training][KEY + ["image_AUROC"]].rename(
             columns={"image_AUROC": label})
         merged = merged.merge(side, on=KEY, how="left")
+    assert len(merged) == len(run), (
+        f"join changed row count: {len(run)} run rows -> {len(merged)}; "
+        "the key is not unique on one side")
     missing = merged[["clean", "matched"]].isna().sum().sum()
     if missing:
         print(f"warning: {missing} comparison values missing from the master CSV")
