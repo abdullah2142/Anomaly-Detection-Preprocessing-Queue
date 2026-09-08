@@ -159,6 +159,7 @@ All generated plots are saved in `results/analysis/`:
 | `07_wilcoxon_augmentation_gains.png` | Wilcoxon test: augmentation gains |
 | `08_wilcoxon_rescue_deltas.png` | Wilcoxon test: rescue harm |
 | `09_wilcoxon_per_method_heatmap.png` | Per-method Wilcoxon FDR-corrected results (cell-level; see `docs/statistical_validation.md` for clustered inference) |
+| `11_generalization_controls.png` | How much of the augmentation gain survives when the tested condition is withheld |
 | `10_experimental_pipeline.md` | Mermaid architectural diagram |
 
 ---
@@ -201,6 +202,36 @@ All generated plots are saved in `results/analysis/`:
 9. **Single noise realization in augmentation**: augmented training images share one fixed noise/fog realization per corruption type (fixed seed), while test-time corruption varies per image. Biases measured augmentation gains downward.
 10. **MVTec augmented data is seed-invariant**: all three seeds train on byte-identical augmented images (VisA does not share this).
 11. **Wiener PSF misspecification (resolved)**: the originally published mild/moderate Wiener rows used the severe-tier kernel. All 1,104 affected rows (22.2% of rescue rows) have been regenerated with per-severity PSFs and merged. The misspecified values are retained in git history and are reported as a deliberate PSF-sensitivity comparison.
+
+---
+
+## Data Provenance
+
+`data/benchmark_master_combined.csv` (9,384 rows) is assembled from several runs.
+The committed notebooks are consolidated versions; some rows were produced by
+earlier split shards that are recoverable from git history but not from the
+current `notebooks/` directory alone.
+
+| Rows | Produced by | Note |
+|---|---|---|
+| MVTec-AD, 6,120 | `notebooks/01`–`04` (consolidated) | The original runs used per-severity shards plus dedicated rescue runners — `01-baseline-patchcore-mod-mild.ipynb`, `02-padim-baseline-mild-moderate.ipynb`, `run_patchcore_rescue.py`, `run_padim_rescue.py` — added in commit `21ce8ef` (2026-05-30) and since removed. |
+| VisA, 3,264 | `notebooks/05`–`08` | Clean training covers 12 categories; augmented training covers 4. |
+| Wiener rescue rows at mild/moderate, 1,104 | `scripts/wiener_reruns/rerun_01`–`08` | Regenerated with per-severity PSFs and merged by `scripts/analysis/merge_wiener_reruns.py`, replacing values produced with a hardcoded severe-tier kernel. |
+
+The generalization controls are **not** part of the master CSV. They live in
+`results/` as separate files with their own `experiment` column, because they use
+a different training regime (one condition withheld) and would not be comparable
+if pooled:
+
+| File | Produced by |
+|---|---|
+| `results/leave_one_corruption_out.txt` | `scripts/generalization/leave_one_corruption_out.ipynb` |
+| `results/severity_holdout.txt` | `scripts/generalization/severity_holdout.ipynb` |
+
+Corruption parameters have been stable since commit `21ce8ef` (2026-05-30). The
+only later change to `experiment_config.json` (`74b1be7`, 2026-09-04) documented
+the salt-and-pepper ratio the code already applied; it altered no pixel. Results
+and figures predating that commit remain valid.
 
 ---
 

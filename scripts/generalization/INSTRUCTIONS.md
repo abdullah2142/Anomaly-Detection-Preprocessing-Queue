@@ -10,6 +10,21 @@ ask whether the models generalised or simply memorised the test distribution.
 |---|---|---|---|
 | `leave_one_corruption_out.ipynb` | 4 corruption types | the held-out 5th | Does it transfer to an unseen *kind* of degradation? |
 | `severity_holdout.ipynb` | mild + moderate | severe | Does it transfer to degradation *worse* than it trained for? |
+| `unconditional_rescue.ipynb` | clean data (no augmentation) | undegraded images, and mismatched corruptions | What does preprocessing cost when it wasn't needed, or when the degradation is misidentified? |
+
+The third notebook addresses a different gap. The benchmark applies each rescue
+only to the corruption it targets, chosen using that corruption's ground-truth
+identity (Limitations 13 and 14). Deployment has neither guarantee: it
+preprocesses a whole stream, most of which may be undegraded, and its detector
+can misclassify. Part A applies all six rescues to clean images; Part B applies
+five plausible *wrong* rescues to corrupted images. Both comparison baselines --
+the clean baseline AUROC and the degradation AUROC -- already exist in the master
+CSV, so only the new arm runs.
+
+This matters most for the paper's one positive recommendation, "CLAHE is
+conditionally safe for low-light PatchCore", which currently assumes a
+low-light detector gates it. Analyse with
+`scripts/analysis/analyze_unconditional_rescue.py`.
 
 ## Design
 
@@ -43,15 +58,20 @@ prep + fit + ~9 test passes); treat as ±50%.
 |---|---:|---:|---:|
 | `leave_one_corruption_out` | 80 | 240 | ~4.5 h |
 | `severity_holdout` | 16 | 80 | ~1.2 h |
-| **Total** | 96 | 320 | **~5.5–6 h** |
+| `unconditional_rescue` | 16 | 336 | ~3 h |
+| **Total** | 112 | 656 | **~9 h** |
+
+`unconditional_rescue` emits 21 rows per (category, model): 6 rescues on clean
+images, plus 5 confusions x 3 severities.
 
 Both models train on the same augmented dataset before it is deleted, so the
 second model costs no extra data preparation.
 
 Each notebook fits in one Kaggle session with the 11.5 h graceful timeout as
 backstop. Resume is row-count based: a unit is complete only at
-`ROWS_PER_UNIT` rows (6 per category × held-out type for LOCO, 10 per category
-for the severity holdout); partial units are discarded and re-run.
+`ROWS_PER_UNIT` rows (6 per category x held-out type for LOCO, 10 per category
+for the severity holdout, 21 per category x model for unconditional rescue);
+partial units are discarded and re-run.
 
 ## Running
 

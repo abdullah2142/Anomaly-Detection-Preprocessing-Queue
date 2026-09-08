@@ -109,7 +109,7 @@ claimed there.
 - [ ] **Write the paper** using the corrected statistical results
 - [ ] **Frame VisA augmented as a representative subset**: "Augmented training was validated on a representative subset of 4 VisA categories spanning diverse product types" — descriptive, not significance-tested
 - [ ] **Limitations section**: subset evaluation on VisA augmented, single aug_prob operating point, train/test resolution mismatch, AUROC floor censoring (the unseen-corruption gap is now measured, not a limitation)
-- [ ] **Provenance note**: state which notebook shard produced which CSV rows, so a reader can reconstruct the run
+- [x] **Provenance note**: see the Data Provenance section in `README.md`
 
 ### Generalization controls ✅ DONE
 Both controls executed and analysed
