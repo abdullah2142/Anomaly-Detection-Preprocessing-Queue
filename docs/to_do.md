@@ -89,7 +89,7 @@ which asserts a 1:1 join before writing.
 - [x] Regenerated [`per_corruption_tables.md`](per_corruption_tables.md) by script
 - [x] Updated rescue figures in `README.md`, `benchmark_report.md`,
       `benchmark_results.md`, `paper_sections.md`
-- [ ] Re-run `notebooks/10_wilcoxon_testing.ipynb` to regenerate figures 04, 05, 07–09
+- [x] Re-run `notebooks/10_wilcoxon_testing.ipynb` to regenerate figures 07–09; 04 and 05 rebuilt by `scripts/analysis/build_figures.py`
 
 **Outcome.** Pooled rescue harm softened by 1.4–3.2 pp per condition, as
 projected. All four MVTec-AD conditions remain significantly negative
@@ -108,7 +108,7 @@ claimed there.
 ### Priority 4: Paper Writing
 - [ ] **Write the paper** using the corrected statistical results
 - [ ] **Frame VisA augmented as a representative subset**: "Augmented training was validated on a representative subset of 4 VisA categories spanning diverse product types" — descriptive, not significance-tested
-- [ ] **Limitations section**: subset evaluation on VisA augmented, single aug_prob operating point, no unseen-corruption test, train/test resolution mismatch, AUROC floor censoring
+- [ ] **Limitations section**: subset evaluation on VisA augmented, single aug_prob operating point, train/test resolution mismatch, AUROC floor censoring (the unseen-corruption gap is now measured, not a limitation)
 - [ ] **Provenance note**: state which notebook shard produced which CSV rows, so a reader can reconstruct the run
 
 ### Generalization controls ✅ DONE
