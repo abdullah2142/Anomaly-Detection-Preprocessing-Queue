@@ -7,7 +7,7 @@
 
 ## 1. ABSTRACT (≤250 words)
 
-State-of-the-art unsupervised anomaly detection models achieve near-perfect AUROC on standard benchmarks yet are evaluated exclusively under controlled studio conditions. In industrial deployment, cameras routinely capture images degraded by low illumination, motion and defocus blur, sensor noise, and environmental haze. Two intuitive mitigations exist: apply classical image restoration as a preprocessing step before inference (test-time rescue), or train models on corrupted images to build robustness directly (training-time augmentation). We conduct the first systematic 4-way comparison of these strategies across two leading feature-embedding anomaly detectors — PatchCore and PaDiM — on the full MVTec-AD benchmark (15 categories, 3 seeds, 5 corruption types, 3 severity levels, 6 rescue methods), yielding 6,120 controlled measurements. Our results reveal three findings. First, augmented training consistently improves robustness (+12.3 pp PatchCore, +10.1 pp PaDiM, both category-clustered $p \le 1.2\times10^{-4}$) by expanding the learned normality manifold to encompass corruption-domain features. Second, classical rescue preprocessing is net-harmful in all four experimental conditions (range: −2.8 to −11.8 pp, all category-clustered $p \le 2.1\times10^{-3}$) — and it is net-harmful under *oracle* conditions: the corruption type, its severity, and the restoration parameters are all supplied to the pipeline, so no degradation-detection or classification error is included in these figures. We term this the *preprocessing fallacy*: restoration algorithms produce a third distribution distinct from both the clean training set and naturally corrupted images, causing anomaly detectors to flag restoration artifacts as defects. Third, Wiener deconvolution is the most harmful rescue at every severity even when given the exact oracle point-spread function that generated the blur (Gaussian: −5.7 pp mild, −15.1 pp moderate, −12.5 pp severe), by introducing spectral ringing that saturates the patch-level anomaly score; misspecifying the kernel by 5× deepens the mild-severity penalty to −32.2 pp, quantifying the additional cost blind deconvolution must pay. CLAHE is the least harmful method and the only conditionally safe one. These findings provide actionable deployment guidance: use augmented training; avoid test-time restoration except CLAHE for low-light PatchCore.
+State-of-the-art unsupervised anomaly detection models achieve near-perfect AUROC on standard benchmarks yet are evaluated exclusively under controlled studio conditions. In industrial deployment, cameras routinely capture images degraded by low illumination, motion and defocus blur, sensor noise, and environmental haze. Two intuitive mitigations exist: apply classical image restoration as a preprocessing step before inference (test-time rescue), or train models on corrupted images to build robustness directly (training-time augmentation). We conduct the first systematic 4-way comparison of these strategies across two leading feature-embedding anomaly detectors — PatchCore and PaDiM — on the full MVTec-AD benchmark (15 categories, 3 seeds, 5 corruption types, 3 severity levels, 6 rescue methods), yielding 6,120 controlled measurements. Our results reveal three findings. First, augmented training consistently improves robustness (+12.3 pp PatchCore, +10.1 pp PaDiM, both category-clustered $p \le 1.2\times10^{-4}$) by expanding the learned normality manifold to encompass corruption-domain features; two withholding controls show this benefit is part genuine robustness and part distribution matching, and that the split is detector-dependent — against corruptions and severities never seen in training, PatchCore retains about a third of its gain while PaDiM retains none. Second, classical rescue preprocessing is net-harmful in all four experimental conditions (range: −2.8 to −11.8 pp, all category-clustered $p \le 2.1\times10^{-3}$) — and it is net-harmful under *oracle* conditions: the corruption type, its severity, and the restoration parameters are all supplied to the pipeline, so no degradation-detection or classification error is included in these figures. We term this the *preprocessing fallacy*: restoration algorithms produce a third distribution distinct from both the clean training set and naturally corrupted images, causing anomaly detectors to flag restoration artifacts as defects. Third, Wiener deconvolution is the most harmful rescue at every severity even when given the exact oracle point-spread function that generated the blur (Gaussian: −5.7 pp mild, −15.1 pp moderate, −12.5 pp severe), by introducing spectral ringing that saturates the patch-level anomaly score; misspecifying the kernel by 5× deepens the mild-severity penalty to −32.2 pp, quantifying the additional cost blind deconvolution must pay. CLAHE is the least harmful method and the only conditionally safe one. These findings provide actionable deployment guidance: use augmented training; avoid test-time restoration except CLAHE for low-light PatchCore.
 
 ---
 
@@ -179,6 +179,46 @@ A key finding is that combining augmented training with rescue preprocessing pro
 
 ---
 
+### 5.6 Does Augmentation Generalise? Two Withholding Controls
+
+Because training augmentation draws from the same corruption types and severities
+used at test time, the gains reported above are a corruption-matched oracle bound.
+We ran two controls that withhold one condition from the augmented arm and test
+only on the withheld condition, over 8 MVTec-AD categories at a single seed. The
+clean-trained and matched-augmented comparisons are drawn from the same
+categories and cells; significance is an exact paired permutation test over
+per-category means (floor $p = 2/2^8 = 0.0078$).
+
+| Control | Model | Matched-oracle gain | Held-out gain | Share surviving |
+|---|---|---|---|---|
+| Leave-one-corruption-out | PatchCore | +10.66 pp | **+3.58 pp** ($p = 0.031$) | 34% |
+| Leave-one-corruption-out | PaDiM | +8.02 pp | −0.22 pp ($p = 0.828$) | 0% |
+| Severity holdout | PatchCore | +13.21 pp | **+4.58 pp** ($p = 0.008$) | 35% |
+| Severity holdout | PaDiM | +8.83 pp | +1.02 pp ($p = 0.461$) | 12% |
+
+The two controls agree despite withholding along different axes. **PatchCore
+generalises partially**: roughly a third of its benefit survives against
+corruption types and severities it never trained on, significant in both controls
+and positive in 6 of 8 categories. **PaDiM does not generalise**: its held-out
+gain is indistinguishable from zero in both, and positive in only 3 of 8
+categories. Withholding a condition costs −7.1 to −8.6 pp in every case.
+
+Transfer decays with severity (+2.88 pp mild, +1.63 pp moderate, +0.53 pp severe,
+models pooled), indicating that what does generalise generalises best where the
+degradation is mildest.
+
+**Mechanism**: PatchCore stores a coreset of patch embeddings and scores by
+nearest-neighbour distance, so training on any corruption broadens the region of
+embedding space treated as normal — a benefit that partially extends to
+neighbouring corruption manifolds. PaDiM fits a per-position Gaussian to feature
+activations; its covariance expands along the specific directions the training
+corruptions induce, which does not cover directions induced by an unseen
+corruption. This predicts the asymmetry we observe.
+
+**Deployment consequence**: augment with the corruptions and severities actually
+expected in the target environment. Extrapolating beyond the augmented
+distribution buys little for PatchCore and nothing measurable for PaDiM.
+
 ## 6. DISCUSSION AND CONCLUSIONS (~500 words)
 
 ### 6.1 The Preprocessing Fallacy in Feature-Embedding Anomaly Detection
@@ -205,13 +245,13 @@ The augmentation strategy is model-agnostic and requires no changes to inference
 
 ### 6.4 Limitations and Future Work
 
-**Synthetic-to-real gap**: Corruptions are synthetically generated and may not fully capture real-world imaging variation. **Limited model scope**: Results apply to feature-embedding detectors; reconstruction-based methods and vision-language models (WinCLIP, AnomalyGPT) may show different patterns. **Aug. probability not ablated**: aug_prob=0.50 is a single operating point; the trade-off curve across probabilities is left for future work. **Blind deconvolution**: Known-kernel Wiener results are an upper bound; real-world unknown-kernel deconvolution is expected to be worse. **Cross-dataset generalization**: The MVTec-AD results are corroborated on VisA. With per-severity oracle PSFs, the Preprocessing Fallacy replicates with significance on the 12 clean-trained VisA categories for PatchCore (−3.7 pp, $p = 4.9\times10^{-4}$), indicating the phenomenon is not an artifact of the MVTec-AD image domain. It does **not** replicate for clean-trained VisA PaDiM (−0.6 pp, $p = 0.375$), the single condition in the benchmark where rescue is indistinguishable from neutral; we report this rather than claim the effect universally. The augmented VisA arm covers 4 categories, where no clustered test can reach conventional significance ($p_{\min} = 0.125$); its gains (+17.8 / +13.9 pp) are reported as descriptive corroboration.
+**Synthetic-to-real gap**: Corruptions are synthetically generated and may not fully capture real-world imaging variation. **Limited model scope**: Results apply to feature-embedding detectors; reconstruction-based methods and vision-language models (WinCLIP, AnomalyGPT) may show different patterns. **Aug. probability not ablated**: aug_prob=0.50 is a single operating point; the trade-off curve across probabilities is left for future work. **Corruption-matched training**: augmentation draws from the same corruption types and severities used at test time; §5.6 quantifies how much of the gain survives when a condition is withheld (about a third for PatchCore, none for PaDiM), on 8 categories at a single seed and on MVTec-AD only. **Blind deconvolution**: Known-kernel Wiener results are an upper bound; real-world unknown-kernel deconvolution is expected to be worse. **Cross-dataset generalization**: The MVTec-AD results are corroborated on VisA. With per-severity oracle PSFs, the Preprocessing Fallacy replicates with significance on the 12 clean-trained VisA categories for PatchCore (−3.7 pp, $p = 4.9\times10^{-4}$), indicating the phenomenon is not an artifact of the MVTec-AD image domain. It does **not** replicate for clean-trained VisA PaDiM (−0.6 pp, $p = 0.375$), the single condition in the benchmark where rescue is indistinguishable from neutral; we report this rather than claim the effect universally. The augmented VisA arm covers 4 categories, where no clustered test can reach conventional significance ($p_{\min} = 0.125$); its gains (+17.8 / +13.9 pp) are reported as descriptive corroboration.
 
 ### 6.5 Conclusions
 
 We present the first systematic 4-way benchmark of rescue preprocessing and training-time augmentation for robust industrial anomaly detection. Three phenomena are established with statistical significance:
 
-1. **Augmented training significantly improves corruption robustness** (+12.3 pp PatchCore, +10.1 pp PaDiM, category-clustered exact test, $p \le 1.2\times10^{-4}$) by expanding the learned normality manifold into corruption-domain feature space, with negligible clean-image cost (−0.5 to −1.8 pp).
+1. **Augmented training significantly improves corruption robustness** (+12.3 pp PatchCore, +10.1 pp PaDiM, category-clustered exact test, $p \le 1.2\times10^{-4}$) by expanding the learned normality manifold into corruption-domain feature space, with negligible clean-image cost (−0.5 to −1.8 pp). Withholding controls (§5.6) show the benefit is part genuine robustness and part distribution matching: against unseen corruption types and severities PatchCore retains roughly a third of its gain, PaDiM none.
 
 2. **Test-time rescue preprocessing is net-harmful** in all 4 MVTec-AD conditions (−2.8 to −11.8 pp, category-clustered $p \le 2.1\times10^{-3}$), *even when the corruption type, severity, and restoration parameters are known exactly* — the *preprocessing fallacy* — because restoration algorithms produce a third distribution containing novel artifacts that anomaly detectors score as defects.
 

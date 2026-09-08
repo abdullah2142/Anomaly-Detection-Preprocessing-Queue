@@ -66,9 +66,44 @@ as a severity trend.
 
 Training-time augmentation (`prepare_augmented_train_data`) applies corruption to raw-resolution images (700–1024 px for MVTec-AD, ~1500 px for VisA) which are subsequently resized to 256×256 by the datamodule. Test-time corruption (`CorruptedDatasetWrapper`) applies corruption to images that have already been resized to 256×256. The same nominal corruption parameters therefore produce substantially different effective severity: e.g., σ=25 Gaussian blur at 1024 px downsampled to 256 px is effectively ~σ=6. Augmented models were trained on milder effective corruption than they are tested on, which means the reported robustness gains may partially reflect generalization beyond the training distribution rather than exact distribution matching.
 
-## 11. Matched Corruption Distributions
+## 11. Matched Corruption Distributions (quantified by two controls)
 
-Training augmentation draws from the same 5 corruption types × 3 severity levels used for test-time evaluation. The reported augmentation gains (+12.3 pp PatchCore, +10.1 pp PaDiM) therefore represent a **corruption-matched oracle upper bound** on augmentation effectiveness. A leave-one-corruption-out cross-validation would provide stronger evidence of generalization but is left as future work.
+Training augmentation draws from the same 5 corruption types × 3 severity levels
+used for test-time evaluation, so the headline gains (+12.3 pp PatchCore,
++10.1 pp PaDiM) are a **corruption-matched oracle bound**. The benchmark alone
+cannot separate genuine robustness from having trained on the test distribution.
+
+Two controls separate them. Each withholds one condition from the augmented arm
+and tests only on that withheld condition, over 8 MVTec-AD categories at seed 42,
+with clean-trained and matched-augmented comparisons drawn from the same
+categories and cells (full tables: [`generalization_controls.md`](generalization_controls.md)).
+
+| Control | Withheld | PatchCore survives | PaDiM survives |
+|---|---|---|---|
+| Leave-one-corruption-out | one corruption type, rotating through all five | +3.58 pp of +10.66 pp (**34%**, p = 0.0312) | −0.22 pp of +8.02 pp (**0%**, p = 0.8281) |
+| Severity holdout | the severe tier (trained mild + moderate) | +4.58 pp of +13.21 pp (**35%**, p = 0.0078) | +1.02 pp of +8.83 pp (**12%**, p = 0.4609) |
+
+**Implication — the gain is part robustness, part distribution matching, and the
+split depends on the detector.** PatchCore retains roughly a third of its benefit
+against corruption types and severities it never saw, significantly in both
+controls and consistently across categories (positive in 6 of 8). PaDiM retains
+none against an unseen corruption type and nothing distinguishable from zero
+against an unseen severity. Withholding a condition costs −7.1 to −8.6 pp in
+every case, significant throughout.
+
+Transfer also decays with severity (+2.88 pp mild, +1.63 pp moderate, +0.53 pp
+severe, models pooled), so what does generalise generalises best where the
+degradation is mildest.
+
+Two caveats on scope. Both controls use a single seed and 8 of the 15 MVTec-AD
+categories, chosen so that the exact permutation test's floor (2/2⁸ = 0.0078)
+permits significance; they are not run on VisA. And the per-corruption
+breakdowns rest on 8 categories each, so only the pooled and per-model figures
+should be treated as well-powered.
+
+**Deployment consequence:** augment with the corruptions and severities you
+actually expect. Extrapolation beyond the augmented distribution buys little, and
+for PaDiM it buys nothing.
 
 ## 12. Undocumented Salt-and-Pepper Component in Sensor Noise
 

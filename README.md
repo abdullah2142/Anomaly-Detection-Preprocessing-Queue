@@ -8,6 +8,7 @@ A rigorous 4-way comparative benchmark evaluating **test-time rescue preprocessi
 - **VisA (clean training)**: ✅ Complete — 12 categories, 2 models, 3 seeds
 - **VisA (augmented training)**: ✅ Complete — 4 categories (candle, cashew, pcb1, pipe_fryum), 2 models, 3 seeds
 - **Statistical validation**: ✅ Category-clustered permutation tests — see [`docs/statistical_validation.md`](docs/statistical_validation.md)
+- **Generalization controls**: ✅ Complete — leave-one-corruption-out and severity holdout, see [`docs/generalization_controls.md`](docs/generalization_controls.md)
 - **Wiener PSF rerun**: ✅ Complete — all 1,104 mild/moderate Wiener rows regenerated with per-severity PSFs and merged ([`scripts/wiener_reruns/`](scripts/wiener_reruns/), [`scripts/analysis/merge_wiener_reruns.py`](scripts/analysis/merge_wiener_reruns.py))
 - **Total benchmark database**: 9,384 rows in `data/benchmark_master_combined.csv`
 
@@ -23,7 +24,7 @@ A rigorous 4-way comparative benchmark evaluating **test-time rescue preprocessi
 | PaDiM — Augmented training | **0.7400** (+10.1 pp) | 21.1% | −0.0955 |
 
 **Core findings:**
-1. **Augmented training significantly improves robustness** (+12.3 pp PatchCore, +10.1 pp PaDiM on MVTec-AD, category-clustered p ≤ 1.2×10⁻⁴).
+1. **Augmented training significantly improves robustness** (+12.3 pp PatchCore, +10.1 pp PaDiM on MVTec-AD, category-clustered p ≤ 1.2×10⁻⁴) — but the benefit is **part robustness, part distribution matching**. Against corruptions and severities never seen in training, PatchCore keeps ~⅓ of its gain; PaDiM keeps none. See Generalization Controls below.
 2. **Rescue preprocessing is net-harmful** in all 4 conditions — the *preprocessing fallacy* — even when the corruption type, severity, and restoration parameters are all known exactly (no degradation-detection step is included).
 3. **Wiener deconvolution is the most harmful rescue** at every severity, even with an oracle PSF matched to the blur that generated the image: −5.7 pp (mild), −15.1 pp (moderate), −12.5 pp (severe) for Gaussian blur. Misspecifying the kernel roughly 5× makes it far worse (−32.2 pp at mild), quantifying the cost of blind deconvolution.
 
@@ -117,6 +118,32 @@ All figures below use per-severity oracle PSFs for Wiener.
 
 ---
 
+## Generalization Controls
+
+Augmented training draws from the same 5 corruption types × 3 severities used at
+test time, so the headline gains are a **corruption-matched oracle bound**. Two
+controls withhold one condition from the augmented arm and test only on it
+(8 MVTec-AD categories, seed 42). Full tables:
+[`docs/generalization_controls.md`](docs/generalization_controls.md).
+
+| Control | Model | Matched gain | Held-out gain | Survives |
+|---|---|---|---|---:|
+| Leave-one-corruption-out | PatchCore | +10.66 pp | **+3.58 pp** (p = 0.031) | 34% |
+| Leave-one-corruption-out | PaDiM | +8.02 pp | −0.22 pp (p = 0.828) | 0% |
+| Severity holdout | PatchCore | +13.21 pp | **+4.58 pp** (p = 0.008) | 35% |
+| Severity holdout | PaDiM | +8.83 pp | +1.02 pp (p = 0.461) | 12% |
+
+**PatchCore generalises partially; PaDiM does not.** Both controls agree despite
+withholding along different axes. Withholding a condition costs −7.1 to −8.6 pp
+in every case, and transfer decays with severity (+2.88 pp mild → +0.53 pp
+severe).
+
+**Deployment consequence**: augment with the corruptions and severities you
+actually expect. Extrapolating beyond them buys little for PatchCore and nothing
+measurable for PaDiM.
+
+---
+
 ## Visualizations
 
 All generated plots are saved in `results/analysis/`:
@@ -166,7 +193,7 @@ All generated plots are saved in `results/analysis/`:
 1. **Sensor noise includes undocumented salt-and-pepper**: 5% S&P impulse noise is applied on top of Gaussian noise. NLM is suboptimal for impulse noise.
 2. **Train/test resolution mismatch**: Training augmentation is applied at raw image resolution (700–1024 px for MVTec, ~1500 px for VisA), then resized to 256×256. Test corruption is applied post-resize at 256×256. Same nominal parameters produce different effective severity.
 3. **AUROC floor saturation**: 23% of rows are exactly 0.5000 (fully tied anomaly scores), concentrated at severe corruption. Reported means are censored at this floor.
-4. **Matched corruption distributions**: Training augmentation uses the same 5 types × 3 severities as the test set. The +12.3 pp gain is a corruption-matched upper bound.
+4. **Matched corruption distributions (quantified)**: Training augmentation uses the same 5 types × 3 severities as the test set, so +12.3 pp is a corruption-matched upper bound. Two withholding controls measure how much survives: PatchCore ~34–35%, PaDiM 0–12%. Run on 8 MVTec-AD categories at one seed; not run on VisA.
 5. **Fog non-reproducibility**: `A.RandomFog` is not seeded in the original experiment runs (fixed in current codebase).
 6. **Pseudoreplication in notebook 10**: the shipped Wilcoxon notebook treats non-independent cells as independent. Use `scripts/analysis/cluster_robust_stats.py` for the corrected inference.
 7. **Oracle corruption identification**: rescue methods are selected by the corruption's ground-truth type and severity. There is no degradation-detection or classification step, so the reported rescue deltas exclude identification error and represent the best case for rescue.

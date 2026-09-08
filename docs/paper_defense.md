@@ -53,6 +53,16 @@ A: No — 0.50 is a single operating point chosen as a reasonable default. The s
 
 ## On the Results
 
+**Q: Your augmentation uses the same corruption types and severities you test on. Haven't you just trained on the test distribution?**
+
+A: Partly, and we measured exactly how much. Two withholding controls train the augmented arm with one condition removed and test only on that removed condition, over 8 MVTec-AD categories. Leave-one-corruption-out withholds a corruption type; the severity holdout trains on mild and moderate and tests on severe.
+
+The answer differs by detector. PatchCore retains 34% (+3.58 pp of +10.66 pp, $p = 0.031$) and 35% (+4.58 pp of +13.21 pp, $p = 0.008$) of its matched gain — significant in both, and positive in 6 of 8 categories. PaDiM retains nothing distinguishable from zero: −0.22 pp ($p = 0.828$) against an unseen corruption type, +1.02 pp ($p = 0.461$) against an unseen severity.
+
+So the honest claim is that the augmentation benefit is part genuine robustness and part distribution matching, and the split depends on the architecture. We think this is more useful than a flat answer: it says PatchCore buys you some margin against degradations you did not anticipate, while PaDiM must be augmented with the corruptions you actually expect. The controls run on a single seed and 8 of 15 categories, chosen so the exact permutation test can reach significance, and were not repeated on VisA — we state the result at the power available rather than beyond it.
+
+---
+
 **Q: How does your pipeline know which rescue method to apply to a given test image?**
 
 A: It does not — we tell it. The rescue is selected by the corruption's ground-truth type and the Wiener PSF by its ground-truth severity; nothing inspects the image. This is deliberate, and it makes the finding stronger rather than weaker. A deployed system would need four additional steps we supply for free: detect that an image is degraded, classify which degradation, estimate the severity, then estimate the restoration parameters. Every one of those can fail, and a misclassification applies a restoration matched to the wrong corruption. Our own data prices one such error at −32 pp for a 5×-misspecified Wiener kernel. So the correct reading of our result is: *rescue preprocessing is net-harmful even under oracle knowledge of corruption type, severity, and parameters* — and any real pipeline must absorb identification error on top of that. The negative numbers we report are an upper bound on real-world rescue performance.
