@@ -521,20 +521,36 @@ SEVERITIES_TO_PROBE = ["moderate"]   # the tier where Wiener harm is largest
 
 
 def make_score_engine():
-    """Engine with score normalisation disabled where the API supports it."""
+    """Engine with score normalisation disabled where the installed API supports it.
+
+    anomalib's Engine accepts unknown keyword arguments into an internal cache and
+    only forwards them to Lightning at fit() time, so passing `normalization` to a
+    version that dropped it fails late, inside fit, not at construction. Inspect
+    the signature instead of relying on try/except. anomalib 2.x moved
+    normalisation to the post-processor and has no such argument -- that is fine:
+    its transform is fitted once during validation and reused for every later
+    predict call, so scores stay comparable across conditions up to one fixed
+    affine map. The analysis verifies that rather than assuming it.
+    """
+    import inspect
     from anomalib.engine import Engine as _Engine
+
+    kwargs = dict(max_epochs=1, accelerator="auto", devices=1,
+                  default_root_dir="/tmp/anomalib", enable_progress_bar=False,
+                  callbacks=[DisableCheckpointing()])
     try:
-        from anomalib.utils.normalization import NormalizationMethod
-        eng = _Engine(max_epochs=1, accelerator="auto", devices=1,
-                      default_root_dir="/tmp/anomalib", enable_progress_bar=False,
-                      callbacks=[DisableCheckpointing()],
-                      normalization=NormalizationMethod.NONE)
-        print("   normalisation: DISABLED (NormalizationMethod.NONE)")
-        return eng
+        params = inspect.signature(_Engine.__init__).parameters
+        if "normalization" in params:
+            from anomalib.utils.normalization import NormalizationMethod
+            print("   normalisation: DISABLED via Engine(normalization=NONE)")
+            return _Engine(**kwargs, normalization=NormalizationMethod.NONE)
     except Exception as e:
-        print(f"   normalisation: could not disable ({type(e).__name__}); "
-              "the analysis will check whether scores were renormalised per run")
-        return make_engine()
+        print(f"   normalisation: signature probe failed ({type(e).__name__}: {e})")
+    print("   normalisation: no Engine-level switch in this anomalib version; "
+          "left at the library default.")
+    print("   The analysis checks for per-run rescaling and for ceiling clipping "
+          "before drawing any conclusion.")
+    return _Engine(**kwargs)
 
 
 def collect_scores(engine, model, loader):

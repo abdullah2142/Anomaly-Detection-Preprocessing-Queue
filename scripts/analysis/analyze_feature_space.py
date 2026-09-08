@@ -47,15 +47,20 @@ def exact_signflip(values) -> tuple[float, float, int]:
 
 
 def normalisation_guard(df: pd.DataFrame) -> bool:
-    """True if scores look safe to compare across conditions.
+    """True if score magnitudes are safe to compare across conditions.
 
-    Per-run min-max normalisation would pin every condition to [0, 1]. If nearly
-    every condition does that, magnitudes were rescaled per run and cannot be
-    compared.
+    Two ways anomalib's normalisation can invalidate this comparison:
+
+    1. Per-run rescaling -- every condition pinned to [0, 1]. Magnitudes would
+       then be meaningless and the run must be repeated with normalisation off.
+    2. Ceiling clipping -- the transform is fitted once on validation data, so
+       scores far above anything seen there clamp at 1.0. Rescued images are
+       exactly where that is expected, and a clipped ceiling hides the very
+       difference we are testing, biasing it toward zero.
     """
-    spans = df.groupby(UNIT + ["condition", "ctype", "severity", "rescue"])["anomaly_score"] \
-              .agg(["min", "max"])
-    pinned = ((spans["min"].abs() < 1e-6) & ((spans["max"] - 1).abs() < 1e-6))
+    grp = UNIT + ["condition", "ctype", "severity", "rescue"]
+    spans = df.groupby(grp)["anomaly_score"].agg(["min", "max"])
+    pinned = (spans["min"].abs() < 1e-6) & ((spans["max"] - 1).abs() < 1e-6)
     share = pinned.mean()
     print(f"Normalisation check: {share*100:.1f}% of conditions span exactly [0, 1] "
           f"({int(pinned.sum())}/{len(pinned)})")
@@ -68,6 +73,23 @@ def normalisation_guard(df: pd.DataFrame) -> bool:
         print("  WARNING: some conditions are pinned to [0, 1]; interpret with care.")
     else:
         print("  OK -- scores retain their raw scale.")
+
+    at_ceiling = df.groupby("condition")["anomaly_score"].apply(
+        lambda x: ((x - 1.0).abs() < 1e-6).mean())
+    print("Ceiling check: share of images with score exactly 1.0, by condition:")
+    for cond, frac in at_ceiling.items():
+        print(f"  {cond:10s} {frac*100:5.1f}%")
+    worst = float(at_ceiling.max()) if len(at_ceiling) else 0.0
+    if worst > 0.5:
+        print("  REFUSING TO CONCLUDE -- most scores sit on the clipping ceiling, so")
+        print("  the differences we need are unmeasurable. Re-run with normalisation")
+        print("  disabled, or record the raw pre-normalisation score.")
+        return False
+    if worst > 0.05:
+        print("  WARNING: some scores are clipped at 1.0. Any rescued-minus-degraded")
+        print("  difference is a LOWER BOUND -- clipping can only shrink it.")
+    else:
+        print("  OK -- no meaningful clipping.")
     return True
 
 
