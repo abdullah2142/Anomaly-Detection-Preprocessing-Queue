@@ -152,6 +152,40 @@ def _render(run_path: str) -> None:
         print(f"      mean difference {mean:+.4f}   p = {p:.4f}   "
               f"({n} units, {int((diff > 0).sum())}/{n} positive)   -> {verdict}")
 
+    # The main test can be censored by the normaliser's ceiling. Two checks that
+    # are robust to it, so the conclusion does not rest on uncensored means.
+    print("\n=== ceiling-robust checks on the same claim ===")
+    grp = UNIT + ["condition"]
+    ceil = normal.assign(at=lambda x: (x.anomaly_score - 1.0).abs() < 1e-6) \
+                 .groupby(grp)["at"].mean().unstack()
+    if {"rescued", "degraded"} <= set(ceil.columns):
+        d = (ceil["rescued"] - ceil["degraded"]).dropna()
+        mean, p_, n = exact_signflip(d.values)
+        print(f"  share of normal images pinned at the ceiling, rescued − degraded:")
+        print(f"      {mean*100:+.2f} pp   p = {p_:.4f}   ({int((d > 0).sum())}/{n} positive)")
+        print("      (restoration pushing MORE images to the ceiling would support the")
+        print("       claim even where the means are censored)")
+    low = ceil[(ceil.get("degraded", 1) < 0.2) & (ceil.get("rescued", 1) < 0.2)].index
+    sub = per_unit.loc[per_unit.index.intersection(low)]
+    print(f"  restricted to units with <20% clipping on both sides: "
+          f"{len(sub)} of {len(per_unit)} units")
+    if len(sub) >= 3:
+        d = (sub["rescued"] - sub["degraded"]).dropna()
+        mean, p_, n = exact_signflip(d.values)
+        print(f"      rescued − degraded: {mean:+.4f}   p = {p_:.4f}   "
+              f"({int((d > 0).sum())}/{n} positive)")
+
+    print("\n=== discriminability: mean score(anomalous) − mean score(normal) ===")
+    print("(what AUROC depends on -- can the model still tell them apart?)")
+    sep = df.groupby(UNIT + ["condition", "is_anomalous"])["anomaly_score"].mean().unstack()
+    sep = (sep[1] - sep[0]).unstack()
+    for a, b, lab in [("degraded", "clean", "degraded − clean"),
+                      ("rescued", "degraded", "rescued  − degraded")]:
+        if {a, b} <= set(sep.columns):
+            d = (sep[a] - sep[b]).dropna()
+            mean, p_, n = exact_signflip(d.values)
+            print(f"  {lab:20s} {mean:+.4f}   p = {p_:.4f}   ({int((d < 0).sum())}/{n} shrank)")
+
     print("\n=== per rescue method: rescued − degraded on normal images ===")
     resc = normal[normal.condition == "rescued"].groupby(UNIT + ["ctype", "rescue"])["anomaly_score"].mean()
     deg = normal[normal.condition == "degraded"].groupby(UNIT + ["ctype"])["anomaly_score"].mean()

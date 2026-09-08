@@ -51,6 +51,19 @@ screw    PaDiM      0.6221    0.9994   0.9710
   rescued  > degraded (THE CLAIM: restoration moves them FURTHER)
       mean difference -0.0020   p = 0.9141   (10 units, 5/10 positive)   -> not supported
 
+=== ceiling-robust checks on the same claim ===
+  share of normal images pinned at the ceiling, rescued − degraded:
+      +0.19 pp   p = 0.9727   (6/10 positive)
+      (restoration pushing MORE images to the ceiling would support the
+       claim even where the means are censored)
+  restricted to units with <20% clipping on both sides: 4 of 10 units
+      rescued − degraded: +0.0123   p = 0.6250   (3/4 positive)
+
+=== discriminability: mean score(anomalous) − mean score(normal) ===
+(what AUROC depends on -- can the model still tell them apart?)
+  degraded − clean     -0.2584   p = 0.0020   (10/10 shrank)
+  rescued  − degraded  -0.0010   p = 0.9082   (6/10 shrank)
+
 === per rescue method: rescued − degraded on normal images ===
   CLAHE                    -0.0258   p = 0.7500
   Dehaze (Dark Channel)    +0.0206   p = 0.2500
