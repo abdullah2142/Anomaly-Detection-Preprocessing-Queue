@@ -192,3 +192,32 @@ procedural variance.
 > saturation, not of seed invariance. Excluding cells pinned at AUROC = 0.5,
 > the identical-across-seeds rate falls to 0.0–3.7% in every condition. See
 > Limitation 9.
+
+## 17. The Fallacy's Mechanism Is Established Only as Failure-to-Return
+
+The *preprocessing fallacy* is measured on the detectors' own distance-from-normality
+scores rather than inferred from AUROC ([`feature_space_evidence.md`](feature_space_evidence.md)).
+That measurement supports the claim that restoration does not return images to the
+clean distribution: on normal test images, restored inputs sit +0.396 from the
+clean baseline ($p = 0.002$, 10/10 units), statistically indistinguishable from the
+corrupted inputs they came from.
+
+It does **not** support the stronger form we originally asserted — that restoration
+lands images *further* from normal, in a third distribution of restoration
+artifacts. That difference is −0.002 ($p = 0.914$, 5/10 units), and it is not a
+clipping artefact: the ceiling-share test ($p = 0.97$) and the low-clipping subset
+($p = 0.63$) agree. The claim has been withdrawn from the abstract, §5.4 and §6.1.
+
+Three scope limits on the probe itself. It covers 5 categories at one seed and one
+severity (moderate). Scores were subject to the library's normalisation, which
+clipped 46% of them at 1.0 — the ceiling-robust checks agree with the main result,
+but an unclipped rerun would sharpen the estimate. And most importantly, **distance
+is not direction**: a scalar score cannot distinguish "the same distance from
+normal" from "a distinct region of feature space at the same radius". Testing
+distinctness requires embedding geometry, and remains future work.
+
+**Implication:** the deployment-relevant half of the fallacy is demonstrated —
+restoration does not undo the distribution shift, so preprocessing cannot be
+assumed to recover clean-image performance. The mechanistic story about *why* the
+AUROC penalty arises is not settled by this evidence, and the paper no longer
+claims otherwise.

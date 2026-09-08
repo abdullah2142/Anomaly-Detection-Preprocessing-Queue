@@ -25,7 +25,7 @@ A rigorous 4-way comparative benchmark evaluating **test-time rescue preprocessi
 
 **Core findings:**
 1. **Augmented training significantly improves robustness** (+12.3 pp PatchCore, +10.1 pp PaDiM on MVTec-AD, category-clustered p ≤ 1.2×10⁻⁴) — but the benefit is **part robustness, part distribution matching**. Against corruptions and severities never seen in training, PatchCore keeps ~⅓ of its gain; PaDiM keeps none. See Generalization Controls below.
-2. **Rescue preprocessing is net-harmful** in all 4 conditions — the *preprocessing fallacy* — even when the corruption type, severity, and restoration parameters are all known exactly (no degradation-detection step is included).
+2. **Rescue preprocessing is net-harmful** in all 4 conditions — the *preprocessing fallacy* — even when the corruption type, severity, and restoration parameters are all known exactly (no degradation-detection step is included). Probing the detectors' own distance-from-normality scores shows restoration **fails to return images to the clean distribution**, but does *not* displace them further than the corruption did — see [`docs/feature_space_evidence.md`](docs/feature_space_evidence.md).
 3. **Wiener deconvolution is the most harmful rescue** at every severity, even with an oracle PSF matched to the blur that generated the image: −5.7 pp (mild), −15.1 pp (moderate), −12.5 pp (severe) for Gaussian blur. Misspecifying the kernel roughly 5× makes it far worse (−32.2 pp at mild), quantifying the cost of blind deconvolution.
 
 ---

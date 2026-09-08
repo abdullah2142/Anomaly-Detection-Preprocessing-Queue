@@ -53,6 +53,18 @@ A: No — 0.50 is a single operating point chosen as a reasonable default. The s
 
 ## On the Results
 
+**Q: You call it the preprocessing fallacy and say restoration creates a third distribution. Have you shown that, or only that AUROC drops?**
+
+A: We measured it, and the measurement refined the claim. The anomaly score is itself a distance from learned normality — nearest-neighbour distance to the coreset for PatchCore, Mahalanobis distance for PaDiM — and AUROC discards it by keeping only the ranking. We recorded the raw score for normal test images under clean, corrupted and restored inputs (5 categories × 2 models, moderate severity; [`feature_space_evidence.md`](feature_space_evidence.md)).
+
+Two of the three predictions hold and one does not. Restored images sit far from learned normality (+0.396 versus clean, $p = 0.002$, 10/10 units) — restoration does **not** return them to the clean distribution, which is the deployment-relevant half of the claim and is now demonstrated rather than inferred. But they are not measurably *further* from normal than the corrupted images they came from (−0.002, $p = 0.914$, 5/10 units). We had asserted the stronger form; the data does not support it, so we no longer make it.
+
+This is not a clipping artefact: 46% of scores sit at the normaliser's ceiling, and both ceiling-robust checks — the share of images pinned at 1.0 ($p = 0.97$) and the low-clipping subset ($p = 0.63$) — agree with the main test. One thing remains genuinely open: distance is not direction, and scalar scores cannot show whether restored images occupy a distinct region of feature space at the same radius. That needs embedding geometry, and we say so rather than assuming it.
+
+The AUROC results are untouched by any of this; they never depended on the mechanism being right.
+
+---
+
 **Q: Your augmentation uses the same corruption types and severities you test on. Haven't you just trained on the test distribution?**
 
 A: Partly, and we measured exactly how much. Two withholding controls train the augmented arm with one condition removed and test only on that removed condition, over 8 MVTec-AD categories. Leave-one-corruption-out withholds a corruption type; the severity holdout trains on mild and moderate and tests on severe.
@@ -73,7 +85,7 @@ A related consequence: we never apply a rescue to a corruption it does not targe
 
 **Q: Wiener deconvolution fails even with the exact known kernel (at severe corruption). What does this tell us?**
 
-A: It tells us that the damaging element is not the blur itself — it is the *artifacts introduced by deconvolution*. With an exact PSF, Wiener deconvolution still introduces ringing (Gibbs phenomenon at sharp edges), noise amplification at high spatial frequencies, and boundary effects at image borders. These artifacts look nothing like any normal training image in any MVTec-AD category. A patch embedding of a deconvolved blurred image maps to a region of feature space far from the coreset, producing anomaly scores near or at the random-chance floor. This is a fundamental incompatibility between frequency-domain restoration and patch-level feature matching, not a tuning problem.
+A: It tells us that the damaging element is not the blur itself — it is what deconvolution does to the image. With an exact PSF, Wiener deconvolution still introduces ringing (Gibbs phenomenon at sharp edges), noise amplification at high spatial frequencies, and boundary effects at image borders. These artifacts look nothing like any normal training image in any MVTec-AD category. A patch embedding of a deconvolved blurred image maps to a region of feature space far from the coreset, producing anomaly scores near or at the random-chance floor. This is a fundamental incompatibility between frequency-domain restoration and patch-level feature matching, not a tuning problem.
 
 ---
 

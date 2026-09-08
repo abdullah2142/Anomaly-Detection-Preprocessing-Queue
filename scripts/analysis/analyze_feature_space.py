@@ -108,10 +108,17 @@ def resolve_run(path: str) -> str:
 def main() -> None:
     ap = argparse.ArgumentParser(description=__doc__)
     ap.add_argument("run")
+    ap.add_argument("--doc", default=None, help="also write a markdown summary here")
     args = ap.parse_args()
-    df = pd.read_csv(resolve_run(args.run))
+    _render(args.run)
+    if args.doc:
+        write_doc(args.doc, args.run)
 
-    print(f"=== {Path(resolve_run(args.run)).name} ===")
+
+def _render(run_path: str) -> None:
+    df = pd.read_csv(resolve_run(run_path))
+
+    print(f"=== {Path(resolve_run(run_path)).name} ===")
     print(f"{len(df)} score rows | {df.category.nunique()} categories | "
           f"{sorted(df.model.unique())}\n")
 
@@ -156,6 +163,28 @@ def main() -> None:
     for rescue, g in r.groupby("rescue"):
         mean, p, n = exact_signflip(g.groupby("category")["diff"].mean().values)
         print(f"  {rescue:24s} {mean:+.4f}   p = {p:.4f}")
+
+
+def write_doc(path: str, run: str) -> None:
+    import io, contextlib
+    buf = io.StringIO()
+    with contextlib.redirect_stdout(buf):
+        _render(run)
+    Path(path).write_text(
+        "# Feature-Space Evidence for the Preprocessing Fallacy\n\n"
+        "This file is generated. Do not edit by hand -- rerun\n"
+        "`python scripts/analysis/analyze_feature_space.py results/feature_space_probe.txt "
+        "--doc docs/feature_space_evidence.md`.\n\n"
+        "The paper's named contribution is a mechanism: restoration does not return a\n"
+        "corrupted image to the clean distribution but creates a third distribution,\n"
+        "further from normal than the corruption was. AUROC cannot test that -- it\n"
+        "measures only the ranking of scores, never how far anything sits from normal.\n"
+        "The anomaly score IS that distance, so its magnitude can.\n\n"
+        "Comparisons are restricted to normal test images and made within a\n"
+        "(category, model) unit, since scores are only comparable within one trained\n"
+        "model. Significance is an exact paired permutation test over per-unit\n"
+        "differences.\n\n```\n" + buf.getvalue() + "```\n")
+    print(f"wrote {path}")
 
 
 if __name__ == "__main__":

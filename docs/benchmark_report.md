@@ -245,7 +245,7 @@ Clean-image AUROC decreases by only 0.5 pp (PatchCore) to 1.8 pp (PaDiM), a negl
 PatchCore shows degradation AUROC improvements of up to **+0.25** for Gaussian blur and **+0.23** for motion blur at severe levels. PaDiM shows gains of up to **+0.17** for motion blur/severe. No corruption/severity condition shows a regression under augmented training.
 
 ### Finding 3 — Rescue preprocessing is predominantly harmful (the preprocessing fallacy)
-Across 810 test cases per model per training condition, rescue methods are beneficial in only 21–38% of instances. The mean rescue delta is negative in all four conditions. Classical restoration pipelines — designed for human visual quality — misalign with the learned feature distributions of deep anomaly detectors.
+Across 810 test cases per model per training condition, rescue methods are beneficial in only 21–38% of instances. The mean rescue delta is negative in all four conditions. Classical restoration pipelines — designed for human visual quality — misalign with the learned feature distributions of deep anomaly detectors. Direct probing of those distributions confirms restoration does not return images to the clean distribution, though it does not push them further from it either (see `feature_space_evidence.md`).
 
 ### Finding 4 — Augmented training exacerbates rescue harm
 Combining augmented training with rescue preprocessing produces the worst outcome. A model trained to recognize corruption patterns is maximally confused by preprocessing that removes those patterns inconsistently. PatchCore's mean rescue delta worsens from −0.0394 (clean) to −0.1179 (augmented).
