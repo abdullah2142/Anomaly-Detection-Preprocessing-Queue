@@ -335,7 +335,7 @@ Stochastic corruptions (sensor noise, fog) use per-sample seeds derived from the
 
 ## **10.3 Training-Set Corruption (Secondary Experiment — ✅ Complete)**
 
-Both models were trained on randomly corrupted training images (50% probability per image, random corruption type and severity drawn uniformly). The key finding: augmented training significantly improves test-time robustness (+10–12 pp mean degradation AUROC) but also *increases* the harm caused by rescue preprocessing. A corruption-aware model's feature distribution is more disrupted by preprocessing than a clean-trained model's.
+Both models were trained on randomly corrupted training images (50% probability per image, random corruption type and severity drawn uniformly). The key finding: augmented training significantly improves test-time robustness (+10–12 pp mean degradation AUROC) but also *increases* the harm caused by rescue preprocessing. Two withholding controls ([`generalization_controls.md`](generalization_controls.md)) show that benefit is part genuine robustness and part distribution matching: against corruption types and severities withheld from training, PatchCore retains ~34–35% of its gain while PaDiM retains nothing distinguishable from zero. A corruption-aware model's feature distribution is more disrupted by preprocessing than a clean-trained model's.
 
 ---
 
