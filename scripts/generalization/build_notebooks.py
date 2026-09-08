@@ -144,7 +144,16 @@ def evaluate(engine, model, base_test_data, ctype, sev):
 completed_units = set()
 all_results = []
 
-for p in [OUTPUT_FILE, PARTIAL_FILE]:
+if ROWS_PER_UNIT is None:
+    # Unit completeness is defined by the experiment body (a variable number of
+    # rows per unit), so load everything and let the loop decide what is done.
+    for p in [OUTPUT_FILE, PARTIAL_FILE]:
+        if os.path.exists(p):
+            all_results = pd.read_csv(p).to_dict("records")
+            print(f"Loaded {{len(all_results)}} rows from {{p}}.")
+            break
+
+for p in ([] if ROWS_PER_UNIT is None else [OUTPUT_FILE, PARTIAL_FILE]):
     if os.path.exists(p):
         try:
             old_df = pd.read_csv(p)
@@ -439,9 +448,176 @@ print(f"\\n{'='*60}\\nUNCONDITIONAL RESCUE COMPLETE - {len(all_results)} rows\\n
 '''
 
 
-def build(slug, unit_cols, rows_per_unit, loop, title, blurb):
+FEATURE_SPACE_LOOP = '''
+# ---------------------------------------------------------------------------
+# Experiment D: direct evidence for the preprocessing fallacy
+#
+# The paper claims restoration does not return a corrupted image to the clean
+# distribution but creates a THIRD distribution, further from normal than the
+# corruption was. AUROC cannot test that claim: it measures only the ranking of
+# scores, not how far anything sits from normal. The distance itself is already
+# computed -- it IS the anomaly score (nearest-neighbour distance to the coreset
+# for PatchCore, Mahalanobis distance for PaDiM) -- and the benchmark discards it,
+# keeping only image_AUROC.
+#
+# This run records the raw per-image score under three conditions and compares
+# their magnitude:
+#     clean  ->  corrupted  ->  corrupted-then-rescued
+#
+# The comparison is restricted to NORMAL test images. They contain no defect, so
+# any rise in their score is the model reacting to something that is not a defect.
+# If rescued > corrupted on normal images, restoration pushed them further from
+# normal than the damage did, which is the fallacy shown directly.
+#
+# SCORE COMPARABILITY. Scores are only comparable within one trained model, so
+# every comparison is within a (category, model) unit. Anomalib may also min-max
+# normalise scores; if that were refit per run, magnitudes across conditions would
+# be meaningless. We disable normalisation where the installed API allows, and the
+# analysis flags the failure mode: if every condition spans exactly [0, 1], the
+# scores were renormalised per run and must not be compared.
+# ---------------------------------------------------------------------------
+from torch.utils.data import DataLoader
+
+SEVERITIES_TO_PROBE = ["moderate"]   # the tier where Wiener harm is largest
+
+
+def make_score_engine():
+    """Engine with score normalisation disabled where the API supports it."""
+    from anomalib.engine import Engine as _Engine
+    try:
+        from anomalib.utils.normalization import NormalizationMethod
+        eng = _Engine(max_epochs=1, accelerator="auto", devices=1,
+                      default_root_dir="/tmp/anomalib", enable_progress_bar=False,
+                      callbacks=[DisableCheckpointing()],
+                      normalization=NormalizationMethod.NONE)
+        print("   normalisation: DISABLED (NormalizationMethod.NONE)")
+        return eng
+    except Exception as e:
+        print(f"   normalisation: could not disable ({type(e).__name__}); "
+              "the analysis will check whether scores were renormalised per run")
+        return make_engine()
+
+
+def collect_scores(engine, model, loader):
+    """Return (scores, labels) per image. Tolerates anomalib's dict/dataclass batches."""
+    import dataclasses
+    preds = engine.predict(model=model, dataloaders=loader)
+    scores, labels = [], []
+    for batch in preds:
+        def pick(*names):
+            for n in names:
+                if dataclasses.is_dataclass(batch) and hasattr(batch, n):
+                    return getattr(batch, n)
+                if isinstance(batch, dict) and n in batch:
+                    return batch[n]
+            return None
+        s = pick("pred_score", "pred_scores", "anomaly_score")
+        y = pick("gt_label", "label", "gt_labels")
+        if s is None:
+            raise RuntimeError(f"no score field in prediction batch: "
+                               f"{list(batch.keys()) if isinstance(batch, dict) else dir(batch)}")
+        s = s.detach().cpu().numpy().reshape(-1)
+        y = (y.detach().cpu().numpy().reshape(-1) if y is not None
+             else np.full(len(s), -1))
+        scores.extend(s.tolist())
+        labels.extend(y.tolist())
+    return scores, labels
+
+
+def record_scores(model_name, condition, ctype, severity, rescue, scores, labels):
+    for i, (sc, lb) in enumerate(zip(scores, labels)):
+        all_results.append({
+            "model": model_name, "dataset": "MVTec-AD", "category": category,
+            "seed": SEED, "condition": condition, "ctype": ctype,
+            "severity": severity, "rescue": rescue, "image_index": i,
+            "is_anomalous": int(lb), "anomaly_score": float(sc),
+            "experiment": "feature_space"})
+    save_results()
+
+
+# A unit is complete when every probe condition is present for it: the clean
+# pass, one pass per (corruption, severity), and one per matched rescue.
+N_RESCUES = sum(len(get_rescue_map(sev, config)[ct])
+                for sev in SEVERITIES_TO_PROBE for ct in ALL_CTYPES)
+EXPECTED_CONDITIONS = 1 + len(ALL_CTYPES) * len(SEVERITIES_TO_PROBE) + N_RESCUES
+print(f"Expecting {EXPECTED_CONDITIONS} probe conditions per (category, model).")
+
+completed_units = set()
+if all_results:
+    _prev = pd.DataFrame(all_results)
+    _n = _prev.groupby(["category", "model"])[["condition", "ctype", "severity", "rescue"]] \
+              .apply(lambda g: g.drop_duplicates().shape[0])
+    completed_units = {k for k, v in _n.items() if v >= EXPECTED_CONDITIONS}
+    print(f"Resumed {len(completed_units)} completed (category, model) units.")
+
+print(f"\\nGPU: {torch.cuda.get_device_name(0) if torch.cuda.is_available() else 'CPU'}")
+print(f"Categories: {CATEGORIES}\\nSeverities probed: {SEVERITIES_TO_PROBE}")
+
+for category in CATEGORIES:
+    for model_name in MODELS:
+        check_timeout()
+        if (category, model_name) in completed_units:
+            print(f"Skipping {category} / {model_name}")
+            continue
+
+        print(f"\\n{'='*60}\\n{category.upper()} | {model_name}\\n{'='*60}")
+        try:
+            L.seed_everything(SEED)
+            engine = make_score_engine()
+            model = make_model(model_name)
+            datamodule = MVTecAD(root=MVTEC_ROOT, category=category,
+                                 train_batch_size=32, eval_batch_size=32)
+            print(f"[TRAIN] {model_name} on clean data")
+            engine.fit(model=model, datamodule=datamodule)
+
+            dm_test = MVTecAD(root=MVTEC_ROOT, category=category,
+                              train_batch_size=32, eval_batch_size=32)
+            dm_test.setup(stage="test")
+            base = dm_test.test_data
+
+            # (1) clean -- where the model expects normal images to sit
+            print("[1] clean")
+            loader = DataLoader(base, batch_size=32, num_workers=4,
+                                collate_fn=base.collate_fn)
+            sc, lb = collect_scores(engine, model, loader)
+            record_scores(model_name, "clean", "clean", "none", "none", sc, lb)
+
+            for ctype in ALL_CTYPES:
+                for sev in SEVERITIES_TO_PROBE:
+                    # (2) corrupted -- how far the damage alone moves them
+                    print(f"[2] {ctype} ({sev})")
+                    loader = DataLoader(
+                        CorruptedDatasetWrapper(base, ctype, sev, config),
+                        batch_size=32, num_workers=4, collate_fn=base.collate_fn)
+                    sc, lb = collect_scores(engine, model, loader)
+                    record_scores(model_name, "degraded", ctype, sev, "none", sc, lb)
+
+                    # (3) rescued -- the fallacy predicts this moves them FURTHER
+                    for r_name, r_func in get_rescue_map(sev, config)[ctype]:
+                        print(f"[3] {ctype} ({sev}) + {r_name}")
+                        loader = DataLoader(
+                            CorruptedDatasetWrapper(base, ctype, sev, config,
+                                                    rescue_func=r_func),
+                            batch_size=32, num_workers=4, collate_fn=base.collate_fn)
+                        sc, lb = collect_scores(engine, model, loader)
+                        record_scores(model_name, "rescued", ctype, sev, r_name, sc, lb)
+
+            del model, engine
+            cleanup_memory()
+            completed_units.add((category, model_name))
+        except Exception as e:
+            print(f"Error in {category}/{model_name}: {e}")
+            save_results()
+            raise
+
+save_results()
+print(f"\\n{'='*60}\\nFEATURE-SPACE PROBE COMPLETE - {len(all_results)} rows\\n{'='*60}")
+'''
+
+
+def build(slug, unit_cols, rows_per_unit, loop, title, blurb, categories=None):
     prelude = source_prelude()
-    common = COMMON.format(categories=CATEGORIES, seed=SEED, slug=slug,
+    common = COMMON.format(categories=categories or CATEGORIES, seed=SEED, slug=slug,
                            all_ctypes=ALL_CTYPES, all_sevs=ALL_SEVS,
                            unit_cols=unit_cols)
     body = f"ROWS_PER_UNIT = {rows_per_unit}\n" + common + loop
@@ -474,6 +650,14 @@ if __name__ == "__main__":
           "held-out 5th, rotating through all five. Answers whether the published "
           "augmentation gain reflects genuine robustness or a corruption-matched oracle. "
           "Clean-trained comparison rows already exist in the master CSV.\n")
+    build("feature_space_probe", ["category", "model"], None, FEATURE_SPACE_LOOP,
+          "Feature-Space Evidence for the Preprocessing Fallacy",
+          "Records the raw per-image anomaly score -- the model's own distance from "
+          "normal -- for clean, corrupted and corrupted-then-rescued images, restricted "
+          "to normal test images. AUROC measures only ranking and cannot test the "
+          "claim that restoration creates a third distribution further from normal "
+          "than the corruption was; the score magnitude can.\n",
+          categories=["bottle", "carpet", "cable", "hazelnut", "screw"])
     build("unconditional_rescue", ["category", "model"], 21, UNCONDITIONAL_LOOP,
           "Unconditional and Misidentified Rescue",
           "Applies each rescue to undegraded images (cost of unnecessary preprocessing) "

@@ -11,6 +11,7 @@ ask whether the models generalised or simply memorised the test distribution.
 | `leave_one_corruption_out.ipynb` | 4 corruption types | the held-out 5th | Does it transfer to an unseen *kind* of degradation? |
 | `severity_holdout.ipynb` | mild + moderate | severe | Does it transfer to degradation *worse* than it trained for? |
 | `unconditional_rescue.ipynb` | clean data (no augmentation) | undegraded images, and mismatched corruptions | What does preprocessing cost when it wasn't needed, or when the degradation is misidentified? |
+| `feature_space_probe.ipynb` | clean data (no augmentation) | clean, corrupted and rescued images | Where do rescued images actually land relative to normal? Direct evidence for the preprocessing fallacy. |
 
 The third notebook addresses a different gap. The benchmark applies each rescue
 only to the corruption it targets, chosen using that corruption's ground-truth
@@ -59,7 +60,8 @@ prep + fit + ~9 test passes); treat as ±50%.
 | `leave_one_corruption_out` | 80 | 240 | ~4.5 h |
 | `severity_holdout` | 16 | 80 | ~1.2 h |
 | `unconditional_rescue` | 16 | 336 | ~3 h |
-| **Total** | 112 | 656 | **~9 h** |
+| `feature_space_probe` | 10 | 120 | ~1.2 h |
+| **Total** | 122 | 776 | **~10 h** |
 
 `unconditional_rescue` emits 21 rows per (category, model): 6 rescues on clean
 images, plus 5 confusions x 3 severities.
@@ -107,3 +109,38 @@ python scripts/generalization/build_notebooks.py
 
 Edit `CATEGORIES`, `SEED` or the loop bodies in that script rather than the
 generated `.ipynb` files.
+
+## `feature_space_probe` — reading the result
+
+The paper names its contribution the *preprocessing fallacy* and defines it as a
+mechanism: restoration does not return a corrupted image to the clean
+distribution, it creates a **third distribution** further from normal than the
+corruption was. AUROC cannot test that — it measures only the ranking of scores,
+never how far anything sits from normal. The distance is already computed (it *is*
+the anomaly score) and the benchmark discards it, keeping only `image_AUROC`.
+
+This notebook records the raw per-image score for clean, corrupted and
+corrupted-then-rescued images, on 5 categories × 2 models, at moderate severity.
+Analysis restricts to **normal** test images — they contain no defect, so a rise
+in their score is the model reacting to something that is not a defect.
+
+```bash
+python scripts/analysis/analyze_feature_space.py results/feature_space_probe.txt
+```
+
+It reports the three predictions in order. The third is the one the paper asserts
+and has never measured:
+
+    score(clean)  <  score(degraded)  <  score(rescued)
+
+**If the third inequality holds**, the fallacy is demonstrated rather than
+inferred, and the abstract's mechanism claim is earned. **If it does not**, the
+honest response is to soften that claim to a hypothesis — the AUROC results stand
+either way, since they never depended on the mechanism being right.
+
+⚠️ **One way this run can be invalid.** Anomalib may min-max normalise scores. If
+it renormalises each run separately, every condition gets pinned to [0, 1] and the
+magnitudes become meaningless. The notebook disables normalisation where the
+installed API allows, and the analysis detects the failure mode and refuses to
+conclude rather than reporting a rescaled artefact. If it refuses, fix the engine
+configuration and re-run — do not interpret the numbers.
