@@ -29,6 +29,7 @@ Usage:  python scripts/generalization/build_notebooks.py
 from __future__ import annotations
 
 import json
+import re
 from pathlib import Path
 
 SOURCE = Path("notebooks/02_mvtec_patchcore_augmented.ipynb")
@@ -49,7 +50,17 @@ def source_prelude() -> str:
     text = "".join(json.load(SOURCE.open())["cells"][0]["source"])
     lines = text.split("\n")
     stop = next(i for i, l in enumerate(lines) if l.startswith("# 4b."))
-    head = "\n".join(lines[:stop])
+    head_lines = lines[:stop]
+
+    # Drop the source notebook's own run configuration. Every one of these is
+    # reassigned by COMMON below, and leaving both in place means the notebook
+    # appears to declare two output files -- the stale one first.
+    dead = ("OUTPUT_FILE", "PARTIAL_FILE", "AUG_TRAIN_ROOT", "CATEGORIES", "SEEDS")
+    head_lines = [
+        l for l in head_lines
+        if not any(re.match(rf"{name}\s*=", l) for name in dead)
+    ]
+    head = "\n".join(head_lines)
 
     start = next(i for i, l in enumerate(lines) if l.startswith("class DisableCheckpointing"))
     # Stop before notebook 02's own resume block: it keys on (category, seed),
@@ -70,6 +81,9 @@ COMMON = '''
 # ---------------------------------------------------------------------------
 from anomalib.models import Patchcore, Padim
 
+import glob
+
+SLUG = "{slug}"
 CATEGORIES = {categories!r}
 SEED = {seed}
 MODELS = ["PatchCore", "PaDiM"]
@@ -81,6 +95,31 @@ PARTIAL_FILE = "results/{slug}_partial.csv"
 AUG_ROOT_BASE = "/kaggle/tmp/aug_{slug}"
 
 os.makedirs("results", exist_ok=True)
+
+# --- Config auto-discovery -------------------------------------------------
+# The prelude carries a hardcoded Kaggle path to experiment_config.json that goes
+# stale whenever the config is attached from a different dataset. Prefer whatever
+# is actually mounted, and say which file was used.
+_cfg = sorted(glob.glob("/kaggle/input/**/experiment_config.json", recursive=True))
+if _cfg:
+    CONFIG_PATH = _cfg[0]
+    with open(CONFIG_PATH) as f:
+        config = json.load(f)
+    MVTEC_ROOT = config.get("mvtec_root", MVTEC_ROOT)
+    print(f"Config: {{CONFIG_PATH}}")
+else:
+    print(f"Config: {{CONFIG_PATH}} (nothing found under /kaggle/input -- using the prelude path)")
+print(f"MVTec root: {{MVTEC_ROOT}}")
+print(f"Writing: {{OUTPUT_FILE}}")
+
+# --- Cross-session resume --------------------------------------------------
+# Attach a previous session's output as a Kaggle dataset and it is picked up
+# automatically, matching the behaviour of the Wiener rerun notebooks.
+_prev = sorted(glob.glob(f"/kaggle/input/**/*{{SLUG}}*.csv", recursive=True)
+               + glob.glob(f"/kaggle/input/**/*{{SLUG}}*.txt", recursive=True))
+if _prev and not os.path.exists(OUTPUT_FILE):
+    shutil.copy(_prev[-1], PARTIAL_FILE)
+    print(f"Restored previous progress from: {{_prev[-1]}}")
 
 
 def make_model(name):

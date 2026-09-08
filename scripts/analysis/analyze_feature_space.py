@@ -71,13 +71,25 @@ def normalisation_guard(df: pd.DataFrame) -> bool:
     return True
 
 
+def resolve_run(path: str) -> str:
+    """Accept either extension. Notebooks write .csv; downloads often arrive .txt."""
+    p = Path(path)
+    if p.exists():
+        return str(p)
+    for alt in (p.with_suffix(".csv"), p.with_suffix(".txt")):
+        if alt.exists():
+            print(f"note: using {alt} for {path}")
+            return str(alt)
+    raise SystemExit(f"not found: {path} (tried .csv and .txt)")
+
+
 def main() -> None:
     ap = argparse.ArgumentParser(description=__doc__)
     ap.add_argument("run")
     args = ap.parse_args()
-    df = pd.read_csv(args.run)
+    df = pd.read_csv(resolve_run(args.run))
 
-    print(f"=== {Path(args.run).name} ===")
+    print(f"=== {Path(resolve_run(args.run)).name} ===")
     print(f"{len(df)} score rows | {df.category.nunique()} categories | "
           f"{sorted(df.model.unique())}\n")
 

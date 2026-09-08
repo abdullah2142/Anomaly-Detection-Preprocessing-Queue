@@ -97,14 +97,26 @@ def part_b(run: pd.DataFrame, master: pd.DataFrame) -> None:
               f"{mean:+.2f} pp (p = {p:.4f}, {n} categories)")
 
 
+def resolve_run(path: str) -> str:
+    """Accept either extension. Notebooks write .csv; downloads often arrive .txt."""
+    p = Path(path)
+    if p.exists():
+        return str(p)
+    for alt in (p.with_suffix(".csv"), p.with_suffix(".txt")):
+        if alt.exists():
+            print(f"note: using {alt} for {path}")
+            return str(alt)
+    raise SystemExit(f"not found: {path} (tried .csv and .txt)")
+
+
 def main() -> None:
     ap = argparse.ArgumentParser(description=__doc__)
     ap.add_argument("run")
     ap.add_argument("--master", default="data/benchmark_master_combined.csv")
     args = ap.parse_args()
-    run = pd.read_csv(args.run)
+    run = pd.read_csv(resolve_run(args.run))
     master = pd.read_csv(args.master)
-    print(f"=== {Path(args.run).name} ===")
+    print(f"=== {Path(resolve_run(args.run)).name} ===")
     print(f"{len(run)} rows | {run.category.nunique()} categories | "
           f"{sorted(run.model.unique())} | seed {sorted(run.seed.unique())}\n")
     part_a(run, master)

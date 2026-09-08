@@ -166,6 +166,18 @@ trained on what it is tested against.
 """
 
 
+def resolve_run(path: str) -> str:
+    """Accept either extension. Notebooks write .csv; downloads often arrive .txt."""
+    p = Path(path)
+    if p.exists():
+        return str(p)
+    for alt in (p.with_suffix(".csv"), p.with_suffix(".txt")):
+        if alt.exists():
+            print(f"note: using {alt} for {path}")
+            return str(alt)
+    raise SystemExit(f"not found: {path} (tried .csv and .txt)")
+
+
 def main() -> None:
     ap = argparse.ArgumentParser(description=__doc__)
     ap.add_argument("run", nargs="*", help="CSV(s) produced by a control notebook")
@@ -189,6 +201,7 @@ def main() -> None:
     for run in runs:
         stem = Path(run).stem
         name, blurb = meta.get(stem, (stem, ""))
+        run = resolve_run(run)
         m = load(run, args.master)
         if args.doc:
             sections.append(render(name, blurb, summarise(m)))

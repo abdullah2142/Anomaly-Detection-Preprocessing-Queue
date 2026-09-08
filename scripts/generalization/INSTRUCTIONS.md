@@ -79,8 +79,17 @@ partial units are discarded and re-run.
 
 1. Upload the notebook to Kaggle, attach `ipythonx/mvtec-ad` and
    `experiment_config.json`, enable the **T4 GPU** accelerator.
-2. Run all. Results land in `results/<experiment>.csv`.
-3. To resume, attach the previous session's CSV output and run again.
+2. Run all. Results land in `results/<slug>.csv`.
+3. To resume, attach the previous session's output as a dataset and run again.
+
+No path editing is needed. Each notebook discovers `experiment_config.json`
+anywhere under `/kaggle/input` and prints which file it used, so the config can be
+attached from any dataset. It also picks up a previous run's output automatically
+by matching its own slug, and prints the config path, MVTec root and output file
+before doing any work — check those three lines first if a run looks wrong.
+
+Analysis accepts either extension, so a download saved as `.txt` needs no
+renaming.
 
 ## Analysing
 
