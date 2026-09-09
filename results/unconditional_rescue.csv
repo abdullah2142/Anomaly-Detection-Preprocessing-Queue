@@ -1,0 +1,337 @@
+model,dataset,category,seed,phase,ctype,severity,rescue,image_AUROC,training,experiment,applied_to
+PatchCore,MVTec-AD,carpet,42,rescue,clean,none,CLAHE,0.9899678230285645,clean,rescue_on_clean,undegraded
+PatchCore,MVTec-AD,carpet,42,rescue,clean,none,Retinex,0.9406099319458008,clean,rescue_on_clean,undegraded
+PatchCore,MVTec-AD,carpet,42,rescue,clean,none,Wiener,0.8952648639678955,clean,rescue_on_clean,undegraded
+PatchCore,MVTec-AD,carpet,42,rescue,clean,none,Wiener (Motion PSF),0.4791332185268402,clean,rescue_on_clean,undegraded
+PatchCore,MVTec-AD,carpet,42,rescue,clean,none,NLM Denoise,0.9867575764656067,clean,rescue_on_clean,undegraded
+PatchCore,MVTec-AD,carpet,42,rescue,clean,none,Dehaze (Dark Channel),0.9887640476226807,clean,rescue_on_clean,undegraded
+PatchCore,MVTec-AD,carpet,42,rescue,fog_haze,mild,CLAHE,0.8138042092323303,clean,rescue_mismatched,wrong_corruption
+PatchCore,MVTec-AD,carpet,42,rescue,fog_haze,moderate,CLAHE,0.5549759268760681,clean,rescue_mismatched,wrong_corruption
+PatchCore,MVTec-AD,carpet,42,rescue,fog_haze,severe,CLAHE,0.5,clean,rescue_mismatched,wrong_corruption
+PatchCore,MVTec-AD,carpet,42,rescue,motion_blur,mild,Wiener,0.732945442199707,clean,rescue_mismatched,wrong_corruption
+PatchCore,MVTec-AD,carpet,42,rescue,motion_blur,moderate,Wiener,0.5,clean,rescue_mismatched,wrong_corruption
+PatchCore,MVTec-AD,carpet,42,rescue,motion_blur,severe,Wiener,0.5,clean,rescue_mismatched,wrong_corruption
+PatchCore,MVTec-AD,carpet,42,rescue,gaussian_blur,mild,Wiener (Motion PSF),0.49438202381134033,clean,rescue_mismatched,wrong_corruption
+PatchCore,MVTec-AD,carpet,42,rescue,gaussian_blur,moderate,Wiener (Motion PSF),0.5,clean,rescue_mismatched,wrong_corruption
+PatchCore,MVTec-AD,carpet,42,rescue,gaussian_blur,severe,Wiener (Motion PSF),0.5,clean,rescue_mismatched,wrong_corruption
+PatchCore,MVTec-AD,carpet,42,rescue,sensor_noise,mild,Dehaze (Dark Channel),0.9771267771720886,clean,rescue_mismatched,wrong_corruption
+PatchCore,MVTec-AD,carpet,42,rescue,sensor_noise,moderate,Dehaze (Dark Channel),0.9506419897079468,clean,rescue_mismatched,wrong_corruption
+PatchCore,MVTec-AD,carpet,42,rescue,sensor_noise,severe,Dehaze (Dark Channel),0.8760032057762146,clean,rescue_mismatched,wrong_corruption
+PatchCore,MVTec-AD,carpet,42,rescue,low_light,mild,NLM Denoise,0.9875601530075073,clean,rescue_mismatched,wrong_corruption
+PatchCore,MVTec-AD,carpet,42,rescue,low_light,moderate,NLM Denoise,0.9658908247947693,clean,rescue_mismatched,wrong_corruption
+PatchCore,MVTec-AD,carpet,42,rescue,low_light,severe,NLM Denoise,0.8069823384284973,clean,rescue_mismatched,wrong_corruption
+PaDiM,MVTec-AD,carpet,42,rescue,clean,none,CLAHE,0.9707062840461731,clean,rescue_on_clean,undegraded
+PaDiM,MVTec-AD,carpet,42,rescue,clean,none,Retinex,0.9237560033798218,clean,rescue_on_clean,undegraded
+PaDiM,MVTec-AD,carpet,42,rescue,clean,none,Wiener,0.8202247619628906,clean,rescue_on_clean,undegraded
+PaDiM,MVTec-AD,carpet,42,rescue,clean,none,Wiener (Motion PSF),0.5854735374450684,clean,rescue_on_clean,undegraded
+PaDiM,MVTec-AD,carpet,42,rescue,clean,none,NLM Denoise,0.9775280952453613,clean,rescue_on_clean,undegraded
+PaDiM,MVTec-AD,carpet,42,rescue,clean,none,Dehaze (Dark Channel),0.9686999320983887,clean,rescue_on_clean,undegraded
+PaDiM,MVTec-AD,carpet,42,rescue,fog_haze,mild,CLAHE,0.7287319302558899,clean,rescue_mismatched,wrong_corruption
+PaDiM,MVTec-AD,carpet,42,rescue,fog_haze,moderate,CLAHE,0.663723886013031,clean,rescue_mismatched,wrong_corruption
+PaDiM,MVTec-AD,carpet,42,rescue,fog_haze,severe,CLAHE,0.6043338775634766,clean,rescue_mismatched,wrong_corruption
+PaDiM,MVTec-AD,carpet,42,rescue,motion_blur,mild,Wiener,0.7540128231048584,clean,rescue_mismatched,wrong_corruption
+PaDiM,MVTec-AD,carpet,42,rescue,motion_blur,moderate,Wiener,0.5451444387435913,clean,rescue_mismatched,wrong_corruption
+PaDiM,MVTec-AD,carpet,42,rescue,motion_blur,severe,Wiener,0.46308186650276184,clean,rescue_mismatched,wrong_corruption
+PaDiM,MVTec-AD,carpet,42,rescue,gaussian_blur,mild,Wiener (Motion PSF),0.61296147108078,clean,rescue_mismatched,wrong_corruption
+PaDiM,MVTec-AD,carpet,42,rescue,gaussian_blur,moderate,Wiener (Motion PSF),0.483146071434021,clean,rescue_mismatched,wrong_corruption
+PaDiM,MVTec-AD,carpet,42,rescue,gaussian_blur,severe,Wiener (Motion PSF),0.38322633504867554,clean,rescue_mismatched,wrong_corruption
+PaDiM,MVTec-AD,carpet,42,rescue,sensor_noise,mild,Dehaze (Dark Channel),0.8984751105308533,clean,rescue_mismatched,wrong_corruption
+PaDiM,MVTec-AD,carpet,42,rescue,sensor_noise,moderate,Dehaze (Dark Channel),0.7275280952453613,clean,rescue_mismatched,wrong_corruption
+PaDiM,MVTec-AD,carpet,42,rescue,sensor_noise,severe,Dehaze (Dark Channel),0.6460674405097961,clean,rescue_mismatched,wrong_corruption
+PaDiM,MVTec-AD,carpet,42,rescue,low_light,mild,NLM Denoise,0.961075484752655,clean,rescue_mismatched,wrong_corruption
+PaDiM,MVTec-AD,carpet,42,rescue,low_light,moderate,NLM Denoise,0.9197431802749634,clean,rescue_mismatched,wrong_corruption
+PaDiM,MVTec-AD,carpet,42,rescue,low_light,severe,NLM Denoise,0.7235152721405029,clean,rescue_mismatched,wrong_corruption
+PatchCore,MVTec-AD,grid,42,rescue,clean,none,CLAHE,0.9757727384567261,clean,rescue_on_clean,undegraded
+PatchCore,MVTec-AD,grid,42,rescue,clean,none,Retinex,0.9741019010543823,clean,rescue_on_clean,undegraded
+PatchCore,MVTec-AD,grid,42,rescue,clean,none,Wiener,0.791144609451294,clean,rescue_on_clean,undegraded
+PatchCore,MVTec-AD,grid,42,rescue,clean,none,Wiener (Motion PSF),0.5,clean,rescue_on_clean,undegraded
+PatchCore,MVTec-AD,grid,42,rescue,clean,none,NLM Denoise,0.9908103942871094,clean,rescue_on_clean,undegraded
+PatchCore,MVTec-AD,grid,42,rescue,clean,none,Dehaze (Dark Channel),0.8629908561706543,clean,rescue_on_clean,undegraded
+PatchCore,MVTec-AD,grid,42,rescue,fog_haze,mild,CLAHE,0.7878028154373169,clean,rescue_mismatched,wrong_corruption
+PatchCore,MVTec-AD,grid,42,rescue,fog_haze,moderate,CLAHE,0.6073517203330994,clean,rescue_mismatched,wrong_corruption
+PatchCore,MVTec-AD,grid,42,rescue,fog_haze,severe,CLAHE,0.5,clean,rescue_mismatched,wrong_corruption
+PatchCore,MVTec-AD,grid,42,rescue,motion_blur,mild,Wiener,0.523809552192688,clean,rescue_mismatched,wrong_corruption
+PatchCore,MVTec-AD,grid,42,rescue,motion_blur,moderate,Wiener,0.5,clean,rescue_mismatched,wrong_corruption
+PatchCore,MVTec-AD,grid,42,rescue,motion_blur,severe,Wiener,0.5,clean,rescue_mismatched,wrong_corruption
+PatchCore,MVTec-AD,grid,42,rescue,gaussian_blur,mild,Wiener (Motion PSF),0.5,clean,rescue_mismatched,wrong_corruption
+PatchCore,MVTec-AD,grid,42,rescue,gaussian_blur,moderate,Wiener (Motion PSF),0.5,clean,rescue_mismatched,wrong_corruption
+PatchCore,MVTec-AD,grid,42,rescue,gaussian_blur,severe,Wiener (Motion PSF),0.5,clean,rescue_mismatched,wrong_corruption
+PatchCore,MVTec-AD,grid,42,rescue,sensor_noise,mild,Dehaze (Dark Channel),0.7289055585861206,clean,rescue_mismatched,wrong_corruption
+PatchCore,MVTec-AD,grid,42,rescue,sensor_noise,moderate,Dehaze (Dark Channel),0.4736842215061188,clean,rescue_mismatched,wrong_corruption
+PatchCore,MVTec-AD,grid,42,rescue,sensor_noise,severe,Dehaze (Dark Channel),0.5,clean,rescue_mismatched,wrong_corruption
+PatchCore,MVTec-AD,grid,42,rescue,low_light,mild,NLM Denoise,0.9381787776947021,clean,rescue_mismatched,wrong_corruption
+PatchCore,MVTec-AD,grid,42,rescue,low_light,moderate,NLM Denoise,0.7710944414138794,clean,rescue_mismatched,wrong_corruption
+PatchCore,MVTec-AD,grid,42,rescue,low_light,severe,NLM Denoise,0.5108605027198792,clean,rescue_mismatched,wrong_corruption
+PaDiM,MVTec-AD,grid,42,rescue,clean,none,CLAHE,0.8421052098274231,clean,rescue_on_clean,undegraded
+PaDiM,MVTec-AD,grid,42,rescue,clean,none,Retinex,0.8312448263168335,clean,rescue_on_clean,undegraded
+PaDiM,MVTec-AD,grid,42,rescue,clean,none,Wiener,0.7694235444068909,clean,rescue_on_clean,undegraded
+PaDiM,MVTec-AD,grid,42,rescue,clean,none,Wiener (Motion PSF),0.4306599497795105,clean,rescue_on_clean,undegraded
+PaDiM,MVTec-AD,grid,42,rescue,clean,none,NLM Denoise,0.9147869348526001,clean,rescue_on_clean,undegraded
+PaDiM,MVTec-AD,grid,42,rescue,clean,none,Dehaze (Dark Channel),0.8011695742607117,clean,rescue_on_clean,undegraded
+PaDiM,MVTec-AD,grid,42,rescue,fog_haze,mild,CLAHE,0.7928153872489929,clean,rescue_mismatched,wrong_corruption
+PaDiM,MVTec-AD,grid,42,rescue,fog_haze,moderate,CLAHE,0.5029239654541016,clean,rescue_mismatched,wrong_corruption
+PaDiM,MVTec-AD,grid,42,rescue,fog_haze,severe,CLAHE,0.4832915663719177,clean,rescue_mismatched,wrong_corruption
+PaDiM,MVTec-AD,grid,42,rescue,motion_blur,mild,Wiener,0.5338345766067505,clean,rescue_mismatched,wrong_corruption
+PaDiM,MVTec-AD,grid,42,rescue,motion_blur,moderate,Wiener,0.5146198868751526,clean,rescue_mismatched,wrong_corruption
+PaDiM,MVTec-AD,grid,42,rescue,motion_blur,severe,Wiener,0.5802004933357239,clean,rescue_mismatched,wrong_corruption
+PaDiM,MVTec-AD,grid,42,rescue,gaussian_blur,mild,Wiener (Motion PSF),0.4837092459201813,clean,rescue_mismatched,wrong_corruption
+PaDiM,MVTec-AD,grid,42,rescue,gaussian_blur,moderate,Wiener (Motion PSF),0.6825396418571472,clean,rescue_mismatched,wrong_corruption
+PaDiM,MVTec-AD,grid,42,rescue,gaussian_blur,severe,Wiener (Motion PSF),0.4887217581272125,clean,rescue_mismatched,wrong_corruption
+PaDiM,MVTec-AD,grid,42,rescue,sensor_noise,mild,Dehaze (Dark Channel),0.4352547824382782,clean,rescue_mismatched,wrong_corruption
+PaDiM,MVTec-AD,grid,42,rescue,sensor_noise,moderate,Dehaze (Dark Channel),0.4920634329319,clean,rescue_mismatched,wrong_corruption
+PaDiM,MVTec-AD,grid,42,rescue,sensor_noise,severe,Dehaze (Dark Channel),0.47869670391082764,clean,rescue_mismatched,wrong_corruption
+PaDiM,MVTec-AD,grid,42,rescue,low_light,mild,NLM Denoise,0.8028404712677002,clean,rescue_mismatched,wrong_corruption
+PaDiM,MVTec-AD,grid,42,rescue,low_light,moderate,NLM Denoise,0.8847118020057678,clean,rescue_mismatched,wrong_corruption
+PaDiM,MVTec-AD,grid,42,rescue,low_light,severe,NLM Denoise,0.8822055459022522,clean,rescue_mismatched,wrong_corruption
+PatchCore,MVTec-AD,leather,42,rescue,clean,none,CLAHE,0.999660313129425,clean,rescue_on_clean,undegraded
+PatchCore,MVTec-AD,leather,42,rescue,clean,none,Retinex,1.0,clean,rescue_on_clean,undegraded
+PatchCore,MVTec-AD,leather,42,rescue,clean,none,Wiener,0.93919837474823,clean,rescue_on_clean,undegraded
+PatchCore,MVTec-AD,leather,42,rescue,clean,none,Wiener (Motion PSF),0.73607337474823,clean,rescue_on_clean,undegraded
+PatchCore,MVTec-AD,leather,42,rescue,clean,none,NLM Denoise,1.0,clean,rescue_on_clean,undegraded
+PatchCore,MVTec-AD,leather,42,rescue,clean,none,Dehaze (Dark Channel),1.0,clean,rescue_on_clean,undegraded
+PatchCore,MVTec-AD,leather,42,rescue,fog_haze,mild,CLAHE,0.8369565010070801,clean,rescue_mismatched,wrong_corruption
+PatchCore,MVTec-AD,leather,42,rescue,fog_haze,moderate,CLAHE,0.5623301267623901,clean,rescue_mismatched,wrong_corruption
+PatchCore,MVTec-AD,leather,42,rescue,fog_haze,severe,CLAHE,0.523097813129425,clean,rescue_mismatched,wrong_corruption
+PatchCore,MVTec-AD,leather,42,rescue,motion_blur,mild,Wiener,0.94972825050354,clean,rescue_mismatched,wrong_corruption
+PatchCore,MVTec-AD,leather,42,rescue,motion_blur,moderate,Wiener,0.5,clean,rescue_mismatched,wrong_corruption
+PatchCore,MVTec-AD,leather,42,rescue,motion_blur,severe,Wiener,0.5,clean,rescue_mismatched,wrong_corruption
+PatchCore,MVTec-AD,leather,42,rescue,gaussian_blur,mild,Wiener (Motion PSF),0.89232337474823,clean,rescue_mismatched,wrong_corruption
+PatchCore,MVTec-AD,leather,42,rescue,gaussian_blur,moderate,Wiener (Motion PSF),0.84035325050354,clean,rescue_mismatched,wrong_corruption
+PatchCore,MVTec-AD,leather,42,rescue,gaussian_blur,severe,Wiener (Motion PSF),0.82863450050354,clean,rescue_mismatched,wrong_corruption
+PatchCore,MVTec-AD,leather,42,rescue,sensor_noise,mild,Dehaze (Dark Channel),0.9918478727340698,clean,rescue_mismatched,wrong_corruption
+PatchCore,MVTec-AD,leather,42,rescue,sensor_noise,moderate,Dehaze (Dark Channel),0.9398777484893799,clean,rescue_mismatched,wrong_corruption
+PatchCore,MVTec-AD,leather,42,rescue,sensor_noise,severe,Dehaze (Dark Channel),0.899796187877655,clean,rescue_mismatched,wrong_corruption
+PatchCore,MVTec-AD,leather,42,rescue,low_light,mild,NLM Denoise,0.953125,clean,rescue_mismatched,wrong_corruption
+PatchCore,MVTec-AD,leather,42,rescue,low_light,moderate,NLM Denoise,0.94870924949646,clean,rescue_mismatched,wrong_corruption
+PatchCore,MVTec-AD,leather,42,rescue,low_light,severe,NLM Denoise,0.9099864363670349,clean,rescue_mismatched,wrong_corruption
+PaDiM,MVTec-AD,leather,42,rescue,clean,none,CLAHE,0.98777174949646,clean,rescue_on_clean,undegraded
+PaDiM,MVTec-AD,leather,42,rescue,clean,none,Retinex,0.9602581858634949,clean,rescue_on_clean,undegraded
+PaDiM,MVTec-AD,leather,42,rescue,clean,none,Wiener,0.890625,clean,rescue_on_clean,undegraded
+PaDiM,MVTec-AD,leather,42,rescue,clean,none,Wiener (Motion PSF),0.7255434393882751,clean,rescue_on_clean,undegraded
+PaDiM,MVTec-AD,leather,42,rescue,clean,none,NLM Denoise,0.9928668737411499,clean,rescue_on_clean,undegraded
+PaDiM,MVTec-AD,leather,42,rescue,clean,none,Dehaze (Dark Channel),0.99830162525177,clean,rescue_on_clean,undegraded
+PaDiM,MVTec-AD,leather,42,rescue,fog_haze,mild,CLAHE,0.6256793737411499,clean,rescue_mismatched,wrong_corruption
+PaDiM,MVTec-AD,leather,42,rescue,fog_haze,moderate,CLAHE,0.659816563129425,clean,rescue_mismatched,wrong_corruption
+PaDiM,MVTec-AD,leather,42,rescue,fog_haze,severe,CLAHE,0.47673237323760986,clean,rescue_mismatched,wrong_corruption
+PaDiM,MVTec-AD,leather,42,rescue,motion_blur,mild,Wiener,0.811141312122345,clean,rescue_mismatched,wrong_corruption
+PaDiM,MVTec-AD,leather,42,rescue,motion_blur,moderate,Wiener,0.69870924949646,clean,rescue_mismatched,wrong_corruption
+PaDiM,MVTec-AD,leather,42,rescue,motion_blur,severe,Wiener,0.601222813129425,clean,rescue_mismatched,wrong_corruption
+PaDiM,MVTec-AD,leather,42,rescue,gaussian_blur,mild,Wiener (Motion PSF),0.812160313129425,clean,rescue_mismatched,wrong_corruption
+PaDiM,MVTec-AD,leather,42,rescue,gaussian_blur,moderate,Wiener (Motion PSF),0.60597825050354,clean,rescue_mismatched,wrong_corruption
+PaDiM,MVTec-AD,leather,42,rescue,gaussian_blur,severe,Wiener (Motion PSF),0.779891312122345,clean,rescue_mismatched,wrong_corruption
+PaDiM,MVTec-AD,leather,42,rescue,sensor_noise,mild,Dehaze (Dark Channel),0.7588315606117249,clean,rescue_mismatched,wrong_corruption
+PaDiM,MVTec-AD,leather,42,rescue,sensor_noise,moderate,Dehaze (Dark Channel),0.6759510636329651,clean,rescue_mismatched,wrong_corruption
+PaDiM,MVTec-AD,leather,42,rescue,sensor_noise,severe,Dehaze (Dark Channel),0.6199048757553101,clean,rescue_mismatched,wrong_corruption
+PaDiM,MVTec-AD,leather,42,rescue,low_light,mild,NLM Denoise,0.8366168141365051,clean,rescue_mismatched,wrong_corruption
+PaDiM,MVTec-AD,leather,42,rescue,low_light,moderate,NLM Denoise,0.8444293141365051,clean,rescue_mismatched,wrong_corruption
+PaDiM,MVTec-AD,leather,42,rescue,low_light,severe,NLM Denoise,0.8199728727340698,clean,rescue_mismatched,wrong_corruption
+PatchCore,MVTec-AD,bottle,42,rescue,clean,none,CLAHE,1.0,clean,rescue_on_clean,undegraded
+PatchCore,MVTec-AD,bottle,42,rescue,clean,none,Retinex,0.9476190805435181,clean,rescue_on_clean,undegraded
+PatchCore,MVTec-AD,bottle,42,rescue,clean,none,Wiener,0.9603174328804016,clean,rescue_on_clean,undegraded
+PatchCore,MVTec-AD,bottle,42,rescue,clean,none,Wiener (Motion PSF),0.5,clean,rescue_on_clean,undegraded
+PatchCore,MVTec-AD,bottle,42,rescue,clean,none,NLM Denoise,1.0,clean,rescue_on_clean,undegraded
+PatchCore,MVTec-AD,bottle,42,rescue,clean,none,Dehaze (Dark Channel),0.9888889193534851,clean,rescue_on_clean,undegraded
+PatchCore,MVTec-AD,bottle,42,rescue,fog_haze,mild,CLAHE,0.8579365015029907,clean,rescue_mismatched,wrong_corruption
+PatchCore,MVTec-AD,bottle,42,rescue,fog_haze,moderate,CLAHE,0.7515872716903687,clean,rescue_mismatched,wrong_corruption
+PatchCore,MVTec-AD,bottle,42,rescue,fog_haze,severe,CLAHE,0.6523809432983398,clean,rescue_mismatched,wrong_corruption
+PatchCore,MVTec-AD,bottle,42,rescue,motion_blur,mild,Wiener,0.9865078926086426,clean,rescue_mismatched,wrong_corruption
+PatchCore,MVTec-AD,bottle,42,rescue,motion_blur,moderate,Wiener,0.5,clean,rescue_mismatched,wrong_corruption
+PatchCore,MVTec-AD,bottle,42,rescue,motion_blur,severe,Wiener,0.5,clean,rescue_mismatched,wrong_corruption
+PatchCore,MVTec-AD,bottle,42,rescue,gaussian_blur,mild,Wiener (Motion PSF),0.5,clean,rescue_mismatched,wrong_corruption
+PatchCore,MVTec-AD,bottle,42,rescue,gaussian_blur,moderate,Wiener (Motion PSF),0.5,clean,rescue_mismatched,wrong_corruption
+PatchCore,MVTec-AD,bottle,42,rescue,gaussian_blur,severe,Wiener (Motion PSF),0.5,clean,rescue_mismatched,wrong_corruption
+PatchCore,MVTec-AD,bottle,42,rescue,sensor_noise,mild,Dehaze (Dark Channel),0.8761905431747437,clean,rescue_mismatched,wrong_corruption
+PatchCore,MVTec-AD,bottle,42,rescue,sensor_noise,moderate,Dehaze (Dark Channel),0.815079391002655,clean,rescue_mismatched,wrong_corruption
+PatchCore,MVTec-AD,bottle,42,rescue,sensor_noise,severe,Dehaze (Dark Channel),0.7396825551986694,clean,rescue_mismatched,wrong_corruption
+PatchCore,MVTec-AD,bottle,42,rescue,low_light,mild,NLM Denoise,0.9666666388511658,clean,rescue_mismatched,wrong_corruption
+PatchCore,MVTec-AD,bottle,42,rescue,low_light,moderate,NLM Denoise,0.985714316368103,clean,rescue_mismatched,wrong_corruption
+PatchCore,MVTec-AD,bottle,42,rescue,low_light,severe,NLM Denoise,0.9484126567840576,clean,rescue_mismatched,wrong_corruption
+PaDiM,MVTec-AD,bottle,42,rescue,clean,none,CLAHE,1.0,clean,rescue_on_clean,undegraded
+PaDiM,MVTec-AD,bottle,42,rescue,clean,none,Retinex,0.5,clean,rescue_on_clean,undegraded
+PaDiM,MVTec-AD,bottle,42,rescue,clean,none,Wiener,0.6928571462631226,clean,rescue_on_clean,undegraded
+PaDiM,MVTec-AD,bottle,42,rescue,clean,none,Wiener (Motion PSF),0.5,clean,rescue_on_clean,undegraded
+PaDiM,MVTec-AD,bottle,42,rescue,clean,none,NLM Denoise,1.0,clean,rescue_on_clean,undegraded
+PaDiM,MVTec-AD,bottle,42,rescue,clean,none,Dehaze (Dark Channel),0.9968253970146179,clean,rescue_on_clean,undegraded
+PaDiM,MVTec-AD,bottle,42,rescue,fog_haze,mild,CLAHE,0.7714285254478455,clean,rescue_mismatched,wrong_corruption
+PaDiM,MVTec-AD,bottle,42,rescue,fog_haze,moderate,CLAHE,0.7285714149475098,clean,rescue_mismatched,wrong_corruption
+PaDiM,MVTec-AD,bottle,42,rescue,fog_haze,severe,CLAHE,0.6261904835700989,clean,rescue_mismatched,wrong_corruption
+PaDiM,MVTec-AD,bottle,42,rescue,motion_blur,mild,Wiener,0.7166666388511658,clean,rescue_mismatched,wrong_corruption
+PaDiM,MVTec-AD,bottle,42,rescue,motion_blur,moderate,Wiener,0.5,clean,rescue_mismatched,wrong_corruption
+PaDiM,MVTec-AD,bottle,42,rescue,motion_blur,severe,Wiener,0.5,clean,rescue_mismatched,wrong_corruption
+PaDiM,MVTec-AD,bottle,42,rescue,gaussian_blur,mild,Wiener (Motion PSF),0.5,clean,rescue_mismatched,wrong_corruption
+PaDiM,MVTec-AD,bottle,42,rescue,gaussian_blur,moderate,Wiener (Motion PSF),0.5,clean,rescue_mismatched,wrong_corruption
+PaDiM,MVTec-AD,bottle,42,rescue,gaussian_blur,severe,Wiener (Motion PSF),0.5,clean,rescue_mismatched,wrong_corruption
+PaDiM,MVTec-AD,bottle,42,rescue,sensor_noise,mild,Dehaze (Dark Channel),0.5,clean,rescue_mismatched,wrong_corruption
+PaDiM,MVTec-AD,bottle,42,rescue,sensor_noise,moderate,Dehaze (Dark Channel),0.5,clean,rescue_mismatched,wrong_corruption
+PaDiM,MVTec-AD,bottle,42,rescue,sensor_noise,severe,Dehaze (Dark Channel),0.5,clean,rescue_mismatched,wrong_corruption
+PaDiM,MVTec-AD,bottle,42,rescue,low_light,mild,NLM Denoise,0.5738095045089722,clean,rescue_mismatched,wrong_corruption
+PaDiM,MVTec-AD,bottle,42,rescue,low_light,moderate,NLM Denoise,0.5,clean,rescue_mismatched,wrong_corruption
+PaDiM,MVTec-AD,bottle,42,rescue,low_light,severe,NLM Denoise,0.5,clean,rescue_mismatched,wrong_corruption
+PatchCore,MVTec-AD,cable,42,rescue,clean,none,CLAHE,0.9934408068656921,clean,rescue_on_clean,undegraded
+PatchCore,MVTec-AD,cable,42,rescue,clean,none,Retinex,0.9357196092605591,clean,rescue_on_clean,undegraded
+PatchCore,MVTec-AD,cable,42,rescue,clean,none,Wiener,0.8183096051216125,clean,rescue_on_clean,undegraded
+PatchCore,MVTec-AD,cable,42,rescue,clean,none,Wiener (Motion PSF),0.5,clean,rescue_on_clean,undegraded
+PatchCore,MVTec-AD,cable,42,rescue,clean,none,NLM Denoise,0.9893178343772888,clean,rescue_on_clean,undegraded
+PatchCore,MVTec-AD,cable,42,rescue,clean,none,Dehaze (Dark Channel),0.952023983001709,clean,rescue_on_clean,undegraded
+PatchCore,MVTec-AD,cable,42,rescue,fog_haze,mild,CLAHE,0.9094828367233276,clean,rescue_mismatched,wrong_corruption
+PatchCore,MVTec-AD,cable,42,rescue,fog_haze,moderate,CLAHE,0.8433283567428589,clean,rescue_mismatched,wrong_corruption
+PatchCore,MVTec-AD,cable,42,rescue,fog_haze,severe,CLAHE,0.6452398896217346,clean,rescue_mismatched,wrong_corruption
+PatchCore,MVTec-AD,cable,42,rescue,motion_blur,mild,Wiener,0.6628561019897461,clean,rescue_mismatched,wrong_corruption
+PatchCore,MVTec-AD,cable,42,rescue,motion_blur,moderate,Wiener,0.5,clean,rescue_mismatched,wrong_corruption
+PatchCore,MVTec-AD,cable,42,rescue,motion_blur,severe,Wiener,0.5,clean,rescue_mismatched,wrong_corruption
+PatchCore,MVTec-AD,cable,42,rescue,gaussian_blur,mild,Wiener (Motion PSF),0.5,clean,rescue_mismatched,wrong_corruption
+PatchCore,MVTec-AD,cable,42,rescue,gaussian_blur,moderate,Wiener (Motion PSF),0.5,clean,rescue_mismatched,wrong_corruption
+PatchCore,MVTec-AD,cable,42,rescue,gaussian_blur,severe,Wiener (Motion PSF),0.5,clean,rescue_mismatched,wrong_corruption
+PatchCore,MVTec-AD,cable,42,rescue,sensor_noise,mild,Dehaze (Dark Channel),0.972638726234436,clean,rescue_mismatched,wrong_corruption
+PatchCore,MVTec-AD,cable,42,rescue,sensor_noise,moderate,Dehaze (Dark Channel),0.9394677877426147,clean,rescue_mismatched,wrong_corruption
+PatchCore,MVTec-AD,cable,42,rescue,sensor_noise,severe,Dehaze (Dark Channel),0.8954272270202637,clean,rescue_mismatched,wrong_corruption
+PatchCore,MVTec-AD,cable,42,rescue,low_light,mild,NLM Denoise,0.9224138259887695,clean,rescue_mismatched,wrong_corruption
+PatchCore,MVTec-AD,cable,42,rescue,low_light,moderate,NLM Denoise,0.8630059957504272,clean,rescue_mismatched,wrong_corruption
+PatchCore,MVTec-AD,cable,42,rescue,low_light,severe,NLM Denoise,0.7040854692459106,clean,rescue_mismatched,wrong_corruption
+PaDiM,MVTec-AD,cable,42,rescue,clean,none,CLAHE,0.7024924755096436,clean,rescue_on_clean,undegraded
+PaDiM,MVTec-AD,cable,42,rescue,clean,none,Retinex,0.6765367388725281,clean,rescue_on_clean,undegraded
+PaDiM,MVTec-AD,cable,42,rescue,clean,none,Wiener,0.7612444162368774,clean,rescue_on_clean,undegraded
+PaDiM,MVTec-AD,cable,42,rescue,clean,none,Wiener (Motion PSF),0.5301724672317505,clean,rescue_on_clean,undegraded
+PaDiM,MVTec-AD,cable,42,rescue,clean,none,NLM Denoise,0.8146551251411438,clean,rescue_on_clean,undegraded
+PaDiM,MVTec-AD,cable,42,rescue,clean,none,Dehaze (Dark Channel),0.7784857749938965,clean,rescue_on_clean,undegraded
+PaDiM,MVTec-AD,cable,42,rescue,fog_haze,mild,CLAHE,0.6028860807418823,clean,rescue_mismatched,wrong_corruption
+PaDiM,MVTec-AD,cable,42,rescue,fog_haze,moderate,CLAHE,0.5341079235076904,clean,rescue_mismatched,wrong_corruption
+PaDiM,MVTec-AD,cable,42,rescue,fog_haze,severe,CLAHE,0.5155547261238098,clean,rescue_mismatched,wrong_corruption
+PaDiM,MVTec-AD,cable,42,rescue,motion_blur,mild,Wiener,0.660232424736023,clean,rescue_mismatched,wrong_corruption
+PaDiM,MVTec-AD,cable,42,rescue,motion_blur,moderate,Wiener,0.48819345235824585,clean,rescue_mismatched,wrong_corruption
+PaDiM,MVTec-AD,cable,42,rescue,motion_blur,severe,Wiener,0.49793851375579834,clean,rescue_mismatched,wrong_corruption
+PaDiM,MVTec-AD,cable,42,rescue,gaussian_blur,mild,Wiener (Motion PSF),0.5874249935150146,clean,rescue_mismatched,wrong_corruption
+PaDiM,MVTec-AD,cable,42,rescue,gaussian_blur,moderate,Wiener (Motion PSF),0.5239880084991455,clean,rescue_mismatched,wrong_corruption
+PaDiM,MVTec-AD,cable,42,rescue,gaussian_blur,severe,Wiener (Motion PSF),0.5,clean,rescue_mismatched,wrong_corruption
+PaDiM,MVTec-AD,cable,42,rescue,sensor_noise,mild,Dehaze (Dark Channel),0.6583583354949951,clean,rescue_mismatched,wrong_corruption
+PaDiM,MVTec-AD,cable,42,rescue,sensor_noise,moderate,Dehaze (Dark Channel),0.48556971549987793,clean,rescue_mismatched,wrong_corruption
+PaDiM,MVTec-AD,cable,42,rescue,sensor_noise,severe,Dehaze (Dark Channel),0.5031859278678894,clean,rescue_mismatched,wrong_corruption
+PaDiM,MVTec-AD,cable,42,rescue,low_light,mild,NLM Denoise,0.6999624967575073,clean,rescue_mismatched,wrong_corruption
+PaDiM,MVTec-AD,cable,42,rescue,low_light,moderate,NLM Denoise,0.6517990827560425,clean,rescue_mismatched,wrong_corruption
+PaDiM,MVTec-AD,cable,42,rescue,low_light,severe,NLM Denoise,0.5404797792434692,clean,rescue_mismatched,wrong_corruption
+PatchCore,MVTec-AD,capsule,42,rescue,clean,none,CLAHE,0.9848424792289734,clean,rescue_on_clean,undegraded
+PatchCore,MVTec-AD,capsule,42,rescue,clean,none,Retinex,0.6445951461791992,clean,rescue_on_clean,undegraded
+PatchCore,MVTec-AD,capsule,42,rescue,clean,none,Wiener,0.5,clean,rescue_on_clean,undegraded
+PatchCore,MVTec-AD,capsule,42,rescue,clean,none,Wiener (Motion PSF),0.5,clean,rescue_on_clean,undegraded
+PatchCore,MVTec-AD,capsule,42,rescue,clean,none,NLM Denoise,0.9908257126808167,clean,rescue_on_clean,undegraded
+PatchCore,MVTec-AD,capsule,42,rescue,clean,none,Dehaze (Dark Channel),0.6059035062789917,clean,rescue_on_clean,undegraded
+PatchCore,MVTec-AD,capsule,42,rescue,fog_haze,mild,CLAHE,0.5,clean,rescue_mismatched,wrong_corruption
+PatchCore,MVTec-AD,capsule,42,rescue,fog_haze,moderate,CLAHE,0.5,clean,rescue_mismatched,wrong_corruption
+PatchCore,MVTec-AD,capsule,42,rescue,fog_haze,severe,CLAHE,0.5,clean,rescue_mismatched,wrong_corruption
+PatchCore,MVTec-AD,capsule,42,rescue,motion_blur,mild,Wiener,0.5,clean,rescue_mismatched,wrong_corruption
+PatchCore,MVTec-AD,capsule,42,rescue,motion_blur,moderate,Wiener,0.5,clean,rescue_mismatched,wrong_corruption
+PatchCore,MVTec-AD,capsule,42,rescue,motion_blur,severe,Wiener,0.5,clean,rescue_mismatched,wrong_corruption
+PatchCore,MVTec-AD,capsule,42,rescue,gaussian_blur,mild,Wiener (Motion PSF),0.5,clean,rescue_mismatched,wrong_corruption
+PatchCore,MVTec-AD,capsule,42,rescue,gaussian_blur,moderate,Wiener (Motion PSF),0.5,clean,rescue_mismatched,wrong_corruption
+PatchCore,MVTec-AD,capsule,42,rescue,gaussian_blur,severe,Wiener (Motion PSF),0.5,clean,rescue_mismatched,wrong_corruption
+PatchCore,MVTec-AD,capsule,42,rescue,sensor_noise,mild,Dehaze (Dark Channel),0.4986039102077484,clean,rescue_mismatched,wrong_corruption
+PatchCore,MVTec-AD,capsule,42,rescue,sensor_noise,moderate,Dehaze (Dark Channel),0.5,clean,rescue_mismatched,wrong_corruption
+PatchCore,MVTec-AD,capsule,42,rescue,sensor_noise,severe,Dehaze (Dark Channel),0.5,clean,rescue_mismatched,wrong_corruption
+PatchCore,MVTec-AD,capsule,42,rescue,low_light,mild,NLM Denoise,0.7810131311416626,clean,rescue_mismatched,wrong_corruption
+PatchCore,MVTec-AD,capsule,42,rescue,low_light,moderate,NLM Denoise,0.5257279276847839,clean,rescue_mismatched,wrong_corruption
+PatchCore,MVTec-AD,capsule,42,rescue,low_light,severe,NLM Denoise,0.5,clean,rescue_mismatched,wrong_corruption
+PaDiM,MVTec-AD,capsule,42,rescue,clean,none,CLAHE,0.7670522332191467,clean,rescue_on_clean,undegraded
+PaDiM,MVTec-AD,capsule,42,rescue,clean,none,Retinex,0.6404068470001221,clean,rescue_on_clean,undegraded
+PaDiM,MVTec-AD,capsule,42,rescue,clean,none,Wiener,0.5,clean,rescue_on_clean,undegraded
+PaDiM,MVTec-AD,capsule,42,rescue,clean,none,Wiener (Motion PSF),0.5,clean,rescue_on_clean,undegraded
+PaDiM,MVTec-AD,capsule,42,rescue,clean,none,NLM Denoise,0.8643797636032104,clean,rescue_on_clean,undegraded
+PaDiM,MVTec-AD,capsule,42,rescue,clean,none,Dehaze (Dark Channel),0.4287993609905243,clean,rescue_on_clean,undegraded
+PaDiM,MVTec-AD,capsule,42,rescue,fog_haze,mild,CLAHE,0.4144395887851715,clean,rescue_mismatched,wrong_corruption
+PaDiM,MVTec-AD,capsule,42,rescue,fog_haze,moderate,CLAHE,0.508575975894928,clean,rescue_mismatched,wrong_corruption
+PaDiM,MVTec-AD,capsule,42,rescue,fog_haze,severe,CLAHE,0.5,clean,rescue_mismatched,wrong_corruption
+PaDiM,MVTec-AD,capsule,42,rescue,motion_blur,mild,Wiener,0.5,clean,rescue_mismatched,wrong_corruption
+PaDiM,MVTec-AD,capsule,42,rescue,motion_blur,moderate,Wiener,0.5,clean,rescue_mismatched,wrong_corruption
+PaDiM,MVTec-AD,capsule,42,rescue,motion_blur,severe,Wiener,0.5,clean,rescue_mismatched,wrong_corruption
+PaDiM,MVTec-AD,capsule,42,rescue,gaussian_blur,mild,Wiener (Motion PSF),0.5,clean,rescue_mismatched,wrong_corruption
+PaDiM,MVTec-AD,capsule,42,rescue,gaussian_blur,moderate,Wiener (Motion PSF),0.5,clean,rescue_mismatched,wrong_corruption
+PaDiM,MVTec-AD,capsule,42,rescue,gaussian_blur,severe,Wiener (Motion PSF),0.5,clean,rescue_mismatched,wrong_corruption
+PaDiM,MVTec-AD,capsule,42,rescue,sensor_noise,mild,Dehaze (Dark Channel),0.4848424196243286,clean,rescue_mismatched,wrong_corruption
+PaDiM,MVTec-AD,capsule,42,rescue,sensor_noise,moderate,Dehaze (Dark Channel),0.5,clean,rescue_mismatched,wrong_corruption
+PaDiM,MVTec-AD,capsule,42,rescue,sensor_noise,severe,Dehaze (Dark Channel),0.5,clean,rescue_mismatched,wrong_corruption
+PaDiM,MVTec-AD,capsule,42,rescue,low_light,mild,NLM Denoise,0.6812923550605774,clean,rescue_mismatched,wrong_corruption
+PaDiM,MVTec-AD,capsule,42,rescue,low_light,moderate,NLM Denoise,0.47706422209739685,clean,rescue_mismatched,wrong_corruption
+PaDiM,MVTec-AD,capsule,42,rescue,low_light,severe,NLM Denoise,0.5,clean,rescue_mismatched,wrong_corruption
+PatchCore,MVTec-AD,hazelnut,42,rescue,clean,none,CLAHE,0.9999999403953552,clean,rescue_on_clean,undegraded
+PatchCore,MVTec-AD,hazelnut,42,rescue,clean,none,Retinex,1.0,clean,rescue_on_clean,undegraded
+PatchCore,MVTec-AD,hazelnut,42,rescue,clean,none,Wiener,0.947857141494751,clean,rescue_on_clean,undegraded
+PatchCore,MVTec-AD,hazelnut,42,rescue,clean,none,Wiener (Motion PSF),0.512499988079071,clean,rescue_on_clean,undegraded
+PatchCore,MVTec-AD,hazelnut,42,rescue,clean,none,NLM Denoise,1.0,clean,rescue_on_clean,undegraded
+PatchCore,MVTec-AD,hazelnut,42,rescue,clean,none,Dehaze (Dark Channel),1.0,clean,rescue_on_clean,undegraded
+PatchCore,MVTec-AD,hazelnut,42,rescue,fog_haze,mild,CLAHE,0.8007142543792725,clean,rescue_mismatched,wrong_corruption
+PatchCore,MVTec-AD,hazelnut,42,rescue,fog_haze,moderate,CLAHE,0.5532143115997314,clean,rescue_mismatched,wrong_corruption
+PatchCore,MVTec-AD,hazelnut,42,rescue,fog_haze,severe,CLAHE,0.5130357146263123,clean,rescue_mismatched,wrong_corruption
+PatchCore,MVTec-AD,hazelnut,42,rescue,motion_blur,mild,Wiener,0.9578571319580078,clean,rescue_mismatched,wrong_corruption
+PatchCore,MVTec-AD,hazelnut,42,rescue,motion_blur,moderate,Wiener,0.5,clean,rescue_mismatched,wrong_corruption
+PatchCore,MVTec-AD,hazelnut,42,rescue,motion_blur,severe,Wiener,0.5,clean,rescue_mismatched,wrong_corruption
+PatchCore,MVTec-AD,hazelnut,42,rescue,gaussian_blur,mild,Wiener (Motion PSF),0.512499988079071,clean,rescue_mismatched,wrong_corruption
+PatchCore,MVTec-AD,hazelnut,42,rescue,gaussian_blur,moderate,Wiener (Motion PSF),0.5249999761581421,clean,rescue_mismatched,wrong_corruption
+PatchCore,MVTec-AD,hazelnut,42,rescue,gaussian_blur,severe,Wiener (Motion PSF),0.587321400642395,clean,rescue_mismatched,wrong_corruption
+PatchCore,MVTec-AD,hazelnut,42,rescue,sensor_noise,mild,Dehaze (Dark Channel),0.9917857646942139,clean,rescue_mismatched,wrong_corruption
+PatchCore,MVTec-AD,hazelnut,42,rescue,sensor_noise,moderate,Dehaze (Dark Channel),0.9671428799629211,clean,rescue_mismatched,wrong_corruption
+PatchCore,MVTec-AD,hazelnut,42,rescue,sensor_noise,severe,Dehaze (Dark Channel),0.9150000214576721,clean,rescue_mismatched,wrong_corruption
+PatchCore,MVTec-AD,hazelnut,42,rescue,low_light,mild,NLM Denoise,1.0,clean,rescue_mismatched,wrong_corruption
+PatchCore,MVTec-AD,hazelnut,42,rescue,low_light,moderate,NLM Denoise,0.9924999475479126,clean,rescue_mismatched,wrong_corruption
+PatchCore,MVTec-AD,hazelnut,42,rescue,low_light,severe,NLM Denoise,0.9807142615318298,clean,rescue_mismatched,wrong_corruption
+PaDiM,MVTec-AD,hazelnut,42,rescue,clean,none,CLAHE,0.8664286136627197,clean,rescue_on_clean,undegraded
+PaDiM,MVTec-AD,hazelnut,42,rescue,clean,none,Retinex,0.6737500429153442,clean,rescue_on_clean,undegraded
+PaDiM,MVTec-AD,hazelnut,42,rescue,clean,none,Wiener,0.5860714316368103,clean,rescue_on_clean,undegraded
+PaDiM,MVTec-AD,hazelnut,42,rescue,clean,none,Wiener (Motion PSF),0.5553571581840515,clean,rescue_on_clean,undegraded
+PaDiM,MVTec-AD,hazelnut,42,rescue,clean,none,NLM Denoise,0.8842856884002686,clean,rescue_on_clean,undegraded
+PaDiM,MVTec-AD,hazelnut,42,rescue,clean,none,Dehaze (Dark Channel),0.7678571343421936,clean,rescue_on_clean,undegraded
+PaDiM,MVTec-AD,hazelnut,42,rescue,fog_haze,mild,CLAHE,0.42571428418159485,clean,rescue_mismatched,wrong_corruption
+PaDiM,MVTec-AD,hazelnut,42,rescue,fog_haze,moderate,CLAHE,0.5,clean,rescue_mismatched,wrong_corruption
+PaDiM,MVTec-AD,hazelnut,42,rescue,fog_haze,severe,CLAHE,0.5,clean,rescue_mismatched,wrong_corruption
+PaDiM,MVTec-AD,hazelnut,42,rescue,motion_blur,mild,Wiener,0.4380357563495636,clean,rescue_mismatched,wrong_corruption
+PaDiM,MVTec-AD,hazelnut,42,rescue,motion_blur,moderate,Wiener,0.4982142746448517,clean,rescue_mismatched,wrong_corruption
+PaDiM,MVTec-AD,hazelnut,42,rescue,motion_blur,severe,Wiener,0.5,clean,rescue_mismatched,wrong_corruption
+PaDiM,MVTec-AD,hazelnut,42,rescue,gaussian_blur,mild,Wiener (Motion PSF),0.4367856979370117,clean,rescue_mismatched,wrong_corruption
+PaDiM,MVTec-AD,hazelnut,42,rescue,gaussian_blur,moderate,Wiener (Motion PSF),0.5525000095367432,clean,rescue_mismatched,wrong_corruption
+PaDiM,MVTec-AD,hazelnut,42,rescue,gaussian_blur,severe,Wiener (Motion PSF),0.539821445941925,clean,rescue_mismatched,wrong_corruption
+PaDiM,MVTec-AD,hazelnut,42,rescue,sensor_noise,mild,Dehaze (Dark Channel),0.49392855167388916,clean,rescue_mismatched,wrong_corruption
+PaDiM,MVTec-AD,hazelnut,42,rescue,sensor_noise,moderate,Dehaze (Dark Channel),0.5012499690055847,clean,rescue_mismatched,wrong_corruption
+PaDiM,MVTec-AD,hazelnut,42,rescue,sensor_noise,severe,Dehaze (Dark Channel),0.512499988079071,clean,rescue_mismatched,wrong_corruption
+PaDiM,MVTec-AD,hazelnut,42,rescue,low_light,mild,NLM Denoise,0.8296428918838501,clean,rescue_mismatched,wrong_corruption
+PaDiM,MVTec-AD,hazelnut,42,rescue,low_light,moderate,NLM Denoise,0.4357142746448517,clean,rescue_mismatched,wrong_corruption
+PaDiM,MVTec-AD,hazelnut,42,rescue,low_light,severe,NLM Denoise,0.5,clean,rescue_mismatched,wrong_corruption
+PatchCore,MVTec-AD,screw,42,rescue,clean,none,CLAHE,0.9078704118728638,clean,rescue_on_clean,undegraded
+PatchCore,MVTec-AD,screw,42,rescue,clean,none,Retinex,0.620618999004364,clean,rescue_on_clean,undegraded
+PatchCore,MVTec-AD,screw,42,rescue,clean,none,Wiener,0.5,clean,rescue_on_clean,undegraded
+PatchCore,MVTec-AD,screw,42,rescue,clean,none,Wiener (Motion PSF),0.5,clean,rescue_on_clean,undegraded
+PatchCore,MVTec-AD,screw,42,rescue,clean,none,NLM Denoise,0.9594179391860962,clean,rescue_on_clean,undegraded
+PatchCore,MVTec-AD,screw,42,rescue,clean,none,Dehaze (Dark Channel),0.5,clean,rescue_on_clean,undegraded
+PatchCore,MVTec-AD,screw,42,rescue,fog_haze,mild,CLAHE,0.5,clean,rescue_mismatched,wrong_corruption
+PatchCore,MVTec-AD,screw,42,rescue,fog_haze,moderate,CLAHE,0.5,clean,rescue_mismatched,wrong_corruption
+PatchCore,MVTec-AD,screw,42,rescue,fog_haze,severe,CLAHE,0.5,clean,rescue_mismatched,wrong_corruption
+PatchCore,MVTec-AD,screw,42,rescue,motion_blur,mild,Wiener,0.5,clean,rescue_mismatched,wrong_corruption
+PatchCore,MVTec-AD,screw,42,rescue,motion_blur,moderate,Wiener,0.5,clean,rescue_mismatched,wrong_corruption
+PatchCore,MVTec-AD,screw,42,rescue,motion_blur,severe,Wiener,0.5,clean,rescue_mismatched,wrong_corruption
+PatchCore,MVTec-AD,screw,42,rescue,gaussian_blur,mild,Wiener (Motion PSF),0.5,clean,rescue_mismatched,wrong_corruption
+PatchCore,MVTec-AD,screw,42,rescue,gaussian_blur,moderate,Wiener (Motion PSF),0.5,clean,rescue_mismatched,wrong_corruption
+PatchCore,MVTec-AD,screw,42,rescue,gaussian_blur,severe,Wiener (Motion PSF),0.5,clean,rescue_mismatched,wrong_corruption
+PatchCore,MVTec-AD,screw,42,rescue,sensor_noise,mild,Dehaze (Dark Channel),0.5,clean,rescue_mismatched,wrong_corruption
+PatchCore,MVTec-AD,screw,42,rescue,sensor_noise,moderate,Dehaze (Dark Channel),0.5,clean,rescue_mismatched,wrong_corruption
+PatchCore,MVTec-AD,screw,42,rescue,sensor_noise,severe,Dehaze (Dark Channel),0.5,clean,rescue_mismatched,wrong_corruption
+PatchCore,MVTec-AD,screw,42,rescue,low_light,mild,NLM Denoise,0.5,clean,rescue_mismatched,wrong_corruption
+PatchCore,MVTec-AD,screw,42,rescue,low_light,moderate,NLM Denoise,0.5,clean,rescue_mismatched,wrong_corruption
+PatchCore,MVTec-AD,screw,42,rescue,low_light,severe,NLM Denoise,0.5,clean,rescue_mismatched,wrong_corruption
+PaDiM,MVTec-AD,screw,42,rescue,clean,none,CLAHE,0.6187742948532104,clean,rescue_on_clean,undegraded
+PaDiM,MVTec-AD,screw,42,rescue,clean,none,Retinex,0.6224637031555176,clean,rescue_on_clean,undegraded
+PaDiM,MVTec-AD,screw,42,rescue,clean,none,Wiener,0.5,clean,rescue_on_clean,undegraded
+PaDiM,MVTec-AD,screw,42,rescue,clean,none,Wiener (Motion PSF),0.5,clean,rescue_on_clean,undegraded
+PaDiM,MVTec-AD,screw,42,rescue,clean,none,NLM Denoise,0.6956343650817871,clean,rescue_on_clean,undegraded
+PaDiM,MVTec-AD,screw,42,rescue,clean,none,Dehaze (Dark Channel),0.539864718914032,clean,rescue_on_clean,undegraded
+PaDiM,MVTec-AD,screw,42,rescue,fog_haze,mild,CLAHE,0.34166839718818665,clean,rescue_mismatched,wrong_corruption
+PaDiM,MVTec-AD,screw,42,rescue,fog_haze,moderate,CLAHE,0.4789915978908539,clean,rescue_mismatched,wrong_corruption
+PaDiM,MVTec-AD,screw,42,rescue,fog_haze,severe,CLAHE,0.5,clean,rescue_mismatched,wrong_corruption
+PaDiM,MVTec-AD,screw,42,rescue,motion_blur,mild,Wiener,0.5609756112098694,clean,rescue_mismatched,wrong_corruption
+PaDiM,MVTec-AD,screw,42,rescue,motion_blur,moderate,Wiener,0.5,clean,rescue_mismatched,wrong_corruption
+PaDiM,MVTec-AD,screw,42,rescue,motion_blur,severe,Wiener,0.5,clean,rescue_mismatched,wrong_corruption
+PaDiM,MVTec-AD,screw,42,rescue,gaussian_blur,mild,Wiener (Motion PSF),0.5,clean,rescue_mismatched,wrong_corruption
+PaDiM,MVTec-AD,screw,42,rescue,gaussian_blur,moderate,Wiener (Motion PSF),0.5,clean,rescue_mismatched,wrong_corruption
+PaDiM,MVTec-AD,screw,42,rescue,gaussian_blur,severe,Wiener (Motion PSF),0.5,clean,rescue_mismatched,wrong_corruption
+PaDiM,MVTec-AD,screw,42,rescue,sensor_noise,mild,Dehaze (Dark Channel),0.5,clean,rescue_mismatched,wrong_corruption
+PaDiM,MVTec-AD,screw,42,rescue,sensor_noise,moderate,Dehaze (Dark Channel),0.5,clean,rescue_mismatched,wrong_corruption
+PaDiM,MVTec-AD,screw,42,rescue,sensor_noise,severe,Dehaze (Dark Channel),0.5,clean,rescue_mismatched,wrong_corruption
+PaDiM,MVTec-AD,screw,42,rescue,low_light,mild,NLM Denoise,0.5118876695632935,clean,rescue_mismatched,wrong_corruption
+PaDiM,MVTec-AD,screw,42,rescue,low_light,moderate,NLM Denoise,0.5568764209747314,clean,rescue_mismatched,wrong_corruption
+PaDiM,MVTec-AD,screw,42,rescue,low_light,severe,NLM Denoise,0.5032793879508972,clean,rescue_mismatched,wrong_corruption
