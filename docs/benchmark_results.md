@@ -90,8 +90,15 @@ The only positive result across all 24 corruption x severity x method combinatio
 ### 3. PatchCore is More Brittle Than PaDiM Under Preprocessing
 PatchCore drops more under rescue (-0.076 vs -0.048 mean delta). PatchCore's coreset memory bank encodes precise patch-level statistics — any image transformation shifts the query distribution away from the training distribution, increasing false negatives.
 
-### 4. The Preprocessing Fallacy Holds Universally
-Confirmed at mild, moderate, and severe severity across both models and all 5 corruption types:
+### 4. The Preprocessing Fallacy — Scope of the Claim
+Holds at mild, moderate and severe severity, across both models and all 5
+corruption types, in every MVTec-AD condition ($p \le 2.1\times10^{-3}$,
+15 categories) and for clean-trained VisA PatchCore ($p = 4.9\times10^{-4}$,
+12 categories). **One exception:** clean-trained VisA PaDiM is $-0.61$ pp at
+$p = 0.375$, not distinguishable from neutral, once the Wiener PSF is corrected.
+We do not claim the fallacy universally.
+
+Within that scope:
 - Rescue preprocessing does not recover anomaly detection performance
 - It worsens performance in the large majority of cases
 - The effect is larger at mild severity, where PSF mismatch causes proportionally more damage on already lightly degraded images

@@ -52,7 +52,7 @@ Experiments were executed on Kaggle T4/P100 GPUs (16 GB VRAM) under a 12-hour se
 
 ## 9. AUROC Floor Saturation
 
-23.1% of all benchmark rows (2,169 / 9,384) exhibit AUROC = 0.5000 exactly, indicating fully tied anomaly scores with zero ranking ability. This is concentrated at severe corruption: 52.2% of severe Gaussian blur rows hit the floor. Reported mean AUROC values are therefore censored at a floor of 0.5 and may understate the true severity of model collapse under extreme corruption. Wilcoxon tests on rescue deltas also have reduced effective N where both degraded and rescued AUROC are 0.5 (zero differences are silently dropped).
+17.2% of all benchmark rows (1,612 / 9,384) exhibit AUROC = 0.5000 exactly, indicating fully tied anomaly scores with zero ranking ability. This fell from 23.1% (2,169 rows) when the corrected per-severity Wiener rows were merged: the misspecified severe-tier kernel had been collapsing 557 cells that the matched kernel leaves informative, which is itself evidence of how much of the original Wiener harm was kernel error rather than deconvolution. This is concentrated at severe corruption: 52.2% of severe Gaussian blur rows hit the floor. Reported mean AUROC values are therefore censored at a floor of 0.5 and may understate the true severity of model collapse under extreme corruption. Wilcoxon tests on rescue deltas also have reduced effective N where both degraded and rescued AUROC are 0.5 (zero differences are silently dropped): 489 such pairs remain, giving effective N of 645–806 against a nominal 810.
 
 A second consequence: rescue *deltas* are censored at severe severity. Because
 33% of severe degraded baselines already sit at 0.5, a rescue applied to them

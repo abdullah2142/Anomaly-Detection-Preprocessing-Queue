@@ -206,7 +206,7 @@ Supplementary (per-category detail, all verified against the current CSV):
 
 1. **Sensor noise includes undocumented salt-and-pepper**: 5% S&P impulse noise is applied on top of Gaussian noise. NLM is suboptimal for impulse noise.
 2. **Train/test resolution mismatch**: Training augmentation is applied at raw image resolution (700–1024 px for MVTec, ~1500 px for VisA), then resized to 256×256. Test corruption is applied post-resize at 256×256. Same nominal parameters produce different effective severity.
-3. **AUROC floor saturation**: 23% of rows are exactly 0.5000 (fully tied anomaly scores), concentrated at severe corruption. Reported means are censored at this floor.
+3. **AUROC floor saturation**: 17.2% of rows are exactly 0.5000 (fully tied anomaly scores), concentrated at severe corruption (52.2% of severe Gaussian blur). Reported means are censored at this floor. The share fell from 23.1% when the corrected Wiener rows were merged — the misspecified kernel had been collapsing cells that the matched kernel does not.
 4. **Matched corruption distributions (quantified)**: Training augmentation uses the same 5 types × 3 severities as the test set, so +12.3 pp is a corruption-matched upper bound. Two withholding controls measure how much survives: PatchCore ~34–35%, PaDiM 0–12%. Run on 8 MVTec-AD categories at one seed; not run on VisA.
 5. **Fog non-reproducibility**: `A.RandomFog` is not seeded in the original experiment runs (fixed in current codebase).
 6. **Pseudoreplication in notebook 10**: the shipped Wilcoxon notebook treats non-independent cells as independent. Use `scripts/analysis/cluster_robust_stats.py` for the corrected inference.

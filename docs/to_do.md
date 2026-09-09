@@ -104,7 +104,7 @@ claimed there.
 ### Priority 3: Statistical hygiene ✅ DONE
 - [x] **Cluster inference by category** — `scripts/analysis/cluster_robust_stats.py`, results in [`statistical_validation.md`](statistical_validation.md)
 - [x] **Report effective N** after zero-difference dropping (645–806, not 810)
-- [x] **Report AUROC floor saturation** (23.1% of rows; 545 uninformative pairs)
+- [x] **Report AUROC floor saturation** (17.2% of rows after the Wiener merge, down from 23.1%; 489 uninformative pairs)
 - [x] **Stop claiming significance for the 4-category VisA augmented arm** (p floor = 0.125)
 
 ### Priority 4: Paper Writing
