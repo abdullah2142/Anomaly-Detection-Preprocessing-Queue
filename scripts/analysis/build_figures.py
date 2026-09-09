@@ -281,6 +281,179 @@ def figure_11(csv: str, out: Path) -> None:
     print("wrote 11_generalization_controls.png")
 
 
+
+def _exact(values):
+    import itertools
+    x = np.asarray(values, dtype=float)
+    n = len(x)
+    obs = abs(x.mean())
+    hits = sum(1 for sg in itertools.product([1, -1], repeat=n)
+               if abs((x * np.array(sg)).mean()) >= obs - 1e-12)
+    return x.mean(), hits / 2 ** n, n
+
+
+def figure_07(df: pd.DataFrame, out: Path) -> None:
+    """Augmentation gains, annotated with category-clustered significance.
+
+    The previous version plotted MVTec-AD and VisA bars with equal visual weight.
+    VisA's augmented arm covers 4 categories, where the exact clustered test
+    cannot return p below 0.125, so those bars are marked descriptive.
+    """
+    deg = df[(df.phase == "degradation") & (df.rescue == "none")]
+    key = ["dataset", "model", "category", "seed", "ctype", "severity"]
+    m = deg[deg.training == "clean"][key + ["image_AUROC"]].merge(
+        deg[deg.training == "augmented"][key + ["image_AUROC"]], on=key,
+        suffixes=("_c", "_a"))
+    m["gain"] = m.image_AUROC_a - m.image_AUROC_c
+
+    labels, vals, notes, colours = [], [], [], []
+    for ds in ["MVTec-AD", "VisA"]:
+        for model in ["PatchCore", "PaDiM"]:
+            g = m[(m.dataset == ds) & (m.model == model)]
+            if g.empty:
+                continue
+            mean, p, n = _exact(g.groupby("category")["gain"].mean().values)
+            labels.append(f"{model}\n{ds}")
+            vals.append(mean)
+            floor = 2 / 2 ** n
+            notes.append(f"p = {p:.4f}" + (f"\n({n} cats, at floor —\ndescriptive only)"
+                                           if p <= floor + 1e-12 and n < 8 else f"\n({n} categories)"))
+            colours.append("#3d9ad1" if ds == "MVTec-AD" else "#c9c9c9")
+
+    fig, ax = plt.subplots(figsize=(11, 6))
+    bars = ax.bar(labels, vals, color=colours, edgecolor="black", linewidth=0.6)
+    for b, v, note in zip(bars, vals, notes):
+        ax.text(b.get_x() + b.get_width() / 2, v + 0.004, f"{v:+.4f}", ha="center",
+                fontsize=11, fontweight="bold")
+        ax.text(b.get_x() + b.get_width() / 2, v / 2, note, ha="center", va="center",
+                fontsize=8.5, color="white")
+    ax.set_ylabel("Mean AUROC gain (augmented − clean)")
+    ax.set_title("Robustness Gain from Augmented Training\n"
+                 "(category-clustered exact permutation test; grey = descriptive only)",
+                 fontweight="bold")
+    ax.grid(axis="y"); ax.set_axisbelow(True); ax.set_ylim(0, max(vals) * 1.22)
+    fig.tight_layout()
+    fig.savefig(out / "07_augmentation_gains.png", bbox_inches="tight")
+    plt.close(fig)
+    print("wrote 07_augmentation_gains.png")
+
+
+def figure_12(out: Path) -> None:
+    """Feature-space evidence: where restored images actually land."""
+    src = Path("results/feature_space_probe.txt")
+    if not src.exists():
+        print("skipped 12 (no feature-space run)")
+        return
+    d = pd.read_csv(src)
+    n = d[d.is_anomalous == 0]
+    per = n.groupby(["category", "model", "condition"])["anomaly_score"].mean().unstack()
+    order = ["clean", "degraded", "rescued"]
+    means = [per[c].mean() for c in order]
+
+    fig, axes = plt.subplots(1, 2, figsize=(14, 5.5))
+    ax = axes[0]
+    bars = ax.bar(["clean", "corrupted", "restored"], means,
+                  color=["#4c9f70", "#e8a33d", "#c14b3f"], edgecolor="black", linewidth=0.6)
+    for b, v in zip(bars, means):
+        ax.text(b.get_x() + b.get_width() / 2, v + 0.012, f"{v:.3f}", ha="center", fontsize=11)
+    ax.set_ylabel("Mean anomaly score on NORMAL images\n(distance from learned normality)")
+    ax.set_title("Restoration does not bring images back", fontweight="bold")
+    ax.grid(axis="y"); ax.set_axisbelow(True)
+
+    ax = axes[1]
+    tests = [("degraded", "clean", "corrupted\n− clean"),
+             ("rescued", "clean", "restored\n− clean"),
+             ("rescued", "degraded", "restored\n− corrupted")]
+    diffs, ps = [], []
+    for a, b, _ in tests:
+        mean, p, _ = _exact((per[a] - per[b]).dropna().values)
+        diffs.append(mean); ps.append(p)
+    cols = ["#2f5f8a" if p < 0.05 else "#c9c9c9" for p in ps]
+    bars = ax.bar([t[2] for t in tests], diffs, color=cols, edgecolor="black", linewidth=0.6)
+    for b, v, p in zip(bars, diffs, ps):
+        ax.text(b.get_x() + b.get_width() / 2, v + (0.012 if v >= 0 else -0.03),
+                f"{v:+.3f}\np = {p:.3f}", ha="center", fontsize=10)
+    ax.axhline(0, color="black", linewidth=0.8)
+    ax.set_ylabel("Difference in mean score")
+    ax.set_title("The claim tested: is restored FURTHER than corrupted?",
+                 fontweight="bold")
+    ax.grid(axis="y"); ax.set_axisbelow(True); ax.set_ylim(min(diffs) - 0.08, max(diffs) * 1.3)
+    fig.suptitle("Feature-Space Evidence for the Preprocessing Fallacy "
+                 "(normal images, 5 categories × 2 models)", fontsize=14, fontweight="bold")
+    fig.tight_layout()
+    fig.savefig(out / "12_feature_space_evidence.png", bbox_inches="tight")
+    plt.close(fig)
+    print("wrote 12_feature_space_evidence.png")
+
+
+def figure_13(csv: str, out: Path) -> None:
+    """Deployment controls: the cost of preprocessing an image that needed no treatment.
+
+    Split by model rather than pooled: CLAHE is safe to apply blind for PatchCore
+    but not for PaDiM, and pooling hides exactly that distinction.
+    """
+    src = Path("results/unconditional_rescue.csv")
+    if not src.exists():
+        print("skipped 13 (no unconditional-rescue run)")
+        return
+    run = pd.read_csv(src)
+    master = pd.read_csv(csv)
+    base = master[(master.phase == "baseline") & (master.dataset == "MVTec-AD")
+                  & (master.training == "clean") & (master.seed.isin(run.seed.unique()))]
+    a = run[run.experiment == "rescue_on_clean"].merge(
+        base[["model", "category", "seed", "image_AUROC"]].rename(
+            columns={"image_AUROC": "cb"}), on=["model", "category", "seed"])
+    a["delta"] = (a.image_AUROC - a.cb) * 100
+
+    stats = {}
+    for (model, rescue), g in a.groupby(["model", "rescue"]):
+        stats[(model, rescue)] = _exact(g.groupby("category")["delta"].mean().values)
+    rescues = sorted({r for _, r in stats},
+                     key=lambda r: np.mean([stats[(m, r)][0] for m in ["PatchCore", "PaDiM"]]))
+    y = np.arange(len(rescues))
+
+    fig, ax = plt.subplots(figsize=(13, 7))
+    for off, model, edge in [(-0.2, "PatchCore", "#2f5f8a"), (0.2, "PaDiM", "#a33327")]:
+        vals = [stats[(model, r)][0] for r in rescues]
+        ps = [stats[(model, r)][1] for r in rescues]
+        # Green means "safe to apply blind": indistinguishable from zero AND small.
+        # p alone would paint a -12.9 pp effect green merely for missing significance.
+        cols = ["#7fbf7f" if (p >= 0.05 and abs(v) < 2.0) else "#c14b3f"
+                for v, p in zip(vals, ps)]
+        ax.barh(y + off, vals, 0.38, color=cols, edgecolor=edge, linewidth=1.6,
+                label=None)
+        for yi, v, p in zip(y + off, vals, ps):
+            ax.text(v - 0.8 if v < -2 else 0.6, yi, f"{v:+.2f} (p={p:.3f})",
+                    va="center", ha="right" if v < -2 else "left", fontsize=9)
+
+    ax.set_yticks(y, rescues)
+    ax.axvline(0, color="black", linewidth=0.8)
+    ax.axvline(-3.35, color="#666666", linestyle="--", linewidth=1.5)
+    ax.text(-3.35, len(rescues) - 0.35,
+            " matched rescue on genuinely\n degraded images (−3.35 pp)",
+            color="#444444", fontsize=9, va="top")
+    ax.set_xlabel("AUROC change when applied to an UNDEGRADED image (pp)")
+    ax.set_title("The Cost of Preprocessing Without an Oracle\n"
+                 "green = not distinguishable from zero (safe to apply blind); "
+                 "outline colour = model",
+                 fontweight="bold")
+    ax.grid(axis="x"); ax.set_axisbelow(True)
+    lo = min(v for v, _, _ in stats.values())
+    ax.set_xlim(lo * 1.3, 12)
+    from matplotlib.lines import Line2D
+    from matplotlib.patches import Patch
+    ax.legend(handles=[
+        Line2D([0], [0], color="#2f5f8a", lw=3, label="PatchCore (bar outline)"),
+        Line2D([0], [0], color="#a33327", lw=3, label="PaDiM (bar outline)"),
+        Patch(facecolor="#7fbf7f", edgecolor="black", label="safe to apply blind (<2 pp, n.s.)"),
+        Patch(facecolor="#c14b3f", edgecolor="black", label="harmful"),
+    ], loc="lower right", fontsize=9, framealpha=0.95)
+    fig.tight_layout()
+    fig.savefig(out / "13_unconditional_rescue.png", bbox_inches="tight")
+    plt.close(fig)
+    print("wrote 13_unconditional_rescue.png")
+
+
 def main() -> None:
     ap = argparse.ArgumentParser(description=__doc__)
     ap.add_argument("--csv", default="data/benchmark_master_combined.csv")
@@ -296,7 +469,10 @@ def main() -> None:
     m = rescue_deltas(args.csv)
     figure_04(m, out)
     figure_05(m, out)
+    figure_07(df, out)
     figure_11(args.csv, out)
+    figure_12(out)
+    figure_13(args.csv, out)
 
 
 if __name__ == "__main__":

@@ -187,7 +187,8 @@ then does not move on rescue (−0.001, p = 0.91).
 
 This is not an artefact of score clipping. 46% of scores sit at the normaliser's
 ceiling of 1.0, but the ceiling-share test (+0.19 pp, p = 0.97) and the
-low-clipping subset (+0.012, p = 0.63) agree with the main result. Full tables:
+low-clipping subset (+0.012, p = 0.63) agree with the main result. Figure
+`12_feature_space_evidence.png`; full tables:
 [`feature_space_evidence.md`](feature_space_evidence.md).
 
 **Wiener deconvolution** is the most harmful rescue: mean AUROC delta ranges from −0.063 (PaDiM clean) to −0.246 (PatchCore augmented). Every Wiener row uses a point-spread function matched to the severity that generated the blur, so these are oracle-PSF results throughout. Harm is not monotonic in severity for Gaussian blur (−5.7 pp mild, −15.1 pp moderate, −12.5 pp severe); the apparent decline at severe is a censoring artefact, since 33% of severe degraded baselines already sit at the AUROC floor of 0.5 and cannot fall further (see §Limitations). Wiener filters invert the blur kernel in the frequency domain, which in low-SNR conditions amplifies noise into structured, high-frequency ringing artefacts (the Gibbs phenomenon) at every edge transition. PatchCore, which scores anomalies via nearest-neighbour distance in a patch embedding space built from clean images, generates embedding vectors for these ringing artefacts that are orthogonal to the entire normal coreset, producing catastrophically elevated anomaly scores across normal image regions.
@@ -266,7 +267,8 @@ one the benchmark never measured:
 | NLM Denoise | −0.09 pp |
 
 Pooled across the six methods, unconditional preprocessing costs −14.66 pp
-(PaDiM) and −15.12 pp (PatchCore), both $p = 0.0078$. That is more than four times
+(PaDiM) and −15.12 pp (PatchCore), both $p = 0.0078$ (Figure
+`13_unconditional_rescue.png`). That is more than four times
 the −3.35 pp penalty of applying the *matched* rescue to a genuinely degraded
 image. The dominant deployment hazard is therefore treating images that did not
 need treatment, not treating them incorrectly.

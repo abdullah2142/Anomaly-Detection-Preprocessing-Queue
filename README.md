@@ -159,10 +159,20 @@ All generated plots are saved in `results/analysis/`:
 | `04_rescue_delta_heatmap.png` | Rescue AUROC delta heatmap |
 | `05_rescue_success_rates.png` | Rescue success rates across conditions |
 | `06_severity_comparison.png` | Severity-stratified AUROC comparison |
-| `07_wilcoxon_augmentation_gains.png` | Wilcoxon test: augmentation gains |
-| `08_wilcoxon_rescue_deltas.png` | Wilcoxon test: rescue harm |
-| `09_wilcoxon_per_method_heatmap.png` | Per-method Wilcoxon FDR-corrected results (cell-level; see `docs/statistical_validation.md` for clustered inference) |
+| `07_augmentation_gains.png` | Augmentation gains with category-clustered significance (VisA marked descriptive) |
+| `08_wilcoxon_rescue_deltas.png` | Mean rescue delta by condition (effect sizes) |
+| `09_wilcoxon_per_method_heatmap.png` | Mean rescue delta per method and condition (effect sizes) |
 | `11_generalization_controls.png` | How much of the augmentation gain survives when the tested condition is withheld |
+| `12_feature_space_evidence.png` | Where restored images land relative to normal — the fallacy tested directly |
+| `13_unconditional_rescue.png` | Cost of preprocessing an undegraded image, per method and model |
+
+Supplementary (per-category detail, all verified against the current CSV):
+
+| Figure | Content |
+|---|---|
+| `baseline_comparison.png` | Clean baseline AUROC per category, both models, with error bars |
+| `degradation_curves.png` | Degradation trajectory per corruption including the clean anchor |
+| `rescue_comparison.png` | Severe-tier degraded vs rescued, per corruption, with error bars |
 | `10_experimental_pipeline.md` | Mermaid architectural diagram |
 
 ---
