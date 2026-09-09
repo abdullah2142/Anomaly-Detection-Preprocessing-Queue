@@ -9,6 +9,7 @@ A rigorous 4-way comparative benchmark evaluating **test-time rescue preprocessi
 - **VisA (augmented training)**: ✅ Complete — 4 categories (candle, cashew, pcb1, pipe_fryum), 2 models, 3 seeds
 - **Statistical validation**: ✅ Category-clustered permutation tests — see [`docs/statistical_validation.md`](docs/statistical_validation.md)
 - **Generalization controls**: ✅ Complete — leave-one-corruption-out and severity holdout, see [`docs/generalization_controls.md`](docs/generalization_controls.md)
+- **Deployment controls**: ✅ Complete — unconditional and misidentified rescue ([`docs/unconditional_rescue.md`](docs/unconditional_rescue.md)), feature-space evidence ([`docs/feature_space_evidence.md`](docs/feature_space_evidence.md))
 - **Wiener PSF rerun**: ✅ Complete — all 1,104 mild/moderate Wiener rows regenerated with per-severity PSFs and merged ([`scripts/wiener_reruns/`](scripts/wiener_reruns/), [`scripts/analysis/merge_wiener_reruns.py`](scripts/analysis/merge_wiener_reruns.py))
 - **Total benchmark database**: 9,384 rows in `data/benchmark_master_combined.csv`
 
@@ -114,7 +115,9 @@ All figures below use per-severity oracle PSFs for Wiener.
 * **NLM Denoise** (−2.65 pp) and **DCP Dehaze** (−2.36 pp): mild harm.
 * **CLAHE**: least harmful at −1.61 pp pooled, and near-neutral for PatchCore
   under low-light specifically (−0.16 pp clean, −0.38 pp augmented) — the only
-  conditionally safe method.
+  conditionally safe method. It is also the only one safe to apply *without*
+  knowing the image is degraded: on undegraded images it costs PatchCore
+  −0.95 pp (p = 0.20), against −40.76 pp for Wiener (Motion PSF).
 
 ---
 
@@ -202,6 +205,34 @@ All generated plots are saved in `results/analysis/`:
 9. **Single noise realization in augmentation**: augmented training images share one fixed noise/fog realization per corruption type (fixed seed), while test-time corruption varies per image. Biases measured augmentation gains downward.
 10. **MVTec augmented data is seed-invariant**: all three seeds train on byte-identical augmented images (VisA does not share this).
 11. **Wiener PSF misspecification (resolved)**: the originally published mild/moderate Wiener rows used the severe-tier kernel. All 1,104 affected rows (22.2% of rescue rows) have been regenerated with per-severity PSFs and merged. The misspecified values are retained in git history and are reported as a deliberate PSF-sensitivity comparison.
+
+---
+
+## Deployment Controls
+
+The benchmark applies each rescue only to the corruption it targets, chosen by
+ground-truth identity. Deployment has neither guarantee. Both missing cases were
+measured on 8 MVTec-AD categories × 2 models
+([`docs/unconditional_rescue.md`](docs/unconditional_rescue.md)).
+
+| Question | Result |
+|---|---|
+| Cost of preprocessing an **undegraded** image | **−14.66 pp** (PaDiM), **−15.12 pp** (PatchCore), p = 0.0078 |
+| Cost of the **matched** rescue on a degraded image (for scale) | −3.35 pp |
+| Cost of applying the **wrong** rescue | −5.17 pp (PaDiM), −7.57 pp (PatchCore), p = 0.0078 |
+
+**Unnecessary preprocessing is over four times more damaging than matched
+preprocessing**, and Wiener on an unblurred image is catastrophic (−40.76 pp).
+Misidentification damage concentrates in blur-for-blur confusion (−15.84 pp).
+
+**The CLAHE recommendation survives**: on undegraded images it costs PatchCore
+−0.95 pp (p = 0.20, indistinguishable from zero), so it needs no gating detector.
+It costs PaDiM −4.92 pp (p = 0.016), so the recommendation is PatchCore-only. NLM
+is also near-harmless unconditionally (−0.09 pp).
+
+**Rule**: do not restore unless the frame is known to be degraded *and* the
+degradation type is known. Only CLAHE and NLM are safe to apply blind, and only
+for PatchCore.
 
 ---
 

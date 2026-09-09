@@ -59,6 +59,11 @@ def part_a(run: pd.DataFrame, master: pd.DataFrame) -> None:
                                     - g.groupby("category")["clean_baseline"].mean().values)
         print(f"{model:11s} {rescue:24s} {mean*100:+8.2f} pp {p:8.4f}")
     print()
+    print("Pooled across both models, per rescue (which methods are safe to apply blind):")
+    for rescue, g in m.groupby("rescue"):
+        mean, p, n = exact_signflip(g.groupby("category")["delta"].mean().values)
+        print(f"  {rescue:24s} {mean:+8.2f} pp   p = {p:.4f}")
+    print()
     for model, g in m.groupby("model"):
         mean, p, n = exact_signflip(g.groupby("category")["delta"].mean().values)
         print(f"  {model:11s} pooled over all six rescues: {mean:+.2f} pp (p = {p:.4f}, {n} categories)")
@@ -113,10 +118,36 @@ def main() -> None:
     ap = argparse.ArgumentParser(description=__doc__)
     ap.add_argument("run")
     ap.add_argument("--master", default="data/benchmark_master_combined.csv")
+    ap.add_argument("--doc", default=None, help="also write a markdown summary here")
     args = ap.parse_args()
-    run = pd.read_csv(resolve_run(args.run))
-    master = pd.read_csv(args.master)
-    print(f"=== {Path(resolve_run(args.run)).name} ===")
+    _render(args.run, args.master)
+    if args.doc:
+        import io, contextlib
+        buf = io.StringIO()
+        with contextlib.redirect_stdout(buf):
+            _render(args.run, args.master)
+        Path(args.doc).write_text(
+            "# Unconditional and Misidentified Rescue\n\n"
+            "This file is generated. Do not edit by hand -- rerun\n"
+            "`python scripts/analysis/analyze_unconditional_rescue.py "
+            "results/unconditional_rescue.csv --doc docs/unconditional_rescue.md`.\n\n"
+            "The benchmark applies each rescue only to the corruption it targets,\n"
+            "selected using that corruption's ground-truth identity. Deployment offers\n"
+            "neither guarantee: it preprocesses a whole stream, most of which may be\n"
+            "undegraded, and its detector can misclassify. Part A measures the cost of\n"
+            "preprocessing an image that needed no treatment; Part B the cost of\n"
+            "applying the rescue for the wrong corruption. Both comparison baselines --\n"
+            "the clean baseline AUROC and the degradation AUROC -- come from the master\n"
+            "CSV. Significance is an exact paired permutation test over per-category\n"
+            "means; with eight categories the smallest attainable p is 0.0078.\n\n"
+            "```\n" + buf.getvalue() + "```\n")
+        print(f"wrote {args.doc}")
+
+
+def _render(run_path: str, master_path: str) -> None:
+    run = pd.read_csv(resolve_run(run_path))
+    master = pd.read_csv(master_path)
+    print(f"=== {Path(resolve_run(run_path)).name} ===")
     print(f"{len(run)} rows | {run.category.nunique()} categories | "
           f"{sorted(run.model.unique())} | seed {sorted(run.seed.unique())}\n")
     part_a(run, master)

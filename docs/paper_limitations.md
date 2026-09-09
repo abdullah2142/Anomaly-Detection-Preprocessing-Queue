@@ -129,12 +129,17 @@ estimate the restoration parameters. Each step can fail, and a misclassification
 applies a restoration matched to the wrong corruption.
 
 **Implication:** this strengthens rather than weakens the central finding. Rescue
-preprocessing is net-harmful *under oracle knowledge of corruption type,
-severity, and restoration parameters* — the most favourable condition that can be
-constructed. Any realistic pipeline must additionally absorb identification
-error, and our own data prices one such error at −32 pp for a 5×-misspecified
-Wiener kernel. Real-world rescue performance is bounded above by the negative
-results reported here.
+preprocessing is net-harmful *under oracle knowledge of corruption type, severity,
+and restoration parameters* — the most favourable condition that can be
+constructed.
+
+**Now measured (§5.7).** The cost of identification error is no longer a
+conjecture: applying the rescue for the wrong corruption costs −5.17 pp (PaDiM)
+and −7.57 pp (PatchCore) against doing nothing, both $p = 0.0078$, and a further
+−2.0 to −5.7 pp beyond the correct rescue. The damage concentrates in blur-for-blur
+confusion (−15.84 pp and −11.48 pp), which is where a classifier is most likely to
+err. Real-world rescue is therefore bounded above by our already-negative oracle
+results, by a quantified margin. See [`unconditional_rescue.md`](unconditional_rescue.md).
 
 ## 14. Rescue Applied Only to Matched, Known-Degraded Inputs
 
@@ -153,7 +158,22 @@ recommendation that CLAHE is conditionally safe for low-light PatchCore
 implicitly assumes a low-light detector gates it.
 
 **Implication:** the reported rescue deltas describe the best case for rescue —
-correct method, correct target. Unconditional deployment is expected to be worse.
+correct method, correct target.
+
+**Now measured (§5.7).** Case 2 is quantified and it is the larger hazard.
+Applying the six rescues to undegraded images costs −14.66 pp (PaDiM) and
+−15.12 pp (PatchCore) pooled, both $p = 0.0078$ — more than four times the
+−3.35 pp penalty of matched restoration on genuinely degraded input. Wiener on an
+unblurred image is catastrophic (−40.76 pp pooled). Unnecessary preprocessing, not
+mistaken preprocessing, is the dominant deployment risk.
+
+The recommendation this limitation threatened survives, but only where it was
+made: CLAHE on undegraded images costs PatchCore −0.95 pp ($p = 0.2031$),
+indistinguishable from zero, so it is safe to apply without a gating detector. The
+same method costs PaDiM −4.92 pp ($p = 0.0156$), so the recommendation does not
+generalise across architectures. NLM is likewise near-harmless (−0.09 pp). Case 1
+(mismatched application) is covered under Limitation 13. Both rest on 8 categories
+at a single seed. See [`unconditional_rescue.md`](unconditional_rescue.md).
 
 ## 15. Single Noise Realization in Training Augmentation
 

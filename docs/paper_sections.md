@@ -7,7 +7,7 @@
 
 ## 1. ABSTRACT (≤250 words)
 
-State-of-the-art unsupervised anomaly detection models achieve near-perfect AUROC on standard benchmarks yet are evaluated exclusively under controlled studio conditions. In industrial deployment, cameras routinely capture images degraded by low illumination, motion and defocus blur, sensor noise, and environmental haze. Two intuitive mitigations exist: apply classical image restoration as a preprocessing step before inference (test-time rescue), or train models on corrupted images to build robustness directly (training-time augmentation). We conduct the first systematic 4-way comparison of these strategies across two leading feature-embedding anomaly detectors — PatchCore and PaDiM — on the full MVTec-AD benchmark (15 categories, 3 seeds, 5 corruption types, 3 severity levels, 6 rescue methods), yielding 6,120 controlled measurements. Our results reveal three findings. First, augmented training consistently improves robustness (+12.3 pp PatchCore, +10.1 pp PaDiM, both category-clustered $p \le 1.2\times10^{-4}$) by expanding the learned normality manifold to encompass corruption-domain features; two withholding controls show this benefit is part genuine robustness and part distribution matching, and that the split is detector-dependent — against corruptions and severities never seen in training, PatchCore retains about a third of its gain while PaDiM retains none. Second, classical rescue preprocessing is net-harmful in all four experimental conditions (range: −2.8 to −11.8 pp, all category-clustered $p \le 2.1\times10^{-3}$) — and it is net-harmful under *oracle* conditions: the corruption type, its severity, and the restoration parameters are all supplied to the pipeline, so no degradation-detection or classification error is included in these figures. We term this the *preprocessing fallacy*. Probing the detectors' own distance-from-normality scores shows restoration fails to return images to the clean distribution — restored images sit as far from learned normality as the damaged ones (+0.396 vs clean, p = 0.002) — without displacing them further (−0.002, p = 0.914). Third, Wiener deconvolution is the most harmful rescue at every severity even when given the exact oracle point-spread function that generated the blur (Gaussian: −5.7 pp mild, −15.1 pp moderate, −12.5 pp severe), by introducing spectral ringing that saturates the patch-level anomaly score; misspecifying the kernel by 5× deepens the mild-severity penalty to −32.2 pp, quantifying the additional cost blind deconvolution must pay. CLAHE is the least harmful method and the only conditionally safe one. These findings provide actionable deployment guidance: use augmented training; avoid test-time restoration except CLAHE for low-light PatchCore.
+State-of-the-art unsupervised anomaly detection models achieve near-perfect AUROC on standard benchmarks yet are evaluated exclusively under controlled studio conditions. In industrial deployment, cameras routinely capture images degraded by low illumination, motion and defocus blur, sensor noise, and environmental haze. Two intuitive mitigations exist: apply classical image restoration as a preprocessing step before inference (test-time rescue), or train models on corrupted images to build robustness directly (training-time augmentation). We conduct the first systematic 4-way comparison of these strategies across two leading feature-embedding anomaly detectors — PatchCore and PaDiM — on the full MVTec-AD benchmark (15 categories, 3 seeds, 5 corruption types, 3 severity levels, 6 rescue methods), yielding 6,120 controlled measurements. Our results reveal three findings. First, augmented training consistently improves robustness (+12.3 pp PatchCore, +10.1 pp PaDiM, both category-clustered $p \le 1.2\times10^{-4}$) by expanding the learned normality manifold to encompass corruption-domain features; two withholding controls show this benefit is part genuine robustness and part distribution matching, and that the split is detector-dependent — against corruptions and severities never seen in training, PatchCore retains about a third of its gain while PaDiM retains none. Second, classical rescue preprocessing is net-harmful in all four experimental conditions (range: −2.8 to −11.8 pp, all category-clustered $p \le 2.1\times10^{-3}$) — and it is net-harmful under *oracle* conditions: the corruption type, its severity, and the restoration parameters are all supplied to the pipeline, so no degradation-detection or classification error is included in these figures. We term this the *preprocessing fallacy*. Probing the detectors' own distance-from-normality scores shows restoration fails to return images to the clean distribution — restored images sit as far from learned normality as the damaged ones (+0.396 vs clean, p = 0.002) — without displacing them further (−0.002, p = 0.914). Third, Wiener deconvolution is the most harmful rescue at every severity even when given the exact oracle point-spread function that generated the blur (Gaussian: −5.7 pp mild, −15.1 pp moderate, −12.5 pp severe), by introducing spectral ringing that saturates the patch-level anomaly score; misspecifying the kernel by 5× deepens the mild-severity penalty to −32.2 pp, quantifying the additional cost blind deconvolution must pay. CLAHE is the least harmful method and the only conditionally safe one. Applying the same methods without an oracle is worse still: preprocessing undegraded images costs −14.7 to −15.1 pp, over four times the penalty of matched restoration on genuinely degraded input, and misidentifying the degradation costs a further −5.2 to −7.6 pp. These findings provide actionable deployment guidance: use augmented training; do not restore unless the frame is known to be degraded and the degradation type is known; only CLAHE and NLM are safe to apply unconditionally, and only for PatchCore.
 
 ---
 
@@ -243,6 +243,53 @@ corruption. This predicts the asymmetry we observe.
 **Deployment consequence**: augment with the corruptions and severities actually
 expected in the target environment. Extrapolating beyond the augmented
 distribution buys little for PatchCore and nothing measurable for PaDiM.
+
+### 5.7 The Cost of Preprocessing Without an Oracle
+
+Sections 5.4–5.6 apply each rescue only to the corruption it targets, selected
+using that corruption's ground-truth identity. Deployment offers neither
+guarantee: preprocessing is applied to an entire image stream, most of which may
+be undegraded, and any degradation classifier can misclassify. We measure both
+missing cases on 8 categories × 2 models at a single seed
+([`unconditional_rescue.md`](unconditional_rescue.md)).
+
+**Preprocessing an image that needed no treatment** is the larger risk, and it is
+one the benchmark never measured:
+
+| Rescue applied to undegraded images | Mean Δ |
+|---|---|
+| Wiener (Motion PSF) | −40.76 pp |
+| Wiener | −20.02 pp |
+| Retinex | −13.65 pp |
+| Dehaze (Dark Channel) | −11.86 pp |
+| CLAHE | −2.93 pp |
+| NLM Denoise | −0.09 pp |
+
+Pooled across the six methods, unconditional preprocessing costs −14.66 pp
+(PaDiM) and −15.12 pp (PatchCore), both $p = 0.0078$. That is more than four times
+the −3.35 pp penalty of applying the *matched* rescue to a genuinely degraded
+image. The dominant deployment hazard is therefore treating images that did not
+need treatment, not treating them incorrectly.
+
+This is also the test our one positive recommendation had to survive. CLAHE on
+undegraded images costs PatchCore −0.95 pp ($p = 0.2031$), indistinguishable from
+zero, so "CLAHE is conditionally safe for low-light PatchCore" holds even when
+applied without a detector to gate it. The same method costs PaDiM −4.92 pp
+($p = 0.0156$); the recommendation does not extend across architectures. NLM
+denoising is likewise near-harmless unconditionally (−0.09 pp).
+
+**Misidentifying the degradation** costs −5.17 pp (PaDiM) and −7.57 pp
+(PatchCore) against doing nothing, both $p = 0.0078$, and a further −2.0 to
+−5.7 pp beyond applying the correct rescue. The damage is concentrated in
+blur-for-blur confusion — Gaussian blur treated as motion blur costs −15.84 pp,
+motion blur treated as Gaussian −11.48 pp — whereas fog mistaken for low light
+(−0.19 pp) and sensor noise mistaken for haze (+0.04 pp) are near neutral. Wiener
+deconvolution is dangerous precisely where a classifier is most likely to err.
+
+**Deployment consequence**: do not preprocess unless the frame is known to be
+degraded *and* the degradation type is known. The cost of being wrong on either
+question exceeds the benefit the restoration was intended to provide. Only CLAHE
+and NLM are safe to apply unconditionally, and only for PatchCore.
 
 ## 6. DISCUSSION AND CONCLUSIONS (~500 words)
 
